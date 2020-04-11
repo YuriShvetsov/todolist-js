@@ -30,9 +30,14 @@ cd todolist-js
 # Install dependencies:
 npm i
 
-# Server with hot reload at http://localhost:8081/
+# Server with hot reload at http://localhost:9000/
 npm run dev
 
 # Output will be at dist / folder
 npm run build
 ```
+
+------------
+Screenshot:
+
+![Image alt](https://github.com/YuriShvetsov/todolist-js/blob/master/screenshots/screenshot.jpg)
