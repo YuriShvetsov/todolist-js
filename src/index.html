@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <title>To-Do List</title>
+    <link rel="shortcut icon" href="./assets/img/icons/todo-list-favicon.png" type="image/x-icon">
+</head>
+<body>
+
+    <div class="todo" id="todo">
+        <div class="todo__inner">
+
+            <div class="todo__header">
+                <div class="todo__h-row">
+                    <div class="todo__current-date">
+                        <span class="todo__current-weekday js-todo-weekday"></span>
+                        <span class="todo__current-date-number js-todo-day"></span>
+                    </div>
+                    <div class="todo__count js-todo-count"></div>
+                </div>
+                <div class="todo__h-row">
+                    <div class="todo__current-month js-todo-month"></div>
+                    <button class="todo__clear-all js-todo-clear">Clear list</button>
+                </div>
+            </div>
+
+            <div class="todo__body">
+                <div class="todo__add-task">
+                    <button class="todo__add-btn js-todo-add">Add</button>
+                    <input type="text" class="todo__add-input js-todo-input" placeholder="Type your task">
+                </div>
+                <div class="todo__content">
+                    <div class="todo__filter todo__filter_notouch js-todo-filter">
+                        <input type="checkbox" class="todo__filter-checkbox js-todo-filter-checkbox" id="todo-select-all" disabled>
+                        <label for="todo-select-all" class="todo__filter-label js-todo-filter-label">
+                            <span class="todo__filter-text">Select all</span>
+                        </label>
+                    </div>
+                    <ul class="todo__list js-todo-list"></ul>
+                </div>
+                <div class="todo__caption-empty js-todo-caption-empty">List is empty</div>
+            </div>
+
+        </div>
+
+        <template id="task-template">
+            <li class="todo__item js-todo-task">
+                <input type="checkbox" class="todo__item-checkbox js-todo-task-checkbox" id="">
+                <label for="" class="todo__item-label js-todo-task-label">
+                    <div class="todo__item-content js-todo-task-text"></div>
+                    <div class="todo__item-date js-todo-task-date"></div><!-- 24 Feb. 20:30 -->
+                </label>
+            </li>
+        </template>
+        
+    </div>
+
+</body>
+</html>

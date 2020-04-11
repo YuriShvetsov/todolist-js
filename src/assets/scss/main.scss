@@ -1,0 +1,35 @@
+// Utils
+
+// @import './utils/fonts.scss';
+@import './utils/vars.scss';
+
+// Common styles
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    // font-family: $main-font;
+    color: $defaultTextColor;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+// Modules
+
+@import './modules/todolist.scss';
+
+// Other styles
+
