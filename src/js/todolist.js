@@ -219,15 +219,18 @@
     newTaskCheckbox.id = task.id;
     newTaskLabel.setAttribute('for', task.id);
 
-    newTaskCheckbox.addEventListener('change', e => {
-      const clickedTask = state.tasks.find(item => item.id == task.id);
+    newTask.addEventListener('click', event => {
+      let eventChangeImitation = new Event('change');
+      newTaskCheckbox.dispatchEvent(eventChangeImitation);
 
-      clickedTask.done = newTaskCheckbox.checked;
+      const clickedTask = state.tasks.find(item => item.id == task.id);
+      clickedTask.done = !clickedTask.done;
+      newTaskCheckbox.checked = clickedTask.done;
       writeToLS();
       activateFilter();
     });
 
-    ui.list.prepend(newTask);
+    ui.list.append(newTask);
   }
 
   function renderAllTasks() {
