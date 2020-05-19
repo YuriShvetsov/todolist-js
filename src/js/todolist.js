@@ -264,8 +264,8 @@
     const sourceDate = new Date(date);
     const day = sourceDate.getDate();
     const month = monthsShort[sourceDate.getMonth()];
-    const hours = sourceDate.getHours();
-    const minutes = sourceDate.getMinutes();
+    const hours = ('0' + sourceDate.getHours()).slice(-2);
+    const minutes = ('0' + sourceDate.getMinutes()).slice(-2);
 
     return `${day} ${month} ${hours}:${minutes}`;
   }
