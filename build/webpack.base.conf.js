@@ -40,7 +40,13 @@ module.exports = {
             test: /\.js$/,
             loader: 'babel-loader',
             exclude: '/node_modules/'
-        }, {
+        },
+        {
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            exclude: '/node_modules/'
+        },
+        {
             test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
             loader: 'file-loader',
             options: {
@@ -92,6 +98,9 @@ module.exports = {
             ],
         }]
     },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js' ],
+    },
     plugins: [
         new MiniCssExtractPlugin({
             filename: `${PATHS.assets}css/[name].[contenthash:8].css`,
@@ -102,9 +111,8 @@ module.exports = {
             inject: true
         }),
         new CopyWebpackPlugin([
-            { from: `${PATHS.src}/${PATHS.assets}img`, to: `${PATHS.assets}img`},
+            { from: `${PATHS.src}/${PATHS.assets}images`, to: `${PATHS.assets}images`},
             { from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts`},
-            { from: `${PATHS.src}/static`, to: ''},
         ])
     ]
 }

@@ -1,9 +1,7 @@
-// Utils
-
 // @import './utils/fonts.scss';
 @import './utils/vars.scss';
 
-// Common styles
+// Other styles
 
 *,
 *::before,
@@ -20,16 +18,7 @@ body {
     padding: 0;
 }
 
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+.title {
+    color: rgb(78, 46, 255);
+    text-align: center;
 }
-
-// Modules
-
-@import './modules/todolist.scss';
-
-// Other styles
-
