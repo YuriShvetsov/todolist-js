@@ -1,16 +1,9 @@
-// @import './utils/fonts.scss';
-@import './utils/vars.scss';
-
-// Other styles
-
 *,
 *::before,
 *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    // font-family: $main-font;
-    color: $defaultTextColor;
 }
 
 body {
@@ -19,6 +12,21 @@ body {
 }
 
 .title {
-    color: rgb(78, 46, 255);
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 2em;
     text-align: center;
+}
+
+.title::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 20px auto 0;
+    background-image: url(../images/svg/typescript.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

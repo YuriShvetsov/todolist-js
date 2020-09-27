@@ -1,27 +1,129 @@
-const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+/* Base config */
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path')
 const PATHS = {
-    src: path.join(__dirname, '../src'),
     dist: path.join(__dirname, '../dist'),
-    assets: 'assets/'
+    src: path.join(__dirname, '../src'),
+}
+const postcssOptions = {
+    plugins: [
+        require('autoprefixer')({}),
+        require('cssnano')({
+            preset: [
+                'default',
+                {
+                    discardComments: {
+                        removeAll: true
+                    }
+                }
+            ]
+        })
+    ]
 }
 
-module.exports = { 
-    // Base config
-    externals: {
-        paths: PATHS
-    },
+module.exports = {
     entry: {
-        app: PATHS.src,
-        // module: `${PATHS.src}/your-module.js`,
+        app: PATHS.src
     },
     output: {
-        filename: `${PATHS.assets}js/[name].[chunkhash:8].js`,
+        filename: 'assets/js/[name].[chunkhash:8].js',
         path: PATHS.dist,
-        // publicPath: '/'
+        sourceMapFilename: '[name].[hash:8].map'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/i,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            url: false
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.css$/i,
+                use: [
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            url: false
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif|svg|webp)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]'
+                }
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: `${PATHS.src}/index.html`,
+            filename: 'index.html',
+            inject: true
+        }),
+        new MiniCssExtractPlugin({
+            filename: `assets/css/[name].[chunkhash:8].css`
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: `${PATHS.src}/assets/images`,
+                    to: 'assets/images'
+                },
+                {
+                    from: `${PATHS.src}/assets/fonts`,
+                    to: 'assets/fonts'
+                }
+            ]
+        })
+    ],
+    resolve: {
+        extensions: ['.ts', '.js', '.json']
+    },
+    externals: {
+        paths: PATHS
     },
     optimization: {
         splitChunks: {
@@ -34,85 +136,5 @@ module.exports = {
                 }
             }
         }
-    },
-    module: {
-        rules: [{
-            test: /\.js$/,
-            loader: 'babel-loader',
-            exclude: '/node_modules/'
-        },
-        {
-            test: /\.tsx?$/,
-            loader: 'ts-loader',
-            exclude: '/node_modules/'
-        },
-        {
-            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'file-loader',
-            options: {
-                name: '[name].[ext]'
-            }
-        },  {
-            test: /\.(png|jpg|gif|svg|webp)$/,
-            loader: 'file-loader',
-            options: {
-                name: '[name].[ext]'
-            }
-        }, {
-            test: /\.s[ac]ss$/i,
-            use: [
-                'style-loader',
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: 'css-loader',
-                    options: {
-                        sourceMap: true,
-                        url: false
-                    }
-                }, 
-                {
-                    loader: 'postcss-loader',
-                    options: { sourceMap: true, config: { path : `${PATHS.src}/configs/postcss.config.js` } }
-                }, 
-                {
-                    loader: 'sass-loader',
-                    options: { sourceMap: true }
-                }
-            ],
-        }, {
-            test: /\.css$/,
-            use: [
-                'style-loader',
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: 'css-loader',
-                    options: {
-                        sourceMap: true,
-                        url: false
-                    }
-                }, 
-                {
-                    loader: 'postcss-loader',
-                    options: { sourceMap: true, config: { path: `${PATHS.src}/configs/postcss.config.js` } }
-                },
-            ],
-        }]
-    },
-    resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ],
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: `${PATHS.assets}css/[name].[contenthash:8].css`,
-        }),
-        new HtmlWebpackPlugin({
-            template: `${PATHS.src}/index.html`,
-            filename: './index.html',
-            inject: true
-        }),
-        new CopyWebpackPlugin([
-            { from: `${PATHS.src}/${PATHS.assets}images`, to: `${PATHS.assets}images`},
-            { from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts`},
-        ])
-    ]
+    }
 }

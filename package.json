@@ -1,44 +1,52 @@
 {
-  "name": "webpackdefault",
-  "version": "1.0.0",
-  "description": "'webpack project'",
-  "main": "index.js",
-  "scripts": {
-    "dev": "webpack-dev-server --port 9000 --config ./build/webpack.dev.conf.js",
-    "build": "webpack --config ./build/webpack.build.conf.js"
-  },
-  "keywords": [
-    "js",
-    "webpack"
-  ],
-  "author": "Yuri Shvetsov",
-  "license": "ISC",
-  "browserslist": [
-    ">1%",
-    "last 3 version"
-  ],
-  "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "autoprefixer": "^9.7.3",
-    "babel-loader": "^8.0.6",
-    "copy-webpack-plugin": "^5.0.5",
-    "css-loader": "^3.2.1",
-    "cssnano": "^4.1.10",
-    "file-loader": "^5.0.2",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.8.0",
-    "node-sass": "^4.13.0",
-    "path": "^0.12.7",
-    "postcss-loader": "^3.0.0",
-    "sass-loader": "^8.0.0",
-    "style-loader": "^1.0.1",
-    "ts-loader": "^8.0.4",
-    "typescript": "^4.0.3",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0",
-    "webpack-merge": "^4.2.2"
-  },
-  "dependencies": {}
+    "name": "todolist",
+    "version": "1.0.0",
+    "description": "learning project",
+    "main": "index.ts",
+    "scripts": {
+        "build": "webpack --config ./build/webpack.build.conf.js",
+        "dev": "webpack-dev-server --watch --config ./build/webpack.dev.conf.js"
+    },
+    "keywords": [
+        "javascript",
+        "typescript",
+        "webpack"
+    ],
+    "author": "Yuri Shvetsov",
+    "license": "ISC",
+    "browserslist": [
+        ">1%",
+        "last 3 version"
+    ],
+    "devDependencies": {
+        "autoprefixer": "^10.0.1",
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^6.1.1",
+        "css-loader": "^4.3.0",
+        "cssnano": "^4.1.10",
+        "file-loader": "^6.1.0",
+        "html-webpack-plugin": "^4.5.0",
+        "mini-css-extract-plugin": "^0.11.2",
+        "node-sass": "^4.14.1",
+        "path": "^0.12.7",
+        "postcss": "^8.1.0",
+        "postcss-loader": "^4.0.2",
+        "sass-loader": "^10.0.2",
+        "style-loader": "^1.2.1",
+        "ts-loader": "^8.0.4",
+        "typescript": "^4.0.3",
+        "webpack": "^4.44.2",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0",
+        "webpack-merge": "^5.1.4"
+    },
+    "dependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/YuriShvetsov/todolist-js.git"
+    },
+    "bugs": {
+        "url": "https://github.com/YuriShvetsov/todolist-js/issues"
+    },
+    "homepage": "https://github.com/YuriShvetsov/todolist-js#readme"
 }

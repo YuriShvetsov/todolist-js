@@ -1,4 +1,5 @@
-import './js/common';
-import './ts/app.ts';
+import './ts/app.ts'
 
-import './assets/scss/main.scss';
+import './assets/css/main.css'
+
+import './assets/scss/main.scss'

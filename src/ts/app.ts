@@ -1,1 +1,1 @@
-import './model';
+console.log('hello friend')
