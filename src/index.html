@@ -8,7 +8,51 @@
 </head>
 <body>
 
-    <div class="title">Typescript</div>
+    <div class="todolist" id="app">
+        <div class="todolist__container">
+            <div class="start-page">
+                <div class="start-page__head">
+                    <div class="logo">
+                        <span class="logo__left-part">Todo</span><span class="logo__right-part">List</span></div>
+                    <div class="start-page-date">
+                        <span class="start-page-date__weekday js-start-page-date-weekday">Sunday</span>
+                        <span> </span>
+                        <span class="start-page-date__day js-start-page-date-day">12nd</span>
+                        <span> </span>
+                        <span class="start-page-date__month js-start-page-date-month">September</span>
+                    </div>
+                </div><!-- start-page__head -->
+                <div class="start-page__body">
+                    <div class="start-page__top">
+                        <div class="start-page__counters">
+                            <div class="start-page__counter">
+                                <div class="start-page__counter-value js-counter-created-tasks">53</div>
+                                <div class="start-page__counter-desc">Created tasks</div>
+                            </div>
+                            <div class="start-page__counter">
+                                <div class="start-page__counter-value js-counter-completed-tasks">21</div>
+                                <div class="start-page__counter-desc">Completed tasks</div>
+                            </div>
+                        </div>
+                        <button class="button button_create-list">Create list</button>
+                    </div>
+                    <div class="start-page__links-to-lists js-link-to-lists">
+                        <div class="list-link">
+                            <div class="list-link__col">
+                                <img class="list-link__icon" src="./assets/images/svg/list.svg">
+                            </div>
+                            <div class="list-link__col">
+                                <div class="list-link__name">All Schedule</div>
+                                <div class="list-link__counter">
+                                    <span class="js-list-link-counter">12</span> <span>tasks</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- start-page__body -->
+            </div><!-- start-page -->
+        </div>
+    </div>
 
 </body>
 </html>

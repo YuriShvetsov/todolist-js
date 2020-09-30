@@ -1,5 +1,2 @@
-import './ts/app.ts'
-
-import './assets/css/main.css'
-
+import './typescript/app.ts'
 import './assets/scss/main.scss'
