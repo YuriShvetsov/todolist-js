@@ -1,7 +1,131 @@
 /* List link template */
 
-/* List template */
+.list-link {
+    display: flex;
+    width: calc(100% / 3);
+    padding: 20px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 2px;
+}
+
+.list-link__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    background-color: $colorBlue;
+    border-radius: 50%;
+}
+
+.list-link__icon-src {
+    display: block;
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+}
+
+.list-link__name {
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+.list-link__counter {
+    font-size: 14px;
+    color: $colorGrayLight;
+    text-align: left;
+}
+
+/* List page template */
+
+.list-page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    // opacity: 0.5;
+    z-index: 200;
+}
+
+.list-page__head {
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid #eee;   
+}
+
+.list-page__h-row {
+    position: relative;
+}
+
+.list-page__title {
+    margin: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.list-page__menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.list-page__menu-popup {
+    width: 150px;
+    right: 35px;
+    top: 0;
+    z-index: 210;
+}
+
+.list-page__top-panel {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;   
+}
+
+.list-page__counter {
+    display: flex;
+    align-items: center;
+}
+
+.list-page__counter-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: $colorBlueDark;
+}
+
+.list-page__counter-desc {
+    margin-left: 10px;
+    font-size: 14px;
+    color: $colorBlue;
+}
+
+.list-page__list {
+    padding-top: 20px;
+}
+
+.list-page__caption-nothing {
+    padding: 20px;
+    font-size: 16px;
+    color: $colorGrayLight;
+    text-align: center;
+}
+
+.list-page__caption-nothing_hidden {
+    display: none;
+}
 
 /* List creating modal window template */
 
+
+
 /* List editing modal window template */
+
+

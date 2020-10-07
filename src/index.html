@@ -9,50 +9,208 @@
 <body>
 
     <div class="todolist" id="app">
-        <div class="todolist__container">
-            <div class="start-page">
+        <div class="todolist__container js-app-container">
+            <div class="start-page page">
                 <div class="start-page__head">
                     <div class="logo">
-                        <span class="logo__left-part">Todo</span><span class="logo__right-part">List</span></div>
-                    <div class="start-page-date">
-                        <span class="start-page-date__weekday js-start-page-date-weekday">Sunday</span>
+                        <span class="logo__part_left">Todo</span><span class="logo__part_right">List</span></div>
+                    <div class="current-date">
+                        <span class="current-date__weekday js-current-date-weekday">Sunday</span><span>, </span>
+                        <span class="current-date__day js-current-date-day">12nd</span>
                         <span> </span>
-                        <span class="start-page-date__day js-start-page-date-day">12nd</span>
-                        <span> </span>
-                        <span class="start-page-date__month js-start-page-date-month">September</span>
+                        <span class="current-date__month js-current-date-month">September</span>
                     </div>
                 </div><!-- start-page__head -->
                 <div class="start-page__body">
-                    <div class="start-page__top">
+                    <div class="start-page__top-panel">
                         <div class="start-page__counters">
                             <div class="start-page__counter">
-                                <div class="start-page__counter-value js-counter-created-tasks">53</div>
+                                <div class="start-page__counter-value js-counter-created-tasks">0</div>
                                 <div class="start-page__counter-desc">Created tasks</div>
                             </div>
                             <div class="start-page__counter">
-                                <div class="start-page__counter-value js-counter-completed-tasks">21</div>
+                                <div class="start-page__counter-value js-counter-completed-tasks">0</div>
                                 <div class="start-page__counter-desc">Completed tasks</div>
                             </div>
                         </div>
-                        <button class="button button_create-list">Create list</button>
+                        <button class="button button_type_create" data-action="openCreateListModal">Create list</button>
                     </div>
-                    <div class="start-page__links-to-lists js-link-to-lists">
-                        <div class="list-link">
-                            <div class="list-link__col">
-                                <img class="list-link__icon" src="./assets/images/svg/list.svg">
-                            </div>
-                            <div class="list-link__col">
-                                <div class="list-link__name">All Schedule</div>
-                                <div class="list-link__counter">
-                                    <span class="js-list-link-counter">12</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="start-page__links-to-lists js-list-container">
+                        <div class="start-page__caption-nothing js-no-lists">You don't have task lists yet...</div>
                     </div>
                 </div><!-- start-page__body -->
             </div><!-- start-page -->
-        </div>
+
+            <div class="overlay" data-action="closeModal"></div>
+
+        </div><!-- todolist__container -->
     </div>
+
+    <template id="list-link">
+        <button class="button list-link" data-action="openThisList">
+            <div class="list-link__col">
+                <div class="list-link__icon">
+                    <img class="list-link__icon-src" src="./assets/images/svg/list.svg">
+                </div>
+            </div>
+            <div class="list-link__col">
+                <div class="list-link__name">All Schedule sometimes</div>
+                <div class="list-link__counter">
+                    <span class="js-list-link-counter">12</span> <span>tasks</span>
+                </div>
+            </div>
+        </button>
+    </template>
+
+    <template id="list-page">
+        <div class="list-page page">
+            <div class="list-page__head">
+                <div class="list-page__h-row">
+                    <div class="list-page__title js-list-page-title">Work projects</div>
+                    <div class="list-page__menu">
+                        <button class="button button_type_menu" data-action="toggleListMenu">Menu</button>
+                        <div class="list-page__menu-popup popup js-list-menu">
+                            <button class="button button_type_popup button_icon_edit" data-action="openEditListModal">Edit</button>
+                            <button class="button button_type_popup button_icon_delete" data-action="openDeleteListModal">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-page__h-row">
+                    <div class="current-date current-date_align_center">
+                        <span class="current-date__weekday js-current-date-weekday">Sunday</span><span>, </span>
+                        <span class="current-date__day js-current-date-day">12nd</span>
+                        <span> </span>
+                        <span class="current-date__month js-current-date-month">September</span>
+                    </div>
+                </div>
+            </div><!-- list-page__head -->
+            <div class="list-page__body">
+                <div class="list-page__top-panel">
+                    <div class="list-page__counter">
+                        <div class="list-page__counter-value js-counter-tasks">0</div>
+                        <div class="list-page__counter-desc">tasks</div>
+                    </div>
+                    <button class="button button_type_create" data-action="openCreateListModal">Create task</button>
+                </div><!-- list-page__top-panel -->
+                <div class="list-page__list js-list">
+                    <div class="list-page__caption-nothing list-page__caption-nothing_hidden js-no-tasks">You don't have tasks yet...</div>
+                </div><!-- list-page__list -->
+            </div><!-- list-page_body -->
+        </div><!-- list-page -->
+    </template>
+
+    <template id="create-list">
+        <div class="create-list modal modal_visible">
+            <div class="modal__title">Creating task list</div>
+            <form action="" class="modal__form js-input-data">
+                <div class="modal__row">
+                    <label for="" class="modal__label"><span class="modal__label-name">List name:</span>
+                        <input type="text" name="list-name" id="" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false">
+                    </label>
+                </div>
+                <div class="modal__row modal__row_accept">
+                    <input type="submit" value="save list" class="create-list__save-button modal__accept-button button button_type_save" data-action="saveList">
+                    <button class="modal__accept-button button button_type_cancel" data-action="closeModal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </template>
+
+    <template id="edit-list">
+        <div class="edit-list modal modal_visible">
+            <div class="modal__title">Editing task list</div>
+            <form action="" class="modal__form js-input-data">
+                <div class="modal__row">
+                    <label for="" class="modal__label"><span class="modal__label-name">List name</span>
+                        <input type="text" name="list-name" id="" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false">
+                    </label>
+                </div>
+                <div class="modal__row modal__row_accept">
+                    <input type="submit" value="save" class="modal__accept-button button button_type_save" data-action="updateList">
+                    <button class="button button_type_cancel modal__accept-button" data-action="closeModal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </template>
+
+    <template id="delete-list">
+        <div class="delete-list modal modal_visible">
+            <div class="modal__title modal__title_style_red">Deleting task list</div>
+            <div class="modal__text">Do you really want to delete the list along with all tasks?</div>
+            <div class="modal__row modal__row_accept">
+                <button class="modal__accept-button button button_type_ok button_style_red" data-action="deleteList">OK</button>
+                <button class="modal__accept-button button button_type_cancel button_style_red" data-action="closeModal">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="task">
+        <div class="task">
+            <div class="task__col">
+                <input class="task__checkbox" type="checkbox" name="" id="task-01">
+                <label for="task-01" class="task__checkbox-label"></label>
+            </div>
+            <div class="task__col task__col_widdest">
+                <div class="task__title js-task-title">Web development</div>
+                <div class="task__desc">
+                    <pre class="js-task-desc">Typescript</pre>
+                </div>
+            </div>
+            <div class="task__col">
+                <div class="task__menu">
+                    <button class="button button_type_menu" data-action="toggleListMenu">Menu</button>
+                    <div class="task__menu-popup popup js-task-menu">
+                        <button class="button button_type_popup button_icon_edit" data-action="openEditTaskModal">Edit</button>
+                        <button class="button button_type_popup button_icon_delete" data-action="deleteTask">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- task -->
+    </template>
+
+    <template id="create-task">
+        <div class="create-task modal modal_visible">
+            <div class="modal__title">Creating task</div>
+            <form action="" class="modal__form js-input-data">
+                <div class="modal__row">
+                    <label for="" class="modal__label"><span class="modal__label-name">Task name:</span>
+                        <input type="text" name="task-name" id="" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false">
+                    </label>
+                </div>
+                <div class="modal__row">
+                    <label for="" class="modal__label"><span class="modal__label-name">Description:</span>
+                        <textarea name="task-desc" id="" class="modal__input modal__input_type_area" autocomplete="off" spellcheck="false" rows="5"></textarea>
+                    </label>
+                </div>
+                <div class="modal__row modal__row_accept">
+                    <input type="submit" value="save task" class="create-list__save-button modal__accept-button button button_type_save" data-action="saveTask">
+                    <button class="modal__accept-button button button_type_cancel" data-action="closeModal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </template>
+
+    <template id="edit-task">
+        <div class="edit-list modal modal_visible">
+            <div class="modal__title">Editing task</div>
+            <form action="" class="modal__form js-input-data">
+                <div class="modal__row">
+                    <label for="" class="modal__label"><span class="modal__label-name">Task name:</span>
+                        <input type="text" name="task-name" id="" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false">
+                    </label>
+                </div>
+                <div class="modal__row">
+                    <label for="" class="modal__label"><span class="modal__label-name">Description:</span>
+                        <textarea name="task-desc" id="" class="modal__input modal__input_type_area" autocomplete="off" spellcheck="false" rows="5"></textarea>
+                    </label>
+                </div>
+                <div class="modal__row modal__row_accept">
+                    <input type="submit" value="save" class="modal__accept-button button button_type_save" data-action="updateTask">
+                    <button class="button button_type_cancel modal__accept-button" data-action="closeModal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </template>
 
 </body>
 </html>

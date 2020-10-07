@@ -1,15 +1,26 @@
-// // Fonts here
+// Open Sans, regular 400
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-// // Lora
-// @font-face {
-//     font-family: 'Lora';
-//     src: url('../fonts/Lora/Lora-Regular.eot');
-//     src: url('../fonts/Lora/Lora-Regular.eot?#iefix') format('embedded-opentype'),
-//         url('../fonts/Lora/Lora-Regular.woff2') format('woff2'),
-//         url('../fonts/Lora/Lora-Regular.woff') format('woff');
-//     font-weight: normal;
-//     font-style: normal;
-// }
+// Open Sans, italic
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans/OpenSans-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+// Open Sans, bold 600
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans/OpenSans-SemiBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
 
 // @font-face {
 //     font-family: 'Lora';
@@ -21,22 +32,3 @@
 //     font-style: italic;
 // }
 
-// @font-face {
-//     font-family: 'Lora';
-//     src: url('../fonts/Lora/Lora-Bold.eot');
-//     src: url('../fonts/Lora/Lora-Bold.eot?#iefix') format('embedded-opentype'),
-//         url('../fonts/Lora/Lora-Bold.woff2') format('woff2'),
-//         url('../fonts/Lora/Lora-Bold.woff') format('woff');
-//     font-weight: bold;
-//     font-style: normal;
-// }
-
-// @font-face {
-//     font-family: 'Lora';
-//     src: url('../fonts/Lora/Lora-Italic.eot');
-//     src: url('../fonts/Lora/Lora-Italic.eot?#iefix') format('embedded-opentype'),
-//         url('../fonts/Lora/Lora-Italic.woff2') format('woff2'),
-//         url('../fonts/Lora/Lora-Italic.woff') format('woff');
-//     font-weight: normal;
-//     font-style: italic;
-// }

@@ -1,5 +1,80 @@
 /* Task template */
 
+.task {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 3px;
+}
+
+.task__col {
+    display: flex;
+    align-items: flex-start;
+}
+
+.task__col:not(:last-child) {
+    margin-right: 20px;
+}
+
+.task__col_widdest {
+    display: block;
+    flex: auto;
+}
+
+.task__menu {
+    position: relative;
+}
+
+.task__menu-popup {
+    width: 150px;
+    right: 35px;
+    top: 0;
+    z-index: 210;
+}
+
+.task__checkbox-label {
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.task__checkbox-label::before {
+    content: '';
+    display: block;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #eee;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.task__checkbox {
+    display: none;
+}
+
+.task__checkbox:checked + .task__checkbox-label::before {
+    background-color: $colorBlue;
+    background-image: url(../images/svg/check.svg);
+    background-position: center 5px;
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+}
+
+.task__title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.task__desc {
+    font-size: 14px;
+    color: $colorGray;
+}
+
 /* Task adding modal window template */
+
+
 
 /* Task editing modal window template */
