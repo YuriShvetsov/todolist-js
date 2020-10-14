@@ -41,7 +41,7 @@
                 </div><!-- start-page__body -->
             </div><!-- start-page -->
 
-            <div class="overlay" data-action="closeModal"></div>
+            <div class="overlay js-overlay" data-action="closeModal"></div>
 
         </div><!-- todolist__container -->
     </div>
@@ -100,24 +100,24 @@
     </template>
 
     <template id="create-list">
-        <div class="create-list modal modal_visible">
+        <div class="create-list modal js-modal">
             <div class="modal__title">Creating task list</div>
-            <form action="" class="modal__form js-input-data">
+            <form action="" class="modal__form js-input-data" name="create-list">
                 <div class="modal__row">
                     <label for="" class="modal__label"><span class="modal__label-name">List name:</span>
                         <input type="text" name="list-name" id="" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false">
                     </label>
                 </div>
                 <div class="modal__row modal__row_accept">
-                    <input type="submit" value="save list" class="create-list__save-button modal__accept-button button button_type_save" data-action="saveList">
-                    <button class="modal__accept-button button button_type_cancel" data-action="closeModal">Cancel</button>
+                    <input type="submit" value="save list" class="create-list__save-button modal__accept-button button button_type_save js-submit" data-action="getAnswer">
+                    <input type="button" value="cancel" class="modal__accept-button button button_type_cancel" data-action="close">
                 </div>
             </form>
         </div>
     </template>
 
     <template id="edit-list">
-        <div class="edit-list modal modal_visible">
+        <div class="edit-list modal js-modal">
             <div class="modal__title">Editing task list</div>
             <form action="" class="modal__form js-input-data">
                 <div class="modal__row">
@@ -127,14 +127,14 @@
                 </div>
                 <div class="modal__row modal__row_accept">
                     <input type="submit" value="save" class="modal__accept-button button button_type_save" data-action="updateList">
-                    <button class="button button_type_cancel modal__accept-button" data-action="closeModal">Cancel</button>
+                    <input type="button" value="cancel" class="modal__accept-button button button_type_cancel" data-action="close">
                 </div>
             </form>
         </div>
     </template>
 
     <template id="delete-list">
-        <div class="delete-list modal modal_visible">
+        <div class="delete-list modal js-modal">
             <div class="modal__title modal__title_style_red">Deleting task list</div>
             <div class="modal__text">Do you really want to delete the list along with all tasks?</div>
             <div class="modal__row modal__row_accept">
@@ -169,7 +169,7 @@
     </template>
 
     <template id="create-task">
-        <div class="create-task modal modal_visible">
+        <div class="create-task modal js-modal">
             <div class="modal__title">Creating task</div>
             <form action="" class="modal__form js-input-data">
                 <div class="modal__row">
@@ -184,16 +184,16 @@
                 </div>
                 <div class="modal__row modal__row_accept">
                     <input type="submit" value="save task" class="create-list__save-button modal__accept-button button button_type_save" data-action="saveTask">
-                    <button class="modal__accept-button button button_type_cancel" data-action="closeModal">Cancel</button>
+                    <input type="button" value="cancel" class="modal__accept-button button button_type_cancel" data-action="close">
                 </div>
             </form>
         </div>
     </template>
 
     <template id="edit-task">
-        <div class="edit-list modal modal_visible">
+        <div class="edit-list modal js-modal">
             <div class="modal__title">Editing task</div>
-            <form action="" class="modal__form js-input-data">
+            <form name="new-data-for-task" action="" class="modal__form js-modal-form">
                 <div class="modal__row">
                     <label for="" class="modal__label"><span class="modal__label-name">Task name:</span>
                         <input type="text" name="task-name" id="" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false">
@@ -206,7 +206,7 @@
                 </div>
                 <div class="modal__row modal__row_accept">
                     <input type="submit" value="save" class="modal__accept-button button button_type_save" data-action="updateTask">
-                    <button class="button button_type_cancel modal__accept-button" data-action="closeModal">Cancel</button>
+                    <button value="cancel" class="modal__accept-button button button_type_cancel" data-action="close">Cancel</button>
                 </div>
             </form>
         </div>
