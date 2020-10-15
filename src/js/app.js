@@ -1,4 +1,5 @@
-// import { List } from './list';
+import Modal from './modal/modal';
+import { List } from './list/list';
 // import { Task } from './task';
 
 const app = {
@@ -43,6 +44,14 @@ const app = {
 
         writeAppData: function() {
 
+        },
+
+        getCountCreatedTasks: function() {
+
+        },
+
+        getCountCompletedTasks: function() {
+
         }
 
     },
@@ -83,11 +92,7 @@ const app = {
 
             let endingForDay = '';
 
-            if (day > 10 && day < 21) {
-                endingForDay = 'th';
-            } else if (+day.toString().slice(-1) > 4 && +day.toString().slice(-1) < 10) {
-                endingForDay = 'th';
-            } else if (+day.toString().slice(-1) === 0) {
+            if (+day.toString().slice(-1) === 0) {
                 endingForDay = 'th';
             } else if (+day.toString().slice(-1) === 1) {
                 endingForDay = 'st';
@@ -98,6 +103,8 @@ const app = {
             } else if (+day.toString().slice(-1) === 4) {
                 endingForDay = 'th';
             } else if (+day.toString().slice(-1) > 4 && +day.toString().slice(-1) < 10) {
+                endingForDay = 'th';
+            } else if (day > 10 && day < 21) {
                 endingForDay = 'th';
             }
 
@@ -134,7 +141,15 @@ const app = {
         },
 
         handleEvents: function() {
+            this.view.appContainer.addEventListener('click', this.handleClick.bind(this));
+        },
 
+        handleClick: function(event) {
+            const action = event.target.dataset.action;
+
+            if (!action || !this.userActions[action]) return;
+
+            this.userActions[action]();
         },
 
         updateCurrentDate: function() {
@@ -153,10 +168,10 @@ const app = {
 
         },
 
-        userAcrtions: {
+        userActions: {
 
             openCreateListModal: function() {
-
+                const modal = new Modal('create-list', 'form', 'app');
             },
 
             openList: function(listId) {
