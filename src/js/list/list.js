@@ -4,32 +4,33 @@ import ListController from './listController';
 
 export default class List {
 
-    constructor(data) {
-        this.model = ListModel;
-        this.view = ListView;
-        this.controller = ListController;
+    constructor(props) {
+        this.data = props.data;
+        this.btnContainer = props.btnContainer;
+        this.appContainer = props.appContainer;
+        this.listIds = props.listIds;
 
-        this.init(data);
+        this.model = Object.assign({}, ListModel);
+        this.view = Object.assign({}, ListView);
+        this.controller = Object.assign({}, ListController);
+
+        this.init();
     }
 
-    init(data) {
-        this.model.init(data);
-        this.view.init();
+    init() {
+        this.model.init(this.data, this.listIds);
+        this.view.init(this.btnContainer, this.appContainer);
         this.controller.init(this.model, this.view);
+    }
+
+    open() {
+        this.controller.openList();
+    }
+
+    get id() {
+        return this.model.getId();
     }
 
 };
 
-// const newList = new List({
-//     name: 'main',
-//     taskList: [
-//         {
-//             name: 'Купить продукты',
-//             notes: 'Молоко, хлеб, сметана'
-//         },
-//         {
-//             name: 'Покормить кота',
-//             notes: ''
-//         }
-//     ]
-// });
+

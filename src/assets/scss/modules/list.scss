@@ -1,42 +1,50 @@
-/* List link template */
+/* List button template */
 
-.list-link {
+.list-button {
     display: flex;
-    width: calc(100% / 3);
-    padding: 20px;
+    // flex-wrap: nowrap;
     align-items: center;
+    width: calc(100% / 3);
+    padding: 15px;
     background-color: rgba(255, 255, 255, 0);
     border-radius: 2px;
 }
 
-.list-link__icon {
+.list-button__col {
+    pointer-events: none;
+}
+
+.list-button__icon {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 40px;
     height: 40px;
-    margin-right: 15px;
+    margin-right: 10px;
     background-color: $colorBlue;
     border-radius: 50%;
 }
 
-.list-link__icon-src {
+.list-button__icon-src {
     display: block;
     width: 20px;
     height: 20px;
     object-fit: cover;
 }
 
-.list-link__name {
-    margin-bottom: 3px;
-    font-size: 14px;
+.list-button__name {
+    font-size: 13px;
     font-weight: bold;
     text-align: left;
     white-space: pre-wrap;
 }
 
-.list-link__counter {
-    font-size: 14px;
+.list-button__name::first-letter {
+    text-transform: uppercase;
+}
+
+.list-button__counter {
+    font-size: 13px;
     color: $colorGrayLight;
     text-align: left;
 }
@@ -60,6 +68,10 @@
 }
 
 .list-page__h-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
     position: relative;
 }
 
@@ -70,10 +82,8 @@
     text-align: center;
 }
 
-.list-page__menu {
-    position: absolute;
-    right: 0;
-    top: 0;
+.list-page__title::first-letter {
+    text-transform: uppercase;
 }
 
 .list-page__menu-popup {
@@ -86,7 +96,7 @@
 .list-page__top-panel {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 15px 0;
     border-bottom: 1px solid #eee;   
 }
 

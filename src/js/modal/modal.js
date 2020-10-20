@@ -4,22 +4,36 @@ import ModalController from './modalController';
 
 export default class Modal {
 
-    constructor(id, type, targetId, data=null) { // type: confirm, form
-        this.id = id;
-        this.type = type;
-        this.targetId = targetId;
+    constructor(props) {
+        this.id = props.id;
+        this.type = props.type;
+        this.targetId = props.targetId;
+        this.data = props.data;
+        this.success = props.success;
+        this.failure = props.failure;
 
-        this.model = ModalModel;
-        this.view = ModalView;
-        this.controller = ModalController;
+        this.model = Object.assign({}, ModalModel);
+        this.view = Object.assign({}, ModalView);
+        this.controller = Object.assign({}, ModalController);
 
         this.init();
     }
 
     init() {
-        this.model.init(this.data);
-        this.view.init(this.id, this.targetId);
-        this.controller.init(this.model, this.view);
+        this.model.init(this.id, this.data);
+        this.view.init({
+            id: this.id,
+            targetId: this.targetId,
+            data: this.data,
+            type: this.type
+        });
+        this.controller.init({
+            model: this.model,
+            view: this.view,
+            success: this.success,
+            failure: this.failure,
+            type: this.type // string: consent, form
+        });
     }
 
 };

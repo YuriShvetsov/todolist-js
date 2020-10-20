@@ -1,6 +1,10 @@
 @import "./utils/fonts.scss";
 @import "./utils/vars.scss";
+
 @import "./modules/app.scss";
+@import "./modules/start-page";
+@import "./modules/list.scss";
+@import "./modules/task.scss";
 
 *,
 *::before,

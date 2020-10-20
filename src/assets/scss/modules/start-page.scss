@@ -13,13 +13,13 @@
 
 .logo {
     margin-bottom: 3px;
-    padding-left: 50px;
-    font-size: 28px;
+    padding-left: 40px;
+    font-size: 22px;
     color: $colorBlueDark;
     background-image: url(../images/svg/logo.svg);
     background-position: 5px center;
     background-repeat: no-repeat;
-    background-size: 40px 40px;
+    background-size: 30px 30px;
 }
 
 .logo__part_left {
@@ -35,7 +35,7 @@
 .start-page__top-panel {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 15px 0;
     border-bottom: 1px solid #eee;
 }
 
