@@ -1,5 +1,6 @@
-import Modal from './modal';
+import Modal from './modal/modal';
 import List from './list/list';
+import CurrentDate from './cur-date';
 
 const app = {
 
@@ -61,19 +62,24 @@ const app = {
         appContainer: null,
         elements: {},
 
-        init: function(element) {
-            this.appElement = element;
+        init: function(appElement) {
+            this.appElement = appElement;
             this.initElements();
+
+            this.currentDate = new CurrentDate(this.elements.startPageHead);
         },
 
         initElements: function() {
             // App container
             this.elements.appContainer = this.appElement.querySelector('.js-app-container');
 
+            // Start page header
+            this.elements.startPageHead = this.appElement.querySelector('.js-start-page-head');
+
             // Current date
-            this.elements.currentDateWeekday = this.appElement.querySelector('.js-current-date-weekday');
-            this.elements.currentDateDay = this.appElement.querySelector('.js-current-date-day');
-            this.elements.currentDateMonth = this.appElement.querySelector('.js-current-date-month');
+            // this.elements.currentDateWeekday = this.appElement.querySelector('.js-current-date-weekday');
+            // this.elements.currentDateDay = this.appElement.querySelector('.js-current-date-day');
+            // this.elements.currentDateMonth = this.appElement.querySelector('.js-current-date-month');
 
             // Counters
             this.elements.counterCreatedTasks = this.appElement.querySelector('.js-counter-created-tasks');
@@ -92,36 +98,8 @@ const app = {
         },
 
         renderCurrentDate: function() {
-            const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-            const currentDate = new Date();
-
-            const weekday = currentDate.getDay();
-            const day = currentDate.getDate();
-            const month = currentDate.getMonth();
-
-            let endingForDay = '';
-
-            if (+day.toString().slice(-1) === 0) {
-                endingForDay = 'th';
-            } else if (+day.toString().slice(-1) === 1) {
-                endingForDay = 'st';
-            } else if (+day.toString().slice(-1) === 2) {
-                endingForDay = 'nd';
-            } else if (+day.toString().slice(-1) === 3) {
-                endingForDay = 'rd';
-            } else if (+day.toString().slice(-1) === 4) {
-                endingForDay = 'th';
-            } else if (+day.toString().slice(-1) > 4 && +day.toString().slice(-1) < 10) {
-                endingForDay = 'th';
-            } else if (day > 10 && day < 21) {
-                endingForDay = 'th';
-            }
-
-            this.elements.currentDateWeekday.innerHTML = weekdayNames[weekday];
-            this.elements.currentDateDay.innerHTML = day + endingForDay;
-            this.elements.currentDateMonth.innerHTML = monthNames[month];
+            this.currentDate.update();
+            this.currentDate.render();
         },
 
         renderTaskCounters: function(nums) {
