@@ -1,6 +1,10 @@
 // Fonts
 
+$fontDefault: 'Open Sans';
+$fontLogo: 'Syne Mono';
+
 // Sizes
+
 $mainFontSize: 16px;
 $mainFontWeight: 400;
 $mainFontHeight: 1.4;
@@ -12,8 +16,9 @@ $phoneWidth: 480px;
 $smPhoneWidth: 320px;
 
 // Colors
-$colorBlue: #4ba8ff;
-$colorBlueDark: #0073df;
+
+$colorViolet: #6c4bff;
+$colorVioletDark: #5938f0;
 $colorGray: #5a5a5a;
 $colorGrayLight: #7a7a7a;
 $colorRed: #ed344e;

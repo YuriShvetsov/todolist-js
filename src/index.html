@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Todolist</title>
+    <link rel="shortcut icon" href="./assets/images/png/todolist.png" type="image/x-icon">
 </head>
 <body>
 
@@ -12,8 +13,12 @@
         <div class="todolist__container js-app-container">
             <div class="start-page page">
                 <div class="start-page__head js-start-page-head">
-                    <div class="logo">
-                        <span class="logo__part_left">Todo</span><span class="logo__part_right">List</span>
+                    <div class="start-page__col js-inset-date">
+                        <div class="logo">
+                            <div class="logo__text">
+                                <span class="logo__part_left">Todo</span><span class="logo__part_right">List</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- <div class="current-date">
                         <span class="current-date__weekday js-current-date-weekday">Sunday</span>
@@ -37,7 +42,7 @@
                         </div>
                         <button class="button button_type_create" data-action="openCreateListModal">Create list</button>
                     </div>
-                    <div class="start-page__links-to-lists js-lists-container">
+                    <div class="start-page__links-to-lists js-list-btn-container">
                         <div class="start-page__caption-nothing js-no-lists">You don't have task lists yet...</div>
                     </div>
                 </div><!-- start-page__body -->
@@ -103,19 +108,22 @@
     </template>
 
     <template id="create-list">
-        <div class="create-list modal js-modal">
-            <div class="modal__title">Creating list</div>
-            <form action="" class="modal__form js-modal-form" name="create-list">
-                <div class="modal__row">
-                    <label for="" class="modal__label"><span class="modal__label-name">List name:</span>
-                        <input type="text" name="name" id="" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false" important>
-                    </label>
-                </div>
-                <div class="modal__row modal__row_accept">
-                    <input type="submit" value="save list" class="create-list__save-button modal__accept-button button button_type_save" data-action="getResult">
-                    <input type="button" value="cancel" class="modal__accept-button button button_type_cancel" data-action="cancel">
-                </div>
-            </form>
+        <div class="create-list modal">
+            <div class="modal__container js-container">
+                <div class="modal__title">Creating list</div>
+                <form action="" class="modal__form js-form" name="create-list">
+                    <div class="modal__row">
+                        <label for="" class="modal__label"><span class="modal__label-name">List name:</span>
+                            <input type="text" name="name" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false" important>
+                        </label>
+                    </div>
+                    <div class="modal__row modal__row_accept">
+                        <input type="submit" value="ok" class="create-list__save-button modal__accept-button button button_type_ok" data-action="result">
+                        <input type="button" value="cancel" class="modal__accept-button button button_type_cancel" data-action="cancel">
+                    </div>
+                </form>
+            </div>
+            <div class="modal__overlay js-overlay" data-action="cancel"></div>
         </div>
     </template>
 
@@ -129,7 +137,7 @@
                     </label>
                 </div>
                 <div class="modal__row modal__row_accept">
-                    <input type="submit" value="save" class="modal__accept-button button button_type_save" data-action="getResult">
+                    <input type="submit" value="ok" class="modal__accept-button button button_type_ok" data-action="getResult">
                     <input type="button" value="cancel" class="modal__accept-button button button_type_cancel" data-action="cancel">
                 </div>
             </form>
@@ -137,13 +145,18 @@
     </template>
 
     <template id="delete-list">
-        <div class="delete-list modal js-modal">
-            <div class="modal__title modal__title_style_red">Deleting task list</div>
-            <div class="modal__text">Do you really want to delete the list along with all tasks?</div>
-            <div class="modal__row modal__row_accept">
-                <button class="modal__accept-button button button_type_ok button_style_red" data-action="getResult">OK</button>
-                <button class="modal__accept-button button button_type_cancel button_style_red" data-action="cancel">Cancel</button>
+        <div class="delete-list modal">
+            <div class="modal__container js-container">
+                <div class="modal__title modal__title_style_red">Deleting list</div>
+                <div class="modal__text">Do you really want to delete the list along with all tasks?</div>
+                <form action="" class="modal__form js-modal-form">
+                    <div class="modal__row modal__row_accept">
+                        <input type="submit" value="ok" class="modal__accept-button button button_type_ok button_style_red" data-action="result">
+                        <input type="button" value="cancel" class="modal__accept-button button button_type_cancel button_style_red-text" data-action="cancel">
+                    </div>
+                </form>
             </div>
+            <div class="modal__overlay js-overlay" data-action="cancel"></div>
         </div>
     </template>
 
@@ -186,7 +199,7 @@
                     </label>
                 </div>
                 <div class="modal__row modal__row_accept">
-                    <input type="submit" value="save task" class="create-list__save-button modal__accept-button button button_type_save" data-action="getResult">
+                    <input type="submit" value="ok" class="create-list__save-button modal__accept-button button button_type_ok" data-action="getResult">
                     <input type="button" value="cancel" class="modal__accept-button button button_type_cancel" data-action="cancel">
                 </div>
             </form>
@@ -208,7 +221,7 @@
                     </label>
                 </div>
                 <div class="modal__row modal__row_accept">
-                    <input type="submit" value="save" class="modal__accept-button button button_type_save" data-action="getResult">
+                    <input type="submit" value="save" class="modal__accept-button button button_type_ok" data-action="getResult">
                     <button value="cancel" class="modal__accept-button button button_type_cancel" data-action="cancel">Cancel</button>
                 </div>
             </form>

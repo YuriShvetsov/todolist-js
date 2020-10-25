@@ -1,6 +1,6 @@
-import Modal from './modal/modal';
-import List from './list/list';
-import CurrentDate from './cur-date';
+import Modal from './modules/modal';
+import List from './modules/list';
+import CurrentDate from './modules/curdate';
 
 const app = {
 
@@ -18,36 +18,28 @@ const app = {
             taskLists: []
         },
 
-        init: function() {
-            // this.readAppData();
-        },
+        init: function() {},
 
-        readAppData: function() {
+        readData: function() {},
 
-        },
+        writeData: function() {},
 
-        writeAppData: function() {
+        getCountCreatedTasks: function() {},
 
-        },
-
-        getNumCreatedTasks: function() {
-
-        },
-
-        getNumCompletedTasks: function() {
-
-        },
+        getCountCompletedTasks: function() {},
 
         addList: function(list) {
             this.state.taskLists.push(list);
         },
 
         removeList: function(listId) {
+            const index = this.state.taskLists.findIndex(list => list.id === listId);
 
+            this.state.taskLists.splice(index);
         },
 
         findList: function(listId) {
-            return this.state.taskLists.find(list => list.id == listId);
+            return this.state.taskLists.find(list => list.id === listId);
         },
 
         getListIds: function() {
@@ -58,39 +50,32 @@ const app = {
 
     view: {
 
-        appElement: null,
-        appContainer: null,
         elements: {},
 
         init: function(appElement) {
-            this.appElement = appElement;
+            this.elements.app = appElement;
             this.initElements();
 
-            this.currentDate = new CurrentDate(this.elements.startPageHead);
+            this.currentDate = new CurrentDate(this.elements.insetDate); // инициализировать в контроллере
         },
 
         initElements: function() {
             // App container
-            this.elements.appContainer = this.appElement.querySelector('.js-app-container');
+            this.elements.appContainer = this.elements.app.querySelector('.js-app-container');
 
-            // Start page header
-            this.elements.startPageHead = this.appElement.querySelector('.js-start-page-head');
-
-            // Current date
-            // this.elements.currentDateWeekday = this.appElement.querySelector('.js-current-date-weekday');
-            // this.elements.currentDateDay = this.appElement.querySelector('.js-current-date-day');
-            // this.elements.currentDateMonth = this.appElement.querySelector('.js-current-date-month');
+            // Inset date
+            this.elements.insetDate = this.elements.app.querySelector('.js-inset-date');
 
             // Counters
-            this.elements.counterCreatedTasks = this.appElement.querySelector('.js-counter-created-tasks');
-            this.elements.counterCompletedTasks = this.appElement.querySelector('.js-counter-completed-tasks');
+            this.elements.counterCreatedTasks = this.elements.app.querySelector('.js-counter-created-tasks');
+            this.elements.counterCompletedTasks = this.elements.app.querySelector('.js-counter-completed-tasks');
 
-            // Lists container
-            this.elements.listContainer = this.appElement.querySelector('.js-lists-container');
+            // List button container
+            this.elements.listContainer = this.elements.app.querySelector('.js-list-btn-container');
         },
 
-        getAppContainer: function() {
-            return this.elements.appContainer;
+        getElements: function() {
+            return this.elements;
         },
 
         getListBtnContainer: function() {
@@ -124,7 +109,7 @@ const app = {
         },
 
         handleEvents: function() {
-            this.view.appElement.addEventListener('click', this.handleClick.bind(this));
+            this.view.getElements().app.addEventListener('click', this.handleClick.bind(this));
         },
 
         handleClick: function(event) {
@@ -148,7 +133,7 @@ const app = {
         },
 
         createList: function(data) {
-            const appContainer = this.view.getAppContainer();
+            const appContainer = this.view.getElements().container;
             const btnContainer = this.view.getListBtnContainer();
             const listIds = this.model.getListIds();
 
@@ -168,11 +153,13 @@ const app = {
                 const modal = new Modal({
                     id: 'create-list',
                     targetId: 'app',
-                    type: 'form',
+                    type: 'form-data',
                     data: null,
                     success: this.createList.bind(this),
                     failure: null
                 });
+
+                modal.open();
             },
 
             openList: function(event) {
@@ -188,4 +175,4 @@ const app = {
 
 };
 
-app.init();
+window.onload = app.init();

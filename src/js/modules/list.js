@@ -1,6 +1,6 @@
-import ListModel from './listModel';
-import ListView from './listView';
-import ListController from './listController';
+import ListModel from './list/model';
+import ListView from './list/view';
+import ListController from './list/controller';
 
 export default class List {
 
@@ -32,5 +32,3 @@ export default class List {
     }
 
 };
-
-

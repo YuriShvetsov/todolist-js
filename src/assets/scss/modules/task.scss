@@ -56,7 +56,7 @@
 }
 
 .task__checkbox:checked + .task__checkbox-label::before {
-    background-color: $colorBlue;
+    background-color: $colorViolet;
     background-image: url(../images/svg/check.svg);
     background-position: center 5px;
     background-repeat: no-repeat;

@@ -1,21 +1,15 @@
 /* Common styles */
 
-*,
-*::before,
-*::after {
-    font-family: 'Open Sans';
-}
-
 .todolist {
     width: 100%;
     height: 100vh;
     padding: 20px 0;
-    background-color: $colorBlueDark;
+    font-family: $fontDefault;
+    background-color: $colorVioletDark;
 }
 
 .todolist__container {
     width: 720px;
-    // min-height: 640px;
     margin: 0 auto;
     position: relative;
     border-radius: 3px;
@@ -48,6 +42,7 @@
     padding-bottom: 5px;
     padding-left: 12px;
     padding-right: 12px;
+    font-family: $fontDefault;
     font-size: 13px;
     font-weight: bold;
     line-height: normal;
@@ -65,7 +60,7 @@
     display: block;
     padding-right: 33px;
     text-transform: uppercase;
-    color: $colorBlueDark;
+    color: $colorVioletDark;
     background-color: #fff;
     background-image: url(../images/svg/add.svg);
     background-position: calc(100% - 13px) center;
@@ -102,19 +97,19 @@
     display: block;
     text-transform: uppercase;
     color: #fff;
-    background-color: $colorBlue;
+    background-color: $colorViolet;
     border-radius: 2px;
 }
 
 .button_type_ok:hover {
-    background-color: darken($colorBlue, 8%);
+    background-color: darken($colorViolet, 3%);
 }
 
 .button_type_cancel {
     display: block;
     width: 100px;
     text-transform: uppercase;
-    color: $colorBlueDark;
+    color: $colorVioletDark;
     background-color: #fff;
     border-radius: 2px;
 }
@@ -123,11 +118,11 @@
     background-color: #eee;
 }
 
-.button_type_save {
+.button_type_ok {
     display: block;
     text-transform: uppercase;
     color: #fff;
-    background-color: $colorBlue;
+    background-color: $colorViolet;
     border-radius: 2px;
 }
 
@@ -146,14 +141,14 @@
 }
 
 .button_type_save:hover {
-    background-color: darken($colorBlue, 8%);
+    background-color: darken($colorViolet, 3%);
 }
 
 .button_type_back {
     display: block;
     padding-left: 33px;
     text-transform: uppercase;
-    color: $colorBlueDark;
+    color: $colorVioletDark;
     background-color: #fff;
     background-image: url(../images/svg/left-arrow.svg);
     background-position: 13px center;
@@ -187,13 +182,12 @@
     background-color: darken($colorRed, 8%);
 }
 
-.button_style_red + .button_type_cancel {
+.button_style_red-text {
     color: $colorRed;
     background-color: #fff;
 }
 
-.button_style_red + .button_type_cancel:hover {
-    color: $colorRed;
+.button_style_red-text:hover {
     background-color: #eee;
 }
 
@@ -208,120 +202,4 @@
 
 .popup_visible {
     display: block;
-}
-
-.modal {
-    // display: none;
-    min-width: 420px;
-    padding: 25px 40px;
-    position: fixed;
-    left: 50%;
-    top: 65px;
-    transform: translateX(-50%) scale(0.95);
-    background-color: #fff;
-    border-radius: 3px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
-    z-index: 1000;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
-}
-
-.modal_visible {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-}
-
-.modal_hidden {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.95);
-}
-
-.modal__title {
-    margin-bottom: 15px;
-    font-size: 16px;
-    font-weight: 300;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.modal__title_style_red {
-    color: $colorRed;
-}
-
-.modal__text {
-    font-size: 13px;
-    color: $colorGrayLight;
-}
-
-.modal__form {
-    display: block;
-    width: 100%;
-}
-
-.modal__row_accept {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-}
-
-.modal__accept-button {
-    min-width: 100px;
-}
-
-.modal__accept-button:not(:last-child) {
-    margin-right: 10px;
-}
-
-.modal__label-name {
-    font-size: 13px;
-    line-height: 2;
-    white-space: nowrap;
-    color: $colorGray;
-}
-
-.modal__input {
-    display: block;
-    width: 100%;
-    padding: 6px;
-    font-size: 13px;
-    color: #464646;
-    line-height: 20px;
-    background-color: #ebebeb;
-    border: none;
-    border-radius: 2px;
-    outline: none;
-}
-
-.modal__input:focus {
-    background-color: #f2f2f2;
-}
-
-.modal__input_type_area {
-    max-height: 400px;
-    resize: none;
-}
-
-.overlay {
-    // display: none;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background-color: rgba(0,0,0,0.3);
-    opacity: 0;
-    visibility: hidden;
-    z-index: 900;
-    transition: opacity 150ms ease-in-out;
-}
-
-.overlay_visible {
-    visibility: visible;
-    opacity: 1;
-}
-
-.overlay_hidden {
-    opacity: 0;
 }

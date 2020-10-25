@@ -1,0 +1,132 @@
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.modal__container {
+    min-width: 420px;
+    padding: 25px 40px;
+    position: fixed;
+    left: 50%;
+    top: 65px;
+    transform: translateX(-50%) scale(0.95);
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+    z-index: 1002;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+    pointer-events: all;
+}
+
+.modal__container_visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.modal__container_hidden {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.95);
+    pointer-events: none;
+}
+
+.modal__title {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: $colorVioletDark;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.modal__title_style_red {
+    font-weight: bold;
+    color: $colorRed;
+}
+
+.modal__text {
+    font-size: 13px;
+    color: $colorGrayLight;
+}
+
+.modal__form {
+    display: block;
+    width: 100%;
+}
+
+.modal__row_accept {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.modal__accept-button {
+    min-width: 100px;
+}
+
+.modal__accept-button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.modal__label-name {
+    font-size: 13px;
+    line-height: 2;
+    white-space: nowrap;
+    color: $colorGray;
+}
+
+.modal__input {
+    display: block;
+    width: 100%;
+    padding: 6px;
+    font-family: $fontDefault;
+    font-size: 13px;
+    color: #464646;
+    line-height: 20px;
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+}
+
+.modal__input:focus {
+    background-color: #f2f2f2;
+}
+
+.modal__input_type_area {
+    max-height: 400px;
+    resize: none;
+}
+
+.modal__overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1001;
+    transition: opacity 150ms ease-in-out;
+    pointer-events: all;
+}
+
+.modal__overlay_visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal__overlay_hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+

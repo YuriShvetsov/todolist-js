@@ -1,4 +1,4 @@
-// Open Sans, regular 400
+// Open Sans, regular
 @font-face {
     font-family: 'Open Sans';
     src: url('../fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
@@ -14,11 +14,19 @@
     font-style: italic;
 }
 
-// Open Sans, bold 600
+// Open Sans, bold
 @font-face {
     font-family: 'Open Sans';
     src: url('../fonts/OpenSans/OpenSans-SemiBold.ttf') format('truetype');
     font-weight: bold;
+    font-style: normal;
+}
+
+// Syne Mono, regular
+@font-face {
+    font-family: 'Syne Mono';
+    src: url('../fonts/Syne_Mono/SyneMono-Regular.ttf') format('truetype');
+    font-weight: normal;
     font-style: normal;
 }
 
