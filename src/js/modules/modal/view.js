@@ -10,7 +10,7 @@ const view = {
         this.formData = props.formData;
 
         // Прочие свойства
-        this.inputTypes = ['text', 'textarea', 'radio', 'checkbox'];
+        // this.inputTypes = ['text', 'textarea', 'radio', 'checkbox'];
 
         // Элементы DOM
         this.elements = {};
@@ -49,7 +49,7 @@ const view = {
         setTimeout(() => {
             this.elements.modal.remove();
             this.elements = {};
-        }, 200);
+        }, 2000);
     },
 
     showContainer: function() {
@@ -92,6 +92,8 @@ const view = {
         // ...
     },
 
+    // Получение элементов DOM
+
     getModal: function() {
         return this.elements.modal;
     },
@@ -102,7 +104,7 @@ const view = {
 
         formElements.forEach(el => {
             const type = el.getAttribute('type');
-            if (!this.inputTypes.includes(type)) return;
+            if (['submit', 'button'].includes(type)) return;
 
             formInputs.push(el);
         });

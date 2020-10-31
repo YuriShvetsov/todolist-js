@@ -175,4 +175,7 @@ const app = {
 
 };
 
-window.onload = app.init();
+// window.onload = app.init();
+
+app.init();
+
