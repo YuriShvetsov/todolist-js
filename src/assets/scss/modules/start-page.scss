@@ -27,6 +27,7 @@
     background-position: 0 center;
     background-repeat: no-repeat;
     background-size: 30px 30px;
+    user-select: none;
 }
 
 .logo__part_left {
@@ -35,6 +36,16 @@
 
 .logo__part_right {
     color: $colorViolet;
+}
+
+@media screen and (width: $smPhoneWidth) {
+
+    .logo {
+        padding-left: 28px;
+        font-size: 20px;
+        background-size: 24px 24px;
+    }
+
 }
 
 /* Body */
@@ -71,6 +82,22 @@
     color: $colorViolet;
 }
 
+@media screen and (width: $smPhoneWidth) {
+
+    .start-page__counters {
+        flex-direction: column;
+    }
+
+    .start-page__counter-value {
+        font-size: 16px;
+    }
+
+    .start-page__counter-desc {
+        font-size: 12px;
+    }
+
+}
+
 .start-page__links-to-lists {
     display: flex;
     justify-content: flex-start;
@@ -90,3 +117,11 @@
     display: none;
 }
 
+@media screen and (width: $smPhoneWidth) {
+
+    .start-page__caption-nothing {
+        padding: 15px 0;
+        font-size: 14px;
+    }
+
+}

@@ -73,6 +73,26 @@
     margin-right: 10px;
 }
 
+.modal__label {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+.modal__label_warning::after {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 5px;
+    bottom: 7px;
+    background-image: url(../images/svg/warning.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .modal__label-name {
     font-size: 13px;
     line-height: 2;
@@ -92,6 +112,17 @@
     border: none;
     border-radius: 2px;
     outline: none;
+}
+
+.modal__input::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: red;
 }
 
 .modal__input:focus {
@@ -127,6 +158,20 @@
     pointer-events: none;
     animation: hideOverlay 150ms ease-in-out;
     animation-fill-mode: both;
+}
+
+@media screen and (width: $smPhoneWidth) {
+
+    .modal__container {
+        width: calc(100% - 30px);
+        min-width: unset;
+        padding: 20px 30px;
+        position: fixed;
+        // left: 50%;
+        top: 30px;
+        // transform: translateX(-50%);
+    }
+
 }
 
 @keyframes showContainer {

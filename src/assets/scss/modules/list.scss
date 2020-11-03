@@ -2,7 +2,6 @@
 
 .list-button {
     display: flex;
-    // flex-wrap: nowrap;
     align-items: center;
     width: calc(100% / 3);
     padding: 15px;
@@ -58,25 +57,28 @@
     left: 0;
     top: 0;
     background-color: #fff;
-    // opacity: 0.5;
     z-index: 200;
 }
 
 .list-page__head {
+    position: relative;
     padding: 0 0 20px 0;
     border-bottom: 1px solid #eee;   
 }
 
 .list-page__h-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
     position: relative;
 }
 
+.list-page__close-btn {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .list-page__title {
-    margin: 5px;
+    margin: 5px 0;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
@@ -84,6 +86,13 @@
 
 .list-page__title::first-letter {
     text-transform: uppercase;
+}
+
+.list-page__menu {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .list-page__menu-popup {
@@ -106,7 +115,7 @@
 }
 
 .list-page__counter-value {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: $colorVioletDark;
 }
@@ -130,6 +139,15 @@
 
 .list-page__caption-nothing_hidden {
     display: none;
+}
+
+@media screen and (width: $smPhoneWidth) {
+
+    .list-button {
+        width: 100%;
+        padding: 15px;
+    }
+
 }
 
 /* List creating modal window template */

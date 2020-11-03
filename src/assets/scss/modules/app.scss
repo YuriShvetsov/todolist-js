@@ -3,23 +3,60 @@
 .todolist {
     width: 100%;
     height: 100vh;
-    padding: 20px 0;
+    padding: 20px 10px;
     font-family: $fontDefault;
     background-color: $colorVioletDark;
 }
 
 .todolist__container {
-    width: 720px;
+    max-width: 720px;
     margin: 0 auto;
     position: relative;
     border-radius: 3px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+@media screen and (width: $smDesktopWidth) {
+
+    .todolist__container {
+        width: auto;
+    }
+
+}
+
 .page {
     padding: 30px;
     background-color: #fff;
     border-radius: 3px;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.page_visible {
+    visibility: visible;
+    animation: showPage 150ms ease-in-out;
+    animation-fill-mode: both;
+    pointer-events: all;
+}
+
+.page_hidden {
+    visibility: visible;
+    animation: hidePage 150ms ease-in-out;
+    animation-fill-mode: both;
+    pointer-events: none;
+}
+
+.page_static {
+    visibility: visible;
+    pointer-events: all;
+}
+
+@media screen and (width: $smPhoneWidth) {
+
+    .page {
+        padding: 20px;
+    }
+
 }
 
 .current-date {
@@ -37,18 +74,27 @@
     color: $colorGray;
 }
 
+@media screen and (width: $smPhoneWidth) {
+
+    .current-date {
+        font-size: 12px;
+    }
+
+}
+
 .button {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 12px;
-    padding-right: 12px;
+    display: block;
+    padding: 5px 12px;
     font-family: $fontDefault;
     font-size: 13px;
     font-weight: bold;
     line-height: normal;
     border: none;
+    border-radius: 2px;
     outline: none;
     cursor: pointer;
+    user-select: none;
+    appearance: none;
     transition: background-color 150ms ease-in-out;
 }
 
@@ -56,26 +102,61 @@
     background-color: #eee;
 }
 
-.button_type_create {
-    display: block;
-    padding-right: 33px;
+.button_type_simple {
+    color: $colorViolet;
     text-transform: uppercase;
-    color: $colorVioletDark;
     background-color: #fff;
-    background-image: url(../images/svg/add.svg);
+}
+
+.button_type_ok {
+    color: #fff;
+    text-transform: uppercase;
+    background-color: $colorViolet;
+}
+
+.button_type_ok:hover {
+    background-color: darken($colorViolet, 3%);
+}
+
+.button_type_warning {
+    color: #fff;
+    text-transform: uppercase;
+    background-color: $colorRed;
+}
+
+.button_type_warning:hover {
+    background-color: darken($colorRed, 8%);
+}
+
+.button_type_left-icon {
+    padding-left: 33px;
+    color: $colorVioletDark;
+    text-transform: uppercase;
+    background-color: #fff;
+    background-position: 13px center;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+}
+
+.button_type_left-icon:hover {
+    background-color: #eee;
+}
+
+.button_type_right-icon {
+    padding-right: 33px;
+    color: $colorVioletDark;
+    text-transform: uppercase;
+    background-color: #fff;
     background-position: calc(100% - 13px) center;
     background-repeat: no-repeat;
     background-size: 12px 12px;
-    border-radius: 2px;
 }
 
-.button_type_menu {
-    display: block;
+.button_type_only-icon {
     width: 28px;
     height: 28px;
     text-indent: -999px;
     background-color: rgba(255, 255, 255, 0);
-    background-image: url(../images/svg/menu.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 14px 14px;
@@ -84,122 +165,145 @@
 }
 
 .button_type_popup {
-    display: block;
     width: 100%;
     padding-left: 35px;
     font-size: 13px;
     font-weight: normal;
     text-align: left;
-    background-color: #fff;
+    text-transform: capitalize;
+    background-color: rgba(255, 255, 255, 0);
+    background-position: 12px center;
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    border-radius: 0;
 }
 
-.button_type_ok {
-    display: block;
-    text-transform: uppercase;
-    color: #fff;
-    background-color: $colorViolet;
-    border-radius: 2px;
+.button_type_popup:first-of-type {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
-.button_type_ok:hover {
-    background-color: darken($colorViolet, 3%);
+.button_type_popup:last-of-type {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
-.button_type_cancel {
-    display: block;
-    width: 100px;
-    text-transform: uppercase;
-    color: $colorVioletDark;
-    background-color: #fff;
-    border-radius: 2px;
-}
-
-.button_type_cancel:hover {
+.button_type_popup:hover {
     background-color: #eee;
 }
 
-.button_type_ok {
-    display: block;
-    text-transform: uppercase;
-    color: #fff;
-    background-color: $colorViolet;
-    border-radius: 2px;
+.button_type_list {
+    text-transform: none;
 }
 
-.button_type_delete {
-    display: block;
-    width: 30px;
-    height: 30px;
-    text-indent: -999px;
-    background-color: rgba(255, 255, 255, 0);
-    background-image: url(../images/svg/delete.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 14px 14px;
-    border-radius: 50%;
-    overflow: hidden;
+.button_type_list:hover {
+    background-color: #eee;
 }
 
-.button_type_save:hover {
-    background-color: darken($colorViolet, 3%);
+.button_icon_add {
+    background-image: url(../images/svg/add.svg);
 }
 
-.button_type_back {
-    display: block;
-    padding-left: 33px;
-    text-transform: uppercase;
-    color: $colorVioletDark;
-    background-color: #fff;
+.button_icon_left-arrow {
     background-image: url(../images/svg/left-arrow.svg);
-    background-position: 13px center;
-    background-repeat: no-repeat;
-    background-size: 12px 12px;
-    border-radius: 2px;
+}
+
+.button_icon_menu {
+    background-image: url(../images/svg/menu.svg);
 }
 
 .button_icon_edit {
-    background-color: rgba(255, 255, 255, 0);
     background-image: url(../images/svg/edit.svg);
-    background-position: 12px center;
-    background-repeat: no-repeat;
-    background-size: 14px 14px;
 }
 
 .button_icon_delete {
-    background-color: rgba(255, 255, 255, 0);
     background-image: url(../images/svg/delete.svg);
-    background-position: 12px center;
-    background-repeat: no-repeat;
-    background-size: 14px 14px;
 }
 
 .button_style_red {
-    color: #fff;
-    background-color: $colorRed;
-}
-
-.button_style_red:hover {
-    background-color: darken($colorRed, 8%);
-}
-
-.button_style_red-text {
     color: $colorRed;
     background-color: #fff;
 }
 
-.button_style_red-text:hover {
-    background-color: #eee;
+@media screen and (width: $smPhoneWidth) {
+
+    .button {
+        padding: 3px 8px;
+        font-size: 13px;
+    }
+
+    .button_type_create {
+        padding-right: 28px;
+        background-position: calc(100% - 8px) center;
+        background-size: 10px 10px;
+    }
+
 }
 
 .popup {
-    display: none;
     position: absolute;
     background-color: #fff;
     box-shadow: 0 15px 20px rgba(0,0,0,0.15);
     border-radius: 3px;
     overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .popup_visible {
-    display: block;
+    visibility: visible;    
+    animation: showPopup 150ms ease-in-out;
+    animation-fill-mode: both;
+    pointer-events: all;
+}
+
+.popup_hidden {
+    visibility: visible;
+    animation: hidePopup 150ms ease-in-out;
+    animation-fill-mode: both;
+    pointer-events: none;
+}
+
+@keyframes showPage {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes hidePage {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+}
+
+@keyframes showPopup {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hidePopup {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
 }
