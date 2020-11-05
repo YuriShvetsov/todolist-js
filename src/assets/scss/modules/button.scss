@@ -1,0 +1,156 @@
+// Buttons
+
+.button {
+    display: block;
+    padding: 5px 12px;
+    font-family: $fontDefault;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: normal;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    transition: background-color 150ms ease-in-out;
+}
+
+.button:hover {
+    background-color: #eee;
+}
+
+.button_type_simple {
+    color: $colorViolet;
+    text-transform: uppercase;
+    background-color: #fff;
+}
+
+.button_type_ok {
+    color: #fff;
+    text-transform: uppercase;
+    background-color: $colorViolet;
+}
+
+.button_type_ok:hover {
+    background-color: darken($colorViolet, 3%);
+}
+
+.button_type_warning {
+    color: #fff;
+    text-transform: uppercase;
+    background-color: $colorRed;
+}
+
+.button_type_warning:hover {
+    background-color: darken($colorRed, 8%);
+}
+
+.button_type_left-icon {
+    padding-left: 33px;
+    color: $colorVioletDark;
+    text-transform: uppercase;
+    background-color: #fff;
+    background-position: 13px center;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+}
+
+.button_type_left-icon:hover {
+    background-color: #eee;
+}
+
+.button_type_right-icon {
+    padding-right: 33px;
+    color: $colorVioletDark;
+    text-transform: uppercase;
+    background-color: #fff;
+    background-position: calc(100% - 13px) center;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+}
+
+.button_type_only-icon {
+    width: 28px;
+    height: 28px;
+    text-indent: -999px;
+    background-color: rgba(255, 255, 255, 0);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.button_type_popup {
+    width: 100%;
+    padding-left: 35px;
+    font-size: 13px;
+    font-weight: normal;
+    text-align: left;
+    text-transform: capitalize;
+    background-color: rgba(255, 255, 255, 0);
+    background-position: 12px center;
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+}
+
+.button_type_popup:hover {
+    background-color: #eee;
+}
+
+.button_type_list {
+    text-transform: none;
+}
+
+.button_type_list:hover {
+    background-color: #eee;
+}
+
+.button_icon_add {
+    background-image: url(../images/svg/add.svg);
+}
+
+.button_icon_left-arrow {
+    background-image: url(../images/svg/left-arrow.svg);
+}
+
+.button_icon_menu {
+    background-image: url(../images/svg/menu.svg);
+}
+
+.button_icon_edit {
+    background-image: url(../images/svg/edit.svg);
+}
+
+.button_icon_delete {
+    background-image: url(../images/svg/delete.svg);
+}
+
+.button_icon_rename {
+    background-image: url(../images/svg/rename.svg);
+}
+
+.button_icon_remove {
+    background-image: url(../images/svg/remove.svg);
+}
+
+.button_style_red {
+    color: $colorRed;
+    background-color: #fff;
+}
+
+@media screen and (width: $smPhoneWidth) {
+
+    .button {
+        padding: 3px 8px;
+        font-size: 13px;
+    }
+
+    .button_type_create {
+        padding-right: 28px;
+        background-position: calc(100% - 8px) center;
+        background-size: 10px 10px;
+    }
+
+}

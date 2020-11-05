@@ -1,4 +1,7 @@
 import Modal from '../modal';
+import Task from '../task';
+
+// Controller for class List
 
 const ListController = {
 
@@ -9,111 +12,196 @@ const ListController = {
         this.popup = {
             isActive: false,
             btn: null,
-            hidingFunc: null
         };
 
-        this.addListBtn();
-        this.openList();
+        this.tasks = [];
+
+        this.initBtn();
+        this.initObjects();
+        this.initBtnEventHandlers();
+        this.initPageEventHandlers();
     },
 
-    handleEvents: function() {
-        this.view.page.addEventListener('click', this.handleClick.bind(this));
+    initBtn: function() {
+        const name = this.model.getName();
+        const tasks = this.model.getTasks();
+
+        this.view.updateBtnName(name);
+        this.view.updateBtnCounter(tasks.length);
+        this.view.createBtn();
     },
 
-    handleClick: function(event) {
+    initObjects: function() {
+        this.initTasks();
+    },
+
+    initTasks: function() {
+        const data = this.model.getTasks();
+        const taskContainer = this.view.getTaskContainer();
+
+        data.forEach(task => {
+            this.tasks.push(
+                new Task({
+                    data: task,
+                    delete: this.deleteTask.bind(this),
+                    taskContainer: taskContainer
+                })
+            );
+        });
+
+        if (this.tasks.length > 0) {
+            this.view.hideCaptionEmptyList();
+        }
+    },
+
+    // Обработка событий
+
+    initBtnEventHandlers: function() {
+        const btn = this.view.getBtn();
+
+        btn.addEventListener('click', this.handleClickOnBtn.bind(this));
+    },
+
+    initPageEventHandlers: function() {
+        const page = this.view.getPage();
+
+        page.addEventListener('click', this.handleClickOnPage.bind(this));
+    },
+
+    handleClickOnBtn: function(event) {
         const action = event.target.dataset.action;
-
-        if  (this.popup.isActive && this.popup.btn != event.target) this.hideActivePopup();
 
         if (!action || !this.userActions[action]) return;
 
         this.userActions[action].call(this, event);
     },
 
-    addListBtn: function() {
-        const id = this.model.getId();
-        const listName = this.model.getData().name;
-        const taskCount = this.model.getTaskCount();
+    handleClickOnPage: function(event) {
+        this.checkActivePopup(event.target);
 
-        this.view.addListBtn(id, listName, taskCount);
+        const action = event.target.dataset.action;
+
+        if (!action || !this.userActions[action]) return;
+
+        this.userActions[action].call(this, event);
     },
 
-    openList: function() {
-        const data = this.model.getData();
+    removeBtnEventHandlers: function() {
+        const btn = this.view.getBtn();
 
-        this.view.showPage(data);
-        this.handleEvents();
+        btn.removeEventListener('click', this.handleClickOnBtn.bind(this));
     },
 
-    closeList: function() {
-        this.view.hidePage();
+    removePageEventHandlers: function() {
+        const page = this.view.getPage();
+
+        page.removeEventListener('click', this.handleClickOnPage.bind(this));
     },
 
-    hideActivePopup: function() {
-        this.userActions.togglePopup.call(this);
+    // Основные методы
+
+    createTask: function(data) {
+        console.log('create task');
+    },
+
+    deleteTask: function(id) {
+        console.log('delete task');
     },
 
     renameList: function(data) {
-        this.model.setListName(data.name);
+        this.model.setName(data.name);
 
-        const listName = this.model.getData().name;
+        const newName = this.model.getName();
 
-        this.view.updatePageTitle(listName);
-        this.view.updateListBtn(listName);
+        this.view.updatePageTitle(newName);
+        this.view.updateBtnName(newName);
+    },
+
+    deleteList: function(allowed=false) {
+        if (allowed) {
+            this.removeBtnEventHandlers();
+            this.removePageEventHandlers();
+
+            this.view.removeBtn();
+            this.view.removePage();
+
+            this.model.deleteSelf();
+        }
     },
 
     userActions: {
+
+        openList: function() {
+            const name = this.model.getName();
+            const tasks = this.model.getTasks();
+
+            this.view.updatePageTitle(name);
+            this.view.updatePageTasksCounter(tasks.length);
+            this.view.createPage();
+        },
+
+        closeList: function() {
+            this.view.removePage();
+        },
+
+        openEditListModal: function() {
+            const modal = new Modal({
+                id: 'edit-list',
+                targetId: 'app',
+                data: {
+                    name: this.model.getName()
+                },
+                success: this.renameList.bind(this),
+                failure: null
+            });
+
+            modal.open();
+        },
+
+        openDeleteListModal: function() {
+            const modal = new Modal({
+                id: 'delete-list',
+                targetId: 'app',
+                data: null,
+                success: this.deleteList.bind(this),
+                failure: null
+            });
+
+            modal.open();
+        },
+
+        openCreateTaskModal: function() {
+            const modal = new Modal({
+                id: 'create-task',
+                targetId: 'app',
+                data: null,
+                success: this.createTask.bind(this),
+                failure: null
+            });
+
+            modal.open();
+        },
 
         togglePopup: function(event) {
             if (this.popup.isActive) {
                 this.view.hidePopup();
                 this.popup.btn = null;
             } else {
-                this.view.showPopup(event.target);
-                this.popup.btn = this.view.popup.btn;
+                this.popup.btn = event.target;
+                this.view.showPopup(this.popup.btn);
             }
 
             this.popup.isActive = !this.popup.isActive;
-        },
-
-        openEditListModal: function() {
-            const successFunction = this.renameList.bind(this);
-            const modal = new Modal({
-                id: 'edit-list',
-                targetId: 'app',
-                type: 'form',
-                data: {
-                    name: this.model.getData().name
-                },
-                success: successFunction,
-                failure: null
-            });
-        },
-
-        openDeleteListModal: function() {
-
-        },
-
-        openCreateTaskModal: function() {
-            const successFunction = null;
-            const modal = new Modal({
-                id: 'create-task',
-                targetId: 'app',
-                type: 'form',
-                data: null,
-                success: successFunction,
-                failure: null
-            });
-        },
-
-        openEditTaskModal: function() {
-
-        },
-
-        close: function() {
-            this.closeList();
         }
 
+    },
+
+    // Другие методы
+
+    checkActivePopup: function(el) {
+        if (this.popup.isActive && el != this.popup.btn) {
+            this.userActions.togglePopup.call(this);
+        }
     }
 
 };

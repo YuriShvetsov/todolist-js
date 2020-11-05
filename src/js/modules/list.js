@@ -2,33 +2,40 @@ import ListModel from './list/model';
 import ListView from './list/view';
 import ListController from './list/controller';
 
-export default class List {
+class List {
 
     constructor(props) {
         this.data = props.data;
+        this.delete = props.delete;
+
         this.btnContainer = props.btnContainer;
-        this.appContainer = props.appContainer;
-        this.listIds = props.listIds;
+        this.pageContainer = props.pageContainer;
 
         this.model = Object.assign({}, ListModel);
         this.view = Object.assign({}, ListView);
         this.controller = Object.assign({}, ListController);
 
-        this.init();
-    }
-
-    init() {
-        this.model.init(this.data, this.listIds);
-        this.view.init(this.btnContainer, this.appContainer);
+        this.model.init(this.data, this.delete);
+        this.view.init(this.btnContainer, this.pageContainer);
         this.controller.init(this.model, this.view);
-    }
-
-    open() {
-        this.controller.openList();
     }
 
     get id() {
         return this.model.getId();
     }
 
+    get name() {
+        return this.model.getName();
+    }
+
+    get tasks() {
+        return this.model.getTasks();
+    }
+
+    get createdTasksNum() {}
+
+    get completedTasksNum() {}
+
 };
+
+export default List;

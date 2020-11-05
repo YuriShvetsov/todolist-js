@@ -6,6 +6,7 @@ const controller = {
         // Входные параметры
         this.model = props.model;
         this.view = props.view;
+        // this.type = props.type;
         this.success = props.success;
         this.failure = props.failure;
 
@@ -28,22 +29,64 @@ const controller = {
 
         if (action === undefined) return;
 
-        if (!this.userActions[action]) {
-            throw Error('Error at init of user action');
-        }
+        if (!this.userActions[action]) throw Error('Error at init of user action');
 
         this.userActions[action].call(this);
+    },
+
+    removeHandlers: function() {
+        const modal = this.view.getModal();
+
+        modal.removeEventListener('click', this.handleClick.bind(this));
     },
 
     // Действия пользователя
 
     userActions: {
 
-        result: function() {
-            console.log('result');
+        // Передача данных формы
+        send: function() {
+
+            if (!this.success) throw Error('Success function is not defined!');
+
+            const formData = this.view.getFormData();
+
+            if (!formData) return;
+
+            this.model.setData(formData);
+
+            const data = this.model.getData();
+            this.success(data);
+
+            this.removeHandlers.call(this);
+            this.view.hide();
         },
-         
+
+        // Отмена передачи данных формы
         cancel: function() {
+            this.removeHandlers.call(this);
+            this.view.hide();
+        },
+
+        // Передача утвердительного ответа
+        accept: function() {
+            if (!this.success) throw Error('Success function is not defined!');
+
+            const positiveAnswer = this.model.getPositiveAnswer();
+            this.success(positiveAnswer);
+
+            this.removeHandlers.call(this);
+            this.view.hide();
+        },
+
+        // Передача отрицательного ответа
+        decline: function() {
+            if (!this.failure) throw Error('Failure function is not defined!');
+
+            const negativeAnswer = this.model.getNegativeAnswer();
+            this.failure(negativeAnswer);
+
+            this.removeHandlers.call(this);
             this.view.hide();
         }
 

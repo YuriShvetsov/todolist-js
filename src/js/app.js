@@ -2,114 +2,192 @@ import Modal from './modules/modal';
 import List from './modules/list';
 import CurrentDate from './modules/curdate';
 
-const app = {
+/* Application TODOLIST
 
-    element: document.getElementById('app'),
+1. Инициализация (app)
+    а) чтение данных (model.read),
+    б) инициализация DOM (view.init),
+    в) инициализация объектов (controller.initAppObjects),
+    г) инициализация обработчиков событий (controller.initEventHandlers),
+    д) отрисовка DOM на основе полученных данных (controller.renderDOM)
+
+2. Обработка событий
+    а) изменение объектов app,
+    б) запись данных (model.write),
+    в) отрисовка DOM на основе измененных данных
+
+*/
+
+const app = {
 
     init: function() {
         this.model.init();
-        this.view.init(this.element);
+        this.view.init();
         this.controller.init(this.model, this.view);
     },
 
     model: {
 
-        state: {
-            taskLists: []
+        init: function() {
+            this.lists = this.read();
         },
 
-        init: function() {},
+        read: function() {
+            return [
+                {
+                    id: 'list-id',
+                    name: 'list-name',
+                    tasks: [
+                        {
+                            id: 'task-id',
+                            date: new Date,
+                            done: false,
+                            name: 'task name',
+                            notes: 'task notes'
+                        }
+                    ]
+                }
+            ];
+        },
 
-        readData: function() {},
-
-        writeData: function() {},
-
-        getCountCreatedTasks: function() {},
-
-        getCountCompletedTasks: function() {},
+        write: function() {},
 
         addList: function(list) {
-            this.state.taskLists.push(list);
+            this.lists.push({
+                id: list.id,
+                name: list.name,
+                tasks: list.tasks
+            });
+
+            this.write();
         },
 
-        removeList: function(listId) {
-            const index = this.state.taskLists.findIndex(list => list.id === listId);
+        deleteList: function(id) {
+            this.lists = this.lists.filter(item => item.id != id);
 
-            this.state.taskLists.splice(index);
+            this.write();
         },
 
-        findList: function(listId) {
-            return this.state.taskLists.find(list => list.id === listId);
+        getLists: function() {
+            return this.lists;
         },
 
-        getListIds: function() {
-            return this.state.taskLists.map(list => list.id);
+        genListId: function() {
+            const ids = this.lists.map(list => list.id);
+            let id;
+    
+            while (true) {
+                id = 'list-' + Math.random().toString(36).substr(2, 8);
+                if (!ids.includes(id)) break;
+            }
+    
+            return id;
         }
 
     },
 
     view: {
 
-        elements: {},
-
-        init: function(appElement) {
-            this.elements.app = appElement;
-            this.initElements();
-
-            this.currentDate = new CurrentDate(this.elements.insetDate); // инициализировать в контроллере
+        init: function() {
+            this.elements = this.initElements();
         },
 
         initElements: function() {
-            // App container
-            this.elements.appContainer = this.elements.app.querySelector('.js-app-container');
+            const app = document.getElementById('app');
+            const elements = {};
 
-            // Inset date
-            this.elements.insetDate = this.elements.app.querySelector('.js-inset-date');
+            elements.pageContainer = app.querySelector('.js-page-container');
+    
+            elements.startPage = app.querySelector('.js-start-page')
+            elements.dateContainer = app.querySelector('.js-date-container');
+            elements.createdTasksCounter = app.querySelector('.js-created-tasks');
+            elements.completedTasksCounter = app.querySelector('.js-completed-tasks');
+            elements.listBtnContainer = app.querySelector('.js-list-btn-container');
+            elements.captionEmptyList = app.querySelector('.js-caption-empty-list');
 
-            // Counters
-            this.elements.counterCreatedTasks = this.elements.app.querySelector('.js-counter-created-tasks');
-            this.elements.counterCompletedTasks = this.elements.app.querySelector('.js-counter-completed-tasks');
-
-            // List button container
-            this.elements.listContainer = this.elements.app.querySelector('.js-list-btn-container');
+            return elements;
         },
 
-        getElements: function() {
-            return this.elements;
+        getElement: function(name) {
+            if (!this.elements[name]) throw new Error(`Element "${name}" is not found!`);
+
+            return this.elements[name];
         },
 
-        getListBtnContainer: function() {
-            return this.elements.listContainer;
+        // Изменение состояния DOM
+
+        renderCreatedTasksCounter: function(value) {
+            const counter = this.getElement('createdTasksCounter');
+
+            counter.innerHTML = value;
         },
 
-        renderCurrentDate: function() {
-            this.currentDate.update();
-            this.currentDate.render();
+        renderCompletedTasksCounter: function(value) {
+            const counter = this.getElement('completedTasksCounter');
+
+            counter.innerHTML = value;
         },
 
-        renderTaskCounters: function(nums) {
-            this.elements.counterCreatedTasks.innerHTML = nums.createdTasks;
-            this.elements.counterCompletedTasks.innerHTML = nums.completedTasks;
-        }
+        showCaptionEmptyList: function() {
+            this.elements.captionEmptyList.classList.remove('start-page__caption-nothing_hidden');
+        },
+
+        hideCaptionEmptyList: function() {
+            this.elements.captionEmptyList.classList.add('start-page__caption-nothing_hidden');
+        },
 
     },
 
     controller: {
 
-        state: {},
-
         init: function(model, view) {
             this.model = model;
             this.view = view;
 
-            this.handleEvents();
-            this.readAppData();
-            this.updateCounters();
-            this.updateCurrentDate();
+            this.lists = [];
+
+            this.initObjects();
+            this.renderDOM();
+            this.initEventHandlers();
         },
 
-        handleEvents: function() {
-            this.view.getElements().app.addEventListener('click', this.handleClick.bind(this));
+        initObjects: function() {
+            this.initCurrentDate();
+            this.initLists();
+        },
+
+        initCurrentDate: function() {
+            const dateContainer = this.view.getElement('dateContainer');
+            const curDate = new CurrentDate(dateContainer);
+
+            curDate.render();
+        },
+
+        initLists: function() {
+            const data = this.model.getLists();
+            const btnContainer = this.view.getElement('listBtnContainer');
+            const pageContainer = this.view.getElement('pageContainer');
+
+            data.forEach(item => {
+                this.lists.push(
+                    new List({
+                        data: item,
+                        delete: this.deleteList.bind(this),
+                        btnContainer: btnContainer,
+                        pageContainer: pageContainer
+                    })
+                );
+            });
+
+            if (this.lists.length > 0) this.view.hideCaptionEmptyList();
+        },
+
+        // Обработка событий
+
+        initEventHandlers: function() {
+            const startPage = this.view.getElement('startPage');
+
+            startPage.addEventListener('click', this.handleClick.bind(this));
         },
 
         handleClick: function(event) {
@@ -120,32 +198,41 @@ const app = {
             this.userActions[action].call(this, event);
         },
 
-        updateCurrentDate: function() {
-            this.view.renderCurrentDate();
+        // Основные методы
+
+        renderDOM: function() {
+            this.updateCounters();
         },
 
-        readAppData: function() {
+        updateCounters: function() {},
 
+        createList: function(inputData) {
+            const data = Object.assign({}, inputData);
+
+            data.id = this.model.genListId();
+            data.tasks = [];
+
+            this.lists.push(
+                new List({
+                    data: data,
+                    delete: this.deleteList.bind(this),
+                    btnContainer: this.view.getElement('listBtnContainer'),
+                    pageContainer: this.view.getElement('pageContainer'),
+                })
+            );
+            this.model.addList(this.lists[this.lists.length - 1]);
+
+            this.view.hideCaptionEmptyList();
         },
 
-        updateCounters: function() {
+        deleteList: function(id) {
+            this.model.deleteList(id);
+            this.lists = this.lists.filter(item => item.id != id);
 
+            if (this.lists.length == 0) this.view.showCaptionEmptyList();
         },
 
-        createList: function(data) {
-            const appContainer = this.view.getElements().container;
-            const btnContainer = this.view.getListBtnContainer();
-            const listIds = this.model.getListIds();
-
-            const list = new List({
-                data,
-                appContainer,
-                btnContainer,
-                listIds
-            });
-
-            this.model.addList(list);
-        },
+        // Действия пользователя
 
         userActions: {
 
@@ -153,20 +240,12 @@ const app = {
                 const modal = new Modal({
                     id: 'create-list',
                     targetId: 'app',
-                    type: 'form-data',
                     data: null,
                     success: this.createList.bind(this),
                     failure: null
                 });
 
                 modal.open();
-            },
-
-            openList: function(event) {
-                const listId = event.target.getAttribute('list-id');
-                const list = this.model.findList(listId);
-
-                list.open();
             }
 
         }
@@ -175,7 +254,4 @@ const app = {
 
 };
 
-// window.onload = app.init();
-
 app.init();
-

@@ -1,125 +1,120 @@
-// import CurrentDate from "../cur-date";
+// View for class List
 
 const ListView = {
 
-    init: function(btnContainer, appContainer) {
+    init: function(btnContainer, pageContainer) {
         this.btnContainer = btnContainer;
-        this.appContainer = appContainer;
-
-        this.page = null;
-        this.btn = null;
-
-        this.pageTitle = null;
-        this.taskCounter = null;
-        this.taskContainer = null;
+        this.pageContainer = pageContainer;
 
         this.popup = {
-            btn: null,
-            el: null
+            container: null
         };
 
-        // this.currentDate = new CurrentDate();
+        this.btn = this.initBtn();
+        this.page = this.initPage();
     },
 
-    create: function() {
-        this.createPage();
-        this.createBtn();
+    initBtn: function() {
+        const btnTemplate = document.getElementById('list-button');
+        const btn = {};
+
+        btn.container = document.importNode(btnTemplate.content, true).children[0];
+        btn.name = btn.container.querySelector('.js-name');
+        btn.counter = btn.container.querySelector('.js-tasks');
+
+        return btn;
     },
 
-    remove: function() {
-        this.removePage();
-        this.removeBtn();
+    initPage: function() {
+        const pageTemplate = document.getElementById('list-page');
+        const page = {};
+
+        page.container = document.importNode(pageTemplate.content, true).children[0];
+        page.title = page.container.querySelector('.js-page-title');
+        page.tasksCounter = page.container.querySelector('.js-tasks-counter');
+        page.taskContainer = page.container.querySelector('.js-task-container');
+        page.captionEmptyList = page.container.querySelector('.js-caption-empty-list');
+
+        return page;
     },
 
-    createPage: function() {},
+    // Получение элементов DOM
 
-    createBtn: function() {},
+    getPage: function() {
+        return this.page.container;
+    },
 
-    removePage: function() {},
+    getBtn: function() {
+        return this.btn.container;
+    },
 
-    removeBtn: function() {},
+    getTaskContainer: function() {
+        return this.page.taskContainer;
+    },
 
+    // Изменение состояния DOM элементов
 
+    createBtn: function() {
+        this.btnContainer.append(this.btn.container);
+    },
 
-    updatePageTitle: function(title) {},
+    removeBtn: function() {
+        this.btn.container.remove();
+    },
 
-    updatePageCounters: function(counters) {},
+    createPage: function() {
+        this.pageContainer.append(this.page.container);
+        this.page.container.classList.add('page_visible');
+    },
 
-    updateBtnTitle: function(title) {},
+    removePage: function() {
+        this.page.container.classList.add('page_hidden');
+        setTimeout(() => {
+            this.page.container.classList.remove('page_visible');
+            this.page.container.classList.remove('page_hidden');
+            this.page.container.remove();
+        }, 400);
+    },
 
-    updateBtnCounters: function(counters) {},
+    showPopup: function(btn) {
+        this.popup.container = btn.nextElementSibling;
+        this.popup.container.classList.add('popup_visible');
+    },
 
+    hidePopup: function() {
+        this.popup.container.classList.add('popup_hidden');
+        setTimeout(() => {
+            this.popup.container.classList.remove('popup_visible');
+            this.popup.container.classList.remove('popup_hidden');
+            this.popup.container = null;
+        }, 200);
+    },
 
+    showCaptionEmptyList: function() {
+        this.page.captionEmptyList.classList.remove('list-page__caption-nothing_hidden');
+    },
 
-    showPopup: function(btn) {},
+    hideCaptionEmptyList: function() {
+        this.page.captionEmptyList.classList.add('list-page__caption-nothing_hidden');
+    },
 
-    hidePopup: function() {},
+    // Изменение содержимого элементов
 
-    
-    // addListBtn: function(listId, name, count) {
-    //     const template = document.getElementById('list-button');
-    //     const copy = document.importNode(template.content, true).children[0];
+    updatePageTitle: function(value) {
+        this.page.title.innerHTML = value;
+    },
 
-    //     const listName = copy.querySelector('.js-list-button-name');
-    //     const taskCount = copy.querySelector('.js-list-button-counter');
+    updatePageTasksCounter: function(value) {
+        this.page.tasksCounter.innerHTML = value;
+    },
 
-    //     listName.innerHTML = name;
-    //     taskCount.innerHTML = count;
+    updateBtnName: function(value) {
+        this.btn.name.innerHTML = value;
+    },
 
-    //     copy.setAttribute('list-id', listId);
-    //     this.btnContainer.append(copy);
-
-    //     const btnList = this.btnContainer.querySelectorAll('.js-list-button');
-
-    //     this.btn = Array.from(btnList).find(btn => btn.getAttribute('list-id') == listId);
-    // },
-
-    // removeListBtn: function(listId) {
-    //     const listButtons = this.btnContainer.querySelectorAll('.js-list-button');
-    //     const listButton = listButtons.find(button => button.getAttribute('list-id') == listId);
-
-    //     listButton.remove();
-    // },
-
-    // showPage: function(data) {
-    //     const template = document.getElementById('list-page');
-    //     const copy = document.importNode(template.content, true).children[0];
-
-    //     this.pageTitle = copy.querySelector('.js-list-page-name');
-
-    //     this.pageTitle.innerHTML = data.name;
-    //     this.appContainer.append(copy);
-
-    //     this.page = this.appContainer.querySelector('.js-list-page');
-    //     this.page.classList.add('page_visible');
-    // },
-
-    // updatePageTitle: function(title) {
-    //     this.pageTitle.innerHTML = title;
-    // },
-
-    // updateListBtn: function(name) {
-    //     const btnName = this.btn.querySelector('.js-list-button-name');
-    //     btnName.innerHTML = name;
-    // },
-    
-    // // hidePage: function() {
-    // //     this.page.remove();
-    // // },
-
-    // showPopup: function(popupBtn) {
-    //     this.popup.btn = popupBtn;
-    //     this.popup.el = popupBtn.nextElementSibling;
-
-    //     this.popup.el.classList.add('popup_visible');
-    // },
-
-    // hidePopup: function() {
-    //     this.popup.el.classList.remove('popup_visible');
-
-    //     this.popup.btn = null;
-    //     this.popup.el = null;
-    // }
+    updateBtnCounter: function(value) {
+        this.btn.counter.innerHTML = value;
+    },
 
 };
 

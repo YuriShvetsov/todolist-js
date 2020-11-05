@@ -1,12 +1,16 @@
+// utils
 @import "./utils/fonts.scss";
 @import "./utils/vars.scss";
 
+// modules
 @import "./modules/app.scss";
+@import "./modules/button.scss";
 @import "./modules/modal.scss";
 @import "./modules/start-page";
 @import "./modules/list.scss";
 @import "./modules/task.scss";
 
+// reset styles
 *,
 *::before,
 *::after {
@@ -18,24 +22,4 @@
 body {
     margin: 0;
     padding: 0;
-}
-
-.title {
-    position: relative;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 2em;
-    text-align: center;
-}
-
-.title::before {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 60px;
-    margin: 20px auto 0;
-    background-image: url(../images/svg/typescript.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }

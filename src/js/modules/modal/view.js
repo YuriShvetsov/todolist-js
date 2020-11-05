@@ -6,11 +6,7 @@ const view = {
         // Входные параметры
         this.id = props.id;
         this.targetId = props.targetId;
-        this.type = props.type;
         this.formData = props.formData;
-
-        // Прочие свойства
-        // this.inputTypes = ['text', 'textarea', 'radio', 'checkbox'];
 
         // Элементы DOM
         this.elements = {};
@@ -36,7 +32,7 @@ const view = {
         this.showContainer();
         this.showOverlay();
 
-        if (this.type === 'form-data') {
+        if (this.elements.formInputs.length > 0) {
             this.fillForm();
             this.focusForm();
         }
@@ -49,7 +45,7 @@ const view = {
         setTimeout(() => {
             this.elements.modal.remove();
             this.elements = {};
-        }, 2000);
+        }, 200);
     },
 
     showContainer: function() {
@@ -68,28 +64,53 @@ const view = {
         this.elements.overlay.classList.add('modal__overlay_hidden');
     },
 
-    // Получение данных формы и элементов
-
-    getData: function() {
-        if (this.type === 'default') {
-            return getDefaultData();
-        } else if (this.type === 'form-data') {
-            return getFormData();
-        }
+    showInputWarn: function(input) {
+        input.parentElement.classList.add('modal__label_warning');
     },
 
-    getDefaultPositiveResult: function() {
-        return true;
+    hideInputWarn: function(input) {
+        input.parentElement.classList.remove('modal__label_warning');
     },
-    
-    getDefaultNegativeResult: function() {
-        return false;
-    },
+
+    // Получение данных из формы
 
     getFormData: function() {
+        if (!this.formIsFilled()) return null;
+
         const formData = {};
 
-        // ...
+        this.elements.formInputs.forEach(input => {
+            let name = input.getAttribute('name');
+            let value = formData[input.getAttribute('name')] = input.value;
+
+            formData[name] = value;
+        });
+
+        return formData;
+    },
+
+    formIsFilled: function() {
+        let isFilled = true;
+        let notFilledInputs = [];
+
+        this.elements.formInputs.forEach(input => {
+            let value = input.value;
+            let isImportant = input.hasAttribute('important');
+
+            if (value.length === 0 && isImportant) {
+                isFilled = false;
+                this.showInputWarn(input);
+                notFilledInputs.push(input);
+            } else {
+                this.hideInputWarn(input);
+            }
+        });
+
+        if (!isFilled) {
+            notFilledInputs[0].focus();
+        }
+
+        return isFilled;
     },
 
     // Получение элементов DOM

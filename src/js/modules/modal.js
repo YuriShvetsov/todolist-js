@@ -6,7 +6,6 @@ export default class Modal {
 
     constructor(props) {
         this.id = props.id;
-        this.type = props.type || 'default';
         this.targetId = props.targetId;
         this.data = props.data;
         this.success = props.success;
@@ -26,7 +25,6 @@ export default class Modal {
             id: this.id,
             targetId: this.targetId,
             formData: this.model.getData(),
-            type: this.type
         });
 
         this.controller.init({
