@@ -6,8 +6,10 @@ class Task {
 
     constructor(props) {
         this.data = props.data;
-        this.delete = props.delete;
         this.taskContainer = props.taskContainer;
+
+        this.report = props.report;
+        this.deleteSelf = props.deleteSelf;
 
         this.model = Object.assign({}, TaskModel);
         this.view = Object.assign({}, TaskView);
@@ -15,27 +17,21 @@ class Task {
 
         this.model.init(this.data);
         this.view.init(this.taskContainer);
-        this.controller.init(this.model, this.view, this.delete);
+        this.controller.init(this.model, this.view, this.report, this.delete);
     }
 
     get id() {
         return this.model.getId();
     }
 
-    get date() {
-        return this.model.getDate();
-    }
-
-    get done() {
-        return this.model.isDone();
-    }
-
-    get name() {
-        return this.model.getName();
-    }
-
-    get notes() {
-        return this.model.getNotes();
+    get allData() {
+        return {
+            id: this.model.getId(),
+            date: this.model.getDate(),
+            done: this.model.isDone(),
+            name: this.model.getName(),
+            notes: this.model.getNotes()
+        };
     }
 
 };

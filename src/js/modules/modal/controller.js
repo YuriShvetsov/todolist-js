@@ -6,9 +6,12 @@ const controller = {
         // Входные параметры
         this.model = props.model;
         this.view = props.view;
-        // this.type = props.type;
+
         this.success = props.success;
         this.failure = props.failure;
+
+        // Окно закрыто
+        this.isClosed = false;
 
         // Инициализация
         this.handleEvents();
@@ -37,6 +40,7 @@ const controller = {
     removeHandlers: function() {
         const modal = this.view.getModal();
 
+        modal.blur();
         modal.removeEventListener('click', this.handleClick.bind(this));
     },
 
@@ -46,7 +50,7 @@ const controller = {
 
         // Передача данных формы
         send: function() {
-
+            if (this.isClosed) return;
             if (!this.success) throw Error('Success function is not defined!');
 
             const formData = this.view.getFormData();
@@ -60,16 +64,21 @@ const controller = {
 
             this.removeHandlers.call(this);
             this.view.hide();
+            this.isClosed = true;
         },
 
         // Отмена передачи данных формы
         cancel: function() {
+            if (this.isClosed) return;
+
             this.removeHandlers.call(this);
             this.view.hide();
+            this.isClosed = true;
         },
 
         // Передача утвердительного ответа
         accept: function() {
+            if (this.isClosed) return;
             if (!this.success) throw Error('Success function is not defined!');
 
             const positiveAnswer = this.model.getPositiveAnswer();
@@ -77,10 +86,12 @@ const controller = {
 
             this.removeHandlers.call(this);
             this.view.hide();
+            this.isClosed = true;
         },
 
         // Передача отрицательного ответа
         decline: function() {
+            if (this.isClosed) return;
             if (!this.failure) throw Error('Failure function is not defined!');
 
             const negativeAnswer = this.model.getNegativeAnswer();
@@ -88,6 +99,7 @@ const controller = {
 
             this.removeHandlers.call(this);
             this.view.hide();
+            this.isClosed = true;
         }
 
     }

@@ -4,12 +4,15 @@ import Modal from '../modal';
 
 const TaskController = {
 
-    init(model, view) {
+    init(model, view, report, deleteSelf) {
         this.model = model;
         this.view = view;
 
+        this.report = report;
+        this.deleteSelf = deleteSelf;
+
+        this.initUI();
         this.initEventHandlers();
-        this.view.create();
     },
 
     initEventHandlers: function() {
@@ -34,6 +37,25 @@ const TaskController = {
 
     // Основные методы
 
+    initUI: function() {
+        const id = this.model.getId();
+        const done = this.model.isDone();
+        const name = this.model.getName();
+        const notes = this.model.getNotes();
+
+        this.view.setIdForDoneCheckbox(id);
+
+        this.view.updateDoneCheckbox(done);
+        this.view.updateName(name);
+        this.view.updateNotes(notes);
+
+        this.view.create();
+    },
+
+    reportAboutChanges: function() {
+        
+    },
+
     updateTask: function(data) {
         this.model.setName(data.name);
         this.model.setNotes(data.notes);
@@ -41,10 +63,15 @@ const TaskController = {
         this.view.updateName(this.model.getName());
         this.view.updateNotes(this.model.getNotes());
 
-        console.log('update task');
+        this.report(this.model.getId());
     },
 
     userActions: {
+
+        toggleDoneTask: function() {
+            this.model.toggleDone();
+            this.report(this.model.getId());
+        },
 
         openEditTaskModal: function() {
             const modal = new Modal({

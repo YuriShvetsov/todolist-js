@@ -3,12 +3,16 @@
 @import "./utils/vars.scss";
 
 // modules
-@import "./modules/app.scss";
 @import "./modules/button.scss";
 @import "./modules/modal.scss";
-@import "./modules/start-page";
+
+@import "./modules/app.scss";
+@import "./modules/btn-list.scss";
+
 @import "./modules/list.scss";
-@import "./modules/task.scss";
+// @import "./modules/task.scss";
+
+// @import "./modules/start-page";
 
 // reset styles
 *,

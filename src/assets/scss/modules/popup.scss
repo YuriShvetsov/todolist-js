@@ -1,0 +1,46 @@
+.popup {
+    padding: 4px;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 15px 20px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.popup_visible {
+    visibility: visible;    
+    animation: showPopup 150ms ease-in-out;
+    animation-fill-mode: both;
+    pointer-events: all;
+}
+
+.popup_hidden {
+    visibility: visible;
+    animation: hidePopup 150ms ease-in-out;
+    animation-fill-mode: both;
+    pointer-events: none;
+}
+
+@keyframes showPopup {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hidePopup {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}

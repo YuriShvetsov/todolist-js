@@ -17,8 +17,17 @@ $smPhoneWidth: 320px;
 
 // Colors
 
-$colorViolet: #6c4bff;
-$colorVioletDark: #5938f0;
+$colorAppBg: #f4f4f8;
+$colorMain: #6e44ff;
+$colorMainLight: lighten($colorMain, 10%);
+
+$colorInputBg: #f0f2f5;
+$colorBtnHover: #f0f2f5;
+$colorBlue: #1a77f2;
+$colorBlueDark: darken($colorBlue, 8%);
+$colorGrayBlue: #f8f9fa;
 $colorGray: #5a5a5a;
 $colorGrayLight: #7a7a7a;
 $colorRed: #ed344e;
+$colorTartOrange: #fe4a49;
+

@@ -7,6 +7,7 @@
     font-size: 13px;
     font-weight: bold;
     line-height: normal;
+    color: $colorMain;
     border: none;
     border-radius: 3px;
     outline: none;
@@ -21,7 +22,6 @@
 }
 
 .button_type_simple {
-    color: $colorViolet;
     text-transform: uppercase;
     background-color: #fff;
 }
@@ -29,11 +29,11 @@
 .button_type_ok {
     color: #fff;
     text-transform: uppercase;
-    background-color: $colorViolet;
+    background-color: $colorBlue;
 }
 
 .button_type_ok:hover {
-    background-color: darken($colorViolet, 3%);
+    background-color: darken($colorBlue, 3%);
 }
 
 .button_type_warning {
@@ -48,7 +48,6 @@
 
 .button_type_left-icon {
     padding-left: 33px;
-    color: $colorVioletDark;
     text-transform: uppercase;
     background-color: #fff;
     background-position: 13px center;
@@ -57,12 +56,11 @@
 }
 
 .button_type_left-icon:hover {
-    background-color: #eee;
+    background-color: $colorBtnHover;
 }
 
 .button_type_right-icon {
     padding-right: 33px;
-    color: $colorVioletDark;
     text-transform: uppercase;
     background-color: #fff;
     background-position: calc(100% - 13px) center;
@@ -89,6 +87,7 @@
     font-weight: normal;
     text-align: left;
     text-transform: capitalize;
+    color: #222;
     background-color: rgba(255, 255, 255, 0);
     background-position: 12px center;
     background-repeat: no-repeat;

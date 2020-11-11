@@ -5,9 +5,11 @@ import Task from '../task';
 
 const ListController = {
 
-    init: function(model, view) {
+    init: function(model, view, deleteSelf) {
         this.model = model;
         this.view = view;
+
+        this.deleteSelf = deleteSelf;
 
         this.popup = {
             isActive: false,
@@ -17,7 +19,7 @@ const ListController = {
         this.tasks = [];
 
         this.initBtn();
-        this.initObjects();
+        this.initTasks();
         this.initBtnEventHandlers();
         this.initPageEventHandlers();
     },
@@ -29,10 +31,9 @@ const ListController = {
         this.view.updateBtnName(name);
         this.view.updateBtnCounter(tasks.length);
         this.view.createBtn();
-    },
 
-    initObjects: function() {
-        this.initTasks();
+        this.view.updatePageTitle(name);
+        this.view.updatePageTasksCounter(tasks.length);
     },
 
     initTasks: function() {
@@ -43,8 +44,9 @@ const ListController = {
             this.tasks.push(
                 new Task({
                     data: task,
-                    delete: this.deleteTask.bind(this),
-                    taskContainer: taskContainer
+                    taskContainer: taskContainer,
+                    report: this.taskIsChanged.bind(this),
+                    deleteSelf: this.deleteTask.bind(this),
                 })
             );
         });
@@ -100,16 +102,49 @@ const ListController = {
 
     // Основные методы
 
-    createTask: function(data) {
-        console.log('create task');
+    addTask: function(data) {
+        console.log(`list > controller > addTask()`);
+        this.tasks.push(
+            new Task({
+                data: {
+                    id: this.model.genTaskId(),
+                    date: new Date(),
+                    done: false,
+                    name: data.name,
+                    notes: data.notes
+                },
+                taskContainer: this.view.getTaskContainer(),
+                report: this.taskIsChanged.bind(this),
+                deleteSelf: null
+            })
+        );
+
+        const lastTask = this.tasks[this.tasks.length - 1];
+
+        this.model.addTask(lastTask.allData);
+
+        const tasks = this.model.getTasks();
+
+        this.view.updateBtnCounter(tasks.length);
+        this.view.updatePageTasksCounter(tasks.length);
+        
+        this.view.hideCaptionEmptyList();
     },
 
     deleteTask: function(id) {
-        console.log('delete task');
+        console.log(`list > controller > deleteTask()`);
+    },
+
+    taskIsChanged: function(id) {
+        console.log(`list > controller > taskIsChanged('${id}')`);
+
+        const task = this.tasks.find(task => task.id == id);
+
+        this.model.updateTask(task.allData);
     },
 
     renameList: function(data) {
-        this.model.setName(data.name);
+        this.model.updateName(data.name);
 
         const newName = this.model.getName();
 
@@ -119,13 +154,15 @@ const ListController = {
 
     deleteList: function(allowed=false) {
         if (allowed) {
+            const id = this.model.getId();
+
             this.removeBtnEventHandlers();
             this.removePageEventHandlers();
 
             this.view.removeBtn();
             this.view.removePage();
 
-            this.model.deleteSelf();
+            this.deleteSelf(id);
         }
     },
 
@@ -133,10 +170,7 @@ const ListController = {
 
         openList: function() {
             const name = this.model.getName();
-            const tasks = this.model.getTasks();
 
-            this.view.updatePageTitle(name);
-            this.view.updatePageTasksCounter(tasks.length);
             this.view.createPage();
         },
 
@@ -175,7 +209,7 @@ const ListController = {
                 id: 'create-task',
                 targetId: 'app',
                 data: null,
-                success: this.createTask.bind(this),
+                success: this.addTask.bind(this),
                 failure: null
             });
 

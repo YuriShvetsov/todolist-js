@@ -5,17 +5,22 @@ const TaskModel = {
     init: function(data) {
         this.id = data.id;
         this.date = data.date;
-
         this.done = data.done;
         this.name = data.name;
         this.notes = data.notes;
     },
 
-    getId: function() {},
+    getId: function() {
+        return this.id;
+    },
 
-    getDate: function() {},
+    getDate: function() {
+        return this.date;
+    },
 
-    isDone: function() {},
+    isDone: function() {
+        return this.done;
+    },
 
     getName: function() {
         return this.name;
@@ -27,7 +32,9 @@ const TaskModel = {
 
     
 
-    toggleDone: function() {},
+    toggleDone: function() {
+        this.done = !this.done;
+    },
 
     setName: function(value) {
         this.name = value.trim();

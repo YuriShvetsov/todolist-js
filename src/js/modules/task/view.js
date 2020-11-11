@@ -13,7 +13,8 @@ const TaskView = {
         const task = {};
 
         task.container = document.importNode(taskTemplate.content, true).children[0];
-        task.checkbox = task.container.querySelector('.js-checkbox');
+        task.doneCheckbox = task.container.querySelector('.js-done');
+        task.doneLabel = task.container.querySelector('.js-done-label');
         task.name = task.container.querySelector('.js-name');
         task.notes = task.container.querySelector('.js-notes');
         task.editBtn = task.container.querySelector('.js-edit');
@@ -36,7 +37,16 @@ const TaskView = {
         this.task.container.remove();
     },
 
+    setIdForDoneCheckbox: function(id) {
+        this.task.doneCheckbox.setAttribute('id', id);
+        this.task.doneLabel.setAttribute('for', id);
+    },
 
+
+
+    updateDoneCheckbox: function(value) {
+        this.task.doneCheckbox.checked = value;
+    },
 
     updateName: function(value) {
         this.task.name.innerHTML = value;
