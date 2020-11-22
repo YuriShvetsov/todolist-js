@@ -39,7 +39,6 @@ const view = {
     },
 
     hide: function() {
-        console.log('modal > view > hide()');
         this.hideContainer();
         this.hideOverlay();
 

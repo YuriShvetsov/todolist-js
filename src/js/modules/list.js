@@ -6,7 +6,7 @@ class List {
 
     constructor(props) {
         this.data = props.data;
-        this.deleteSelf = props.deleteSelf;
+        this.subscribe = props.subscribe;
 
         this.btnContainer = props.btnContainer;
         this.pageContainer = props.pageContainer;
@@ -17,7 +17,15 @@ class List {
 
         this.model.init(this.data);
         this.view.init(this.btnContainer, this.pageContainer);
-        this.controller.init(this.model, this.view, this.deleteSelf);
+        this.controller.init(this.model, this.view, this.subscribe);
+    }
+
+    open() {
+        this.controller.openList();
+    }
+
+    close() {
+        this.controller.closeList();
     }
 
     get id() {
@@ -33,11 +41,7 @@ class List {
     }
 
     get length() {
-        return this.model.getCreatedTasksNum();
-    }
-
-    get completedTasksNum() {
-        return this.model.getCompletedTasksNum();
+        return this.model.getTasks().length;
     }
 
 };

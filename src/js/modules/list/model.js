@@ -8,7 +8,7 @@ const ListModel = {
         this.tasks = data.tasks;
     },
 
-    genTaskId: function() {
+    generateTaskId: function() {
         const ids = this.tasks.map(task => task.id);
         let id;
 
@@ -31,14 +31,14 @@ const ListModel = {
     },
 
     deleteTask: function(id) {
-        const index = this.tasks.findIndex(task => task.id === data.id);
+        const index = this.tasks.findIndex(task => task.id === id);
 
         this.tasks.splice(index, 1);
         console.log(`list > modal > задача с id "${ task.id }" удалена`);
     },
 
-    updateTask: function(data) {
-        const index = this.tasks.findIndex(task => task.id === data.id);
+    updateTask: function(id, data) {
+        const index = this.tasks.findIndex(task => task.id === id);
 
         this.tasks[index] = data;
         console.log(`list > model > задача с id "${ data.id }" обновлена`);
@@ -56,20 +56,6 @@ const ListModel = {
 
     getTasks: function() {
         return this.tasks;
-    },
-
-    getCreatedTasksNum: function() {
-        return this.tasks.length;
-    },
-
-    getCompletedTasksNum: function() {
-        return this.tasks.reduce((sum, task) => {
-            if (task.done) {
-                return sum + 1;
-            }
-
-            return sum;
-        }, 0);
     }
 
 };

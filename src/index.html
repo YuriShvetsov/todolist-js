@@ -12,246 +12,96 @@
     <div class="app" id="app">
         <div class="app__container">
 
-            <div class="app__section app__section_main js-section-main">
-                <div class="app__header js-header">
-                    <div class="app__logo logo">todolist</div>
-                    <div class="app__date-insert js-date-insert"></div>
+            <div class="app__header">
+                <div class="logo">
+                    <span class="logo__text">todolist</span>
+                    <img class="logo__icon" src="./assets/images/svg/quill.svg" alt="">
                 </div>
-                <div class="app__btn-list js-btn-list">
-                    <div class="btn-list__bar js-btn-list-bar">
-                        <div class="btn-list__info">
-                            <div class="btn-list__counter">
-                                <span>All tasks: </span><span class="btn-list__counter-value js-created-tasks">0</span>
-                            </div>
-                            <div class="btn-list__counter">
-                                <span>Completed tasks: </span><span class="btn-list__counter-value js-completed-tasks">0</span>
-                            </div>
-                        </div>
-                        <div class="btn-list__controls">
-                            <button class="button button_type_right-icon button_icon_add">Add list</button>
-                        </div>
-                    </div>
-                    <div class="btn-list__insert js-btn-list-insert">
-                        <!-- <div class="btn-list__empty js-btn-list-empty">You have no task lists yet</div> -->
-
-                        <button class="list-button button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                        <button class="list-button button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                        <button class="list-button button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                        <button class="list-button button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                        <button class="list-button button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                        <button class="list-button button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                        <button class="list-button button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                        <button class="list-button list-button_active button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                        <button class="list-button button" data-action="openList">
-                            <div class="list-button__col">
-                                <div class="list-button__icon">
-                                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                                </div>
-                            </div>
-                            <div class="list-button__col">
-                                <div class="list-button__name js-name">Main list</div>
-                                <div class="list-button__counter">
-                                    <span class="js-tasks">8</span> <span>tasks</span>
-                                </div>
-                            </div>
-                        </button>
-                    </div>
-                </div>
+                <div class="app__date js-date-insert"></div>
             </div>
 
-            <div class="app__section app__section_secondary">
+            <div class="app__main">
+                <div class="app__section app__section_size_sm side js-side">
+                    <div class="my-lists">
+                        <div class="my-lists__header js-side-header">
+                            <div class="my-lists__title">My lists</div>
+                            <button class="my-lists__add-btn button button_type_text-icon button_icon_add" data-action="openCreateListModal">add list</button>
+                        </div>
+                        <ul class="my-lists__body js-list-btn-insert">
+                            
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="app__section app__section_size_lg content js-list-insert">
 
-                <div class="app__list-insert js-list-insert"></div>
+                </div>
             </div>
 
         </div>
+    </div>
 
-        <!-- <div class="header">
-            <div class="container">
-                <div class="header__wrapper">
-                    <div class="logo">
-                        <div class="logo__text">
-                            <span class="logo__part_left">Todo</span><span class="logo__part_right">List</span>
-                        </div>
+    <template id="list-btn">
+        <li class="list-btn button">
+            <div class="list-btn__container">
+                <a class="list-btn__open-link" data-action="openPage">
+                    <div class="list-btn__info">
+                        <div class="list-btn__name js-name">List name</div>
+                        <div class="list-btn__counter js-counter">0</div>
                     </div>
-                    <div class="js-date-container"></div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="main">
-            <div class="container js-page-container">
-                <div class="page page_visible start-page js-start-page">
-                    <div class="start-page__top-panel">
-                        <div class="start-page__counters">
-                            <div class="start-page__counter">
-                                <div class="start-page__counter-value js-created-tasks">0</div>
-                                <div class="start-page__counter-desc">Created tasks</div>
-                            </div>
-                            <div class="start-page__counter">
-                                <div class="start-page__counter-value js-completed-tasks">0</div>
-                                <div class="start-page__counter-desc">Completed tasks</div>
-                            </div>
-                        </div>
-                        <button class="button button_type_right-icon button_icon_add" data-action="openCreateListModal">Create list</button>
-                    </div>
-                    <div class="start-page__list">
-                        <div class="start-page__list-container js-list-btn-container">
-                            <div class="start-page__caption-nothing js-caption-empty-list">You don't have lists yet...</div>
-                        </div>
+                </a>
+                <div class="list-btn__menu">
+                    <button class="list-btn__menu-btn button button_type_icon button_icon_menu" data-action="togglePopup">menu</button>
+                    <div class="list-btn__menu-popup popup">
+                        <button class="button button_type_popup button_icon_edit" data-action="openRenameListModal">rename</button>
+                        <button class="button button_type_popup button_icon_delete button_style_red" data-action="openDeleteListModal">delete</button>
                     </div>
                 </div>
             </div>
-        </div> -->
-
-    </div><!-- todolist -->
-
-    <template id="list-button">
-        <button class="list-button button" data-action="openList">
-            <div class="list-button__col">
-                <div class="list-button__icon">
-                    <img class="list-button__icon-src" src="./assets/images/svg/list.svg">
-                </div>
-            </div>
-            <div class="list-button__col">
-                <div class="list-button__name js-name">Main list</div>
-                <div class="list-button__counter">
-                    <span class="js-tasks">8</span> <span>tasks</span>
-                </div>
-            </div>
-        </button>
+        </li>
     </template>
 
     <template id="list-page">
-        <div class="page list-page js-page">
-            <div class="list-page__head">
-                <div class="list-page__h-row">
-                    <button class="list-page__close-btn button button_type_left-icon button_icon_left-arrow" data-action="closeList">Back</button>
-                    <div class="list-page__title js-page-title">List name</div>
-                    <div class="list-page__menu">
-                        <button class="button button_type_only-icon button_icon_menu" data-action="togglePopup">Menu</button>
-                        <div class="list-page__menu-popup popup js-list-page-menu">
-                            <button class="button button_type_popup button_icon_edit" data-action="openEditListModal">Edit</button>
-                            <button class="button button_type_popup button_icon_delete button_style_red" data-action="openDeleteListModal">Delete</button>
-                        </div>
+        <div class="list">
+            <div class="list__header">
+                <button class="list__add button button_type_text-icon button_icon_add" data-action="openCreateTaskModal">add task</button>
+                <div class="list__title js-title">List name</div>
+                <button class="list__close button button_type_icon button_icon_close" data-action="closePage" title="close">close</button>
+            </div>
+            <div class="list__body js-task-insert">
+                
+            </div>
+        </div>
+    </template>
+
+    <template id="task">
+        <div class="task">
+            <div class="task__col">
+                <input class="task__checkbox js-done" type="checkbox" id="task-id" data-action="toggleTaskDone">
+                <label class="task__label js-done-label" for="task-id"></label>
+            </div>
+            <div class="task__col task__col_widdest">
+                <div class="task__name js-name">Task</div>
+                <pre class="task__notes js-notes">Notes</pre>
+            </div>
+            <div class="task__col">
+                <div class="task__menu">
+                    <button class="task__menu-btn button button_type_icon button_icon_menu" data-action="togglePopup">menu</button>
+                    <div class="task__menu-popup popup">
+                        <button class="button button_type_popup button_icon_edit" data-action="openEditTaskModal">edit</button>
+                        <button class="button button_type_popup button_icon_delete button_style_red" data-action="deleteTask">delete</button>
                     </div>
                 </div>
-            </div><!-- list-page__head -->
-            <div class="list-page__body">
-                <div class="list-page__top-panel">
-                    <div class="list-page__counter">
-                        <div class="list-page__counter-value js-tasks-counter">0</div>
-                        <div class="list-page__counter-desc">tasks</div>
-                    </div>
-                    <button class="button button_type_right-icon button_icon_add" data-action="openCreateTaskModal">Create task</button>
-                </div><!-- list-page__top-panel -->
-                <div class="list-page__list js-task-container">
-                    <div class="list-page__caption-nothing js-caption-empty-list">You don't have tasks yet...</div>
-                </div><!-- list-page__list -->
-            </div><!-- list-page_body -->
-        </div><!-- list-page -->
+            </div>
+        </div>
     </template>
+
+    <!-- Modals -->
 
     <template id="create-list">
         <div class="create-list modal">
             <div class="modal__container js-container">
-                <div class="modal__title">Creating list</div>
+                <div class="modal__title">List creating</div>
                 <form action="" class="modal__form js-form" name="create-list">
                     <div class="modal__row">
                         <label for="" class="modal__label">
@@ -269,10 +119,10 @@
         </div>
     </template>
 
-    <template id="edit-list">
-        <div class="edit-list modal">
+    <template id="rename-list">
+        <div class="rename-list modal">
             <div class="modal__container js-container">
-                <div class="modal__title">Editing list</div>
+                <div class="modal__title">List renaming</div>
                 <form action="" class="modal__form js-form">
                     <div class="modal__row">
                         <label for="" class="modal__label"><span class="modal__label-name">Name</span>
@@ -292,7 +142,7 @@
     <template id="delete-list">
         <div class="delete-list modal">
             <div class="modal__container js-container">
-                <div class="modal__title modal__title_style_red">Deleting list</div>
+                <div class="modal__title modal__title_style_red">List deleting</div>
                 <div class="modal__text">Do you really want to delete the list along with all tasks?</div>
                 <form action="" class="modal__form js-form">
                     <div class="modal__row modal__row_accept">
@@ -305,29 +155,10 @@
         </div>
     </template>
 
-    <template id="task">
-        <div class="task">
-            <div class="task__col">
-                <input class="task__checkbox js-done" id="task-id" type="checkbox" data-action="toggleDoneTask">
-                <label for="task-id" class="task__checkbox-label js-done-label"></label>
-            </div>
-            <div class="task__col task__col_widdest">
-                <div class="task__title js-name">Task name</div>
-                <pre class="task__notes js-notes">Task notes</pre>
-            </div>
-            <div class="task__col">
-                <div class="task__menu">
-                    <button class="task__menu-item button button_type_only-icon button_icon_rename" data-action="openEditTaskModal">Edit</button>
-                    <button class="task__menu-item button button_type_only-icon button_icon_remove" data-action="deleteTask">Delete</button>
-                </div>
-            </div>
-        </div><!-- task -->
-    </template>
-
     <template id="create-task">
         <div class="create-task modal">
             <div class="modal__container js-container">
-                <div class="modal__title">Creating task</div>
+                <div class="modal__title">Task creating</div>
                 <form action="" class="modal__form js-form">
                     <div class="modal__row">
                         <label for="" class="modal__label">

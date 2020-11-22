@@ -2,12 +2,15 @@
 
 .button {
     display: block;
-    padding: 5px 12px;
-    font-family: $fontDefault;
+    padding: 7px 12px 7px 12px;
+    font-family: $fontMain;
     font-size: 13px;
     font-weight: bold;
-    line-height: normal;
+    line-height: 1;
     color: $colorMain;
+    text-transform: uppercase;
+    white-space: nowrap;
+    background-color: #fff;
     border: none;
     border-radius: 3px;
     outline: none;
@@ -18,27 +21,20 @@
 }
 
 .button:hover {
-    background-color: #eee;
-}
-
-.button_type_simple {
-    text-transform: uppercase;
-    background-color: #fff;
+    background-color: #f5f5f5;
 }
 
 .button_type_ok {
     color: #fff;
-    text-transform: uppercase;
-    background-color: $colorBlue;
+    background-color: $colorMain;
 }
 
 .button_type_ok:hover {
-    background-color: darken($colorBlue, 3%);
+    background-color: darken($colorMain, 3%);
 }
 
 .button_type_warning {
     color: #fff;
-    text-transform: uppercase;
     background-color: $colorRed;
 }
 
@@ -46,38 +42,39 @@
     background-color: darken($colorRed, 8%);
 }
 
-.button_type_left-icon {
+.button_type_icon-text {
     padding-left: 33px;
-    text-transform: uppercase;
     background-color: #fff;
-    background-position: 13px center;
+    background-position: 13px calc(50% - 1px);
     background-repeat: no-repeat;
     background-size: 12px 12px;
 }
 
-.button_type_left-icon:hover {
-    background-color: $colorBtnHover;
-}
-
-.button_type_right-icon {
+.button_type_text-icon {
     padding-right: 33px;
-    text-transform: uppercase;
     background-color: #fff;
-    background-position: calc(100% - 13px) center;
+    background-position: calc(100% - 13px) calc(50% - 1px);
     background-repeat: no-repeat;
     background-size: 12px 12px;
 }
 
-.button_type_only-icon {
+.button_type_icon {
     width: 28px;
     height: 28px;
     text-indent: -999px;
     background-color: rgba(255, 255, 255, 0);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 14px 14px;
+    background-size: 13px 13px;
     border-radius: 50%;
     overflow: hidden;
+    opacity: 1;
+    transition: opacity 150ms ease-in-out;
+}
+
+.button_type_icon:hover {
+    background-color: inherit;
+    opacity: 0.8;
 }
 
 .button_type_popup {
@@ -91,7 +88,7 @@
     background-color: rgba(255, 255, 255, 0);
     background-position: 12px center;
     background-repeat: no-repeat;
-    background-size: 14px 14px;
+    background-size: 13px 13px;
 }
 
 .button_type_popup:hover {
@@ -132,6 +129,10 @@
 
 .button_icon_remove {
     background-image: url(../images/svg/remove.svg);
+}
+
+.button_icon_close {
+    background-image: url(../images/svg/close.svg);
 }
 
 .button_style_red {

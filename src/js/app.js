@@ -3,17 +3,148 @@ import List from './modules/list';
 import CurrentDate from './modules/curdate';
 
 const app = {
-
     init: function() {
+        this.model.init();
         this.view.init();
-        this.controller.init(this.model, this.view)
+        this.controller.init(this.model, this.view);
     },
 
-    model: {},
+    model: {
+
+        init: function() {
+            this.data = this.read();
+        },
+
+        // Чтение и запись данных в ls
+
+        read: function() {
+            // const data = {
+            //     activeListId: 'list-id-1',
+            //     lists: [
+            //         {
+            //             id: 'list-id-1',
+            //             name: 'List name',
+            //             tasks: [
+            //                 {
+            //                     id: 'task-id-1',
+            //                     date: new Date(),
+            //                     done: false,
+            //                     name: 'Task name',
+            //                     notes: 'Task notes'
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             id: 'list-id-2',
+            //             name: 'List name 2',
+            //             tasks: [
+            //                 {
+            //                     id: 'task-id-1',
+            //                     date: new Date(),
+            //                     done: false,
+            //                     name: 'Task name 1',
+            //                     notes: 'Task notes'
+            //                 },
+            //                 {
+            //                     id: 'task-id-2',
+            //                     date: new Date(),
+            //                     done: true,
+            //                     name: 'Task name 2',
+            //                     notes: 'Task notes'
+            //                 }
+            //             ]
+            //         }
+            //     ]
+            // };
+
+            const data = JSON.parse(localStorage.getItem('todolist')) || {
+                activeListId: null,
+                lists: []
+            };
+
+            return data;
+        },
+
+        write: function() {
+            // console.log(this.data);
+
+            localStorage.setItem('todolist', JSON.stringify(this.data));
+        },
+
+        // Работа со списками
+
+        getLists: function() {
+            return this.data.lists;
+        },
+
+        addList: function(list) {
+            this.data.lists.push(list);
+            this.write();
+        },
+
+        updateList: function(id, data) {
+            const index = this.data.lists.findIndex(list => list.id == id);
+            this.data.lists[index] = data;
+            this.write();
+        },
+
+        deleteList: function(id) {
+            const index = this.data.lists.findIndex(list => list.id == id);
+
+            this.data.lists.splice(index, 1);
+
+            if (id == this.data.activeListId) this.resetActiveListId();
+            
+            this.write();
+        },
+
+        // Активный список
+
+        setActiveListId: function(id) {
+            this.data.activeListId = id;
+            this.write();
+        },
+
+        getActiveListId: function() {
+            return this.data.activeListId;
+        },
+
+        resetActiveListId: function() {
+            if (this.data.lists.length == 0) {
+                this.data.activeListId = null;
+                return;
+            }
+
+            const lastList = this.data.lists[this.data.lists.length - 1];
+
+            this.data.activeListId = lastList.id;
+        },
+
+        // Прочие функции
+
+        generateListId: function() {
+            const ids = this.data.lists.map(list => list.id);
+            let id;
+
+            while (true) {
+                id = 'list-' + Math.random().toString(36).substr(2, 8);
+
+                if (!ids.includes(id)) break;
+            }
+
+            return id;
+        }
+
+    },
 
     view: {
 
         init: function() {
+            this.elements = {};
+            this.popup = {
+                container: null
+            };
+
             this.initElements();
             this.setSizeBtnList();
         },
@@ -21,38 +152,44 @@ const app = {
         initElements: function() {
             const app = document.getElementById('app');
 
-            this.elements = {
-                sectionMain: app.querySelector('.js-section-main'),
-                header: app.querySelector('.js-header'),
-                btnList: app.querySelector('.js-btn-list'),
-                btnListBar: app.querySelector('.js-btn-list-bar'),
-                btnListInsert: app.querySelector('.js-btn-list-insert'),
-                btnListEmpty: app.querySelector('.js-btn-list-empty')
-            };
+            this.elements.dateInsert = app.querySelector('.js-date-insert');
+            this.elements.listBtnInsert = app.querySelector('.js-list-btn-insert');
+            this.elements.listInsert = app.querySelector('.js-list-insert');
+
+            this.elements.side = app.querySelector('.js-side');
+            this.elements.sideHeader = app.querySelector('.js-side-header');
+        },
+
+        getElement: function(el) {
+            if (!this.elements[el]) throw new Error(`Element '${ el }' is not found`);
+            
+            return this.elements[el];
         },
 
         setSizeBtnList: function() {
-            const sectionMainHeight = this.elements.sectionMain.getBoundingClientRect().height;
-            const headerHeight = this.elements.header.getBoundingClientRect().height;
-            const btnListBarHeight = this.elements.btnListBar.getBoundingClientRect().height;
+            this.elements.listBtnInsert.style.height = 0 + 'px';
 
-            this.elements.btnListInsert.style.height = sectionMainHeight - (headerHeight + btnListBarHeight) - 40 + 'px';
+            const sideHeight = this.elements.side.getBoundingClientRect().height;
+            const sideHeaderHeight = this.elements.sideHeader.getBoundingClientRect().height;
 
-            console.log({
-                main: sectionMainHeight,
-                header: headerHeight,
-                btnListBar: btnListBarHeight,
-                btnListInsert: sectionMainHeight - (headerHeight + btnListBarHeight) - 54
-            });
+            this.elements.listBtnInsert.style.height = sideHeight - sideHeaderHeight + 'px';
         },
 
-        showBtnListEmpty: function() {
-            this.elements.btnListEmpty.classList.remove('btn-list__empty_hidden');
+        showPopup: function(btn) {
+            this.popup.container = btn.nextElementSibling;
+            this.popup.container.classList.add('popup_visible');
         },
+    
+        hidePopup: function() {
+            const closedPopup = Object.assign({}, this.popup);
 
-        hideBtnListEmpty: function() {
-            this.elements.btnListEmpty.classList.add('btn-list__empty_hidden');
-        }
+            closedPopup.container.classList.add('popup_hidden');
+
+            setTimeout(() => {
+                closedPopup.container.classList.remove('popup_visible');
+                closedPopup.container.classList.remove('popup_hidden');
+            }, 200);
+        },
 
     },
 
@@ -62,280 +199,196 @@ const app = {
             this.model = model;
             this.view = view;
 
-            this.initHadlers();
+            this.lists = [];
+            this.popup = {
+                isActive: false,
+                btn: null,
+            };
+
+            this.initHandlers();
+            this.initCurDate();
+            this.initLists();
         },
 
-        initHadlers: function() {
-            window.addEventListener('resize', event => {
-                this.view.setSizeBtnList();
+        initHandlers: function() {
+            const app = document.getElementById('app');
+
+            app.addEventListener('click', this.clickHandler.bind(this));
+            window.addEventListener('resize', this.resizeHandler.bind(this));
+        },
+
+        clickHandler: function(event) {
+            this.checkActivePopup(event.target);
+
+            const action = event.target.dataset.action;
+
+            if (!action || !this.actions[action]) return;
+
+            this.actions[action].call(this, event);
+        },
+
+        resizeHandler: function(event) {
+            this.view.setSizeBtnList();
+        },
+
+        // Основные методы
+
+        initCurDate: function() {
+            const dateInsert = this.view.getElement('dateInsert');
+            const curDate = new CurrentDate(dateInsert);
+
+            curDate.render();
+        },
+
+        initLists: function() {
+            this.model.getLists().forEach(data => {
+                let list = new List({
+                    data: data,
+                    subscribe: {
+                        open: this.openList.bind(this),
+                        close: this.closeList.bind(this),
+                        update: this.updateList.bind(this),
+                        delete: this.deleteList.bind(this)
+                    },
+                    btnContainer: this.view.getElement('listBtnInsert'),
+                    pageContainer: this.view.getElement('listInsert')
+                });
+
+                this.lists.push(list);
             });
+
+            this.openActiveList();
+        },
+
+        createList: function(data) {
+            const id = this.model.generateListId();
+            const list = new List({
+                data: {
+                    id: id,
+                    name: data.name,
+                    tasks: []
+                },
+                subscribe: {
+                    open: this.openList.bind(this),
+                    close: this.closeList.bind(this),
+                    update: this.updateList.bind(this),
+                    delete: this.deleteList.bind(this)
+                },
+                btnContainer: this.view.getElement('listBtnInsert'),
+                pageContainer: this.view.getElement('listInsert')
+            });
+            const listData = {
+                id: list.id,
+                name: list.name,
+                tasks: list.tasks
+            };
+
+            this.lists.push(list);
+            this.model.addList(listData);
+
+            this.closeActiveList();
+            this.model.setActiveListId(id);
+            this.openActiveList();
+        },
+
+        // Методы, вызываемые при изменении списка
+
+        openList: function(id) {
+            this.closeActiveList();
+            this.model.setActiveListId(id);
+        },
+
+        closeList: function() {
+            this.closeActiveList();
+            this.model.setActiveListId(null);
+        },
+
+        openActiveList: function() {
+            const id = this.model.getActiveListId();
+
+            if (!id) return;
+
+            const list = this.lists.find(list => list.id == id);
+
+            list.open();
+        },
+
+        closeActiveList: function() {
+            const id = this.model.getActiveListId();
+
+            if (!id) return;
+
+            const list = this.lists.find(list => list.id == id);
+
+            list.close();
+        },
+
+        updateList: function(id) {
+            const list = this.lists.find(list => list.id == id);
+
+            this.model.updateList(id, {
+                id: list.id,
+                name: list.name,
+                tasks: list.tasks
+            });
+        },
+
+        deleteList: function(id) {
+            const index = this.lists.findIndex(list => list.id == id);
+
+            this.lists.splice(index, 1);
+            this.model.deleteList(id);
+
+            this.openActiveList();
+        },
+
+        actions: {
+
+            openCreateListModal: function() {
+                const modal = new Modal({
+                    id: 'create-list',
+                    targetId: 'app',
+                    data: null,
+                    success: this.createList.bind(this),
+                    failure: null
+                });
+
+                modal.open();
+            },
+
+            togglePopup: function(event) {
+                if (this.popup.isActive) {
+                    this.view.hidePopup();
+                    this.popup.btn = null;
+                } else {
+                    this.popup.btn = event.target;
+                    this.view.showPopup(this.popup.btn);
+                }
+    
+                this.popup.isActive = !this.popup.isActive;
+            }
+
+        },
+
+        // Другие методы
+
+        checkActivePopup: function(el) {
+            if (this.popup.isActive && this.popup.btn != el) {
+                this.view.hidePopup();
+                this.popup.btn = null;
+                this.popup.isActive = false;
+            }
         }
 
     }
-
 };
 
 app.init();
 
+/*
 
+Ошибки:
 
+1. -
 
-
-
-
-
-
-
-
-
-
-
-// const app = {
-
-//     init: function() {
-//         this.model.init();
-//         this.view.init();
-//         this.controller.init(this.model, this.view);
-//     },
-
-//     model: {
-
-//         init: function() {
-//             this.lists = this.read();
-//         },
-
-//         read: function() {
-//             return [
-//                 {
-//                     id: 'list-id-1',
-//                     name: 'main',
-//                     tasks: [
-//                         {
-//                             id: 'task-id-1',
-//                             date: new Date,
-//                             done: false,
-//                             name: 'task 1',
-//                             notes: ''
-//                         }
-//                     ]
-//                 }
-                
-//             ];
-//         },
-
-//         write: function() {},
-
-//         addList: function(list) {
-//             this.lists.push({
-//                 id: list.id,
-//                 name: list.name,
-//                 tasks: list.tasks
-//             });
-
-//             this.write();
-//         },
-
-//         deleteList: function(id) {
-//             this.lists = this.lists.filter(item => item.id != id);
-//             console.log(this.lists.length);
-//             this.write();
-//         },
-
-//         getLists: function() {
-//             return this.lists;
-//         },
-
-//         genListId: function() {
-//             const ids = this.lists.map(list => list.id);
-//             let id;
-    
-//             while (true) {
-//                 id = 'list-' + Math.random().toString(36).substr(2, 8);
-//                 if (!ids.includes(id)) break;
-//             }
-    
-//             return id;
-//         }
-
-//     },
-
-//     view: {
-
-//         init: function() {
-//             this.elements = this.initElements();
-//         },
-
-//         initElements: function() {
-//             const app = document.getElementById('app');
-//             const elements = {};
-
-//             elements.pageContainer = app.querySelector('.js-page-container');
-    
-//             elements.startPage = app.querySelector('.js-start-page')
-//             elements.dateContainer = app.querySelector('.js-date-container');
-//             elements.createdTasksCounter = app.querySelector('.js-created-tasks');
-//             elements.completedTasksCounter = app.querySelector('.js-completed-tasks');
-//             elements.listBtnContainer = app.querySelector('.js-list-btn-container');
-//             elements.captionEmptyList = app.querySelector('.js-caption-empty-list');
-
-//             return elements;
-//         },
-
-//         getElement: function(name) {
-//             if (!this.elements[name]) throw new Error(`Element "${name}" is not found!`);
-
-//             return this.elements[name];
-//         },
-
-//         // Изменение состояния DOM
-
-//         updateCreatedTasksCounter: function(value) {
-//             const counter = this.getElement('createdTasksCounter');
-
-//             counter.innerHTML = value;
-//         },
-
-//         updateCompletedTasksCounter: function(value) {
-//             const counter = this.getElement('completedTasksCounter');
-
-//             counter.innerHTML = value;
-//         },
-
-//         showCaptionEmptyList: function() {
-//             this.elements.captionEmptyList.classList.remove('start-page__caption-nothing_hidden');
-//         },
-
-//         hideCaptionEmptyList: function() {
-//             this.elements.captionEmptyList.classList.add('start-page__caption-nothing_hidden');
-//         },
-
-//     },
-
-//     controller: {
-
-//         init: function(model, view) {
-//             this.model = model;
-//             this.view = view;
-
-//             this.lists = [];
-
-//             this.initCurrentDate();
-//             this.initLists();
-//             this.initEventHandlers();
-//         },
-
-//         initCurrentDate: function() {
-//             const dateContainer = this.view.getElement('dateContainer');
-//             const curDate = new CurrentDate(dateContainer);
-
-//             curDate.render();
-//             // console.log(`app > controller > текущая дата инициализирована`);
-//         },
-
-//         initLists: function() {
-//             const data = this.model.getLists();
-//             const btnContainer = this.view.getElement('listBtnContainer');
-//             const pageContainer = this.view.getElement('pageContainer');
-
-//             data.forEach(item => {
-//                 this.lists.push(
-//                     new List({
-//                         data: item,
-//                         deleteSelf: this.deleteList.bind(this),
-//                         btnContainer: btnContainer,
-//                         pageContainer: pageContainer
-//                     })
-//                 );
-//             });
-
-//             this.updateCounters();
-
-//             if (this.lists.length > 0) this.view.hideCaptionEmptyList();
-//             // console.log(`app > controller > списки инициализированы`);
-//         },
-
-//         // Обработка событий
-
-//         initEventHandlers: function() {
-//             const startPage = this.view.getElement('startPage');
-
-//             startPage.addEventListener('click', this.handleClick.bind(this));
-//         },
-
-//         handleClick: function(event) {
-//             const action = event.target.dataset.action;
-
-//             if (!action || !this.userActions[action]) return;
-
-//             this.userActions[action].call(this, event);
-//         },
-
-//         // Основные методы
-
-//         updateCounters: function() {
-//             if (this.lists.length == 0) {
-//                 this.view.updateCreatedTasksCounter(0);
-//                 this.view.updateCompletedTasksCounter(0);
-//                 return;
-//             }
-
-//             const createdTasksNum = this.lists.reduce((sum, list) => sum + list.length, 0);
-//             const completedTasksNum = this.lists.reduce((sum, list) => sum + list.completedTasksNum, 0);
-
-//             this.view.updateCreatedTasksCounter(createdTasksNum);
-//             this.view.updateCompletedTasksCounter(completedTasksNum);
-
-//             // console.log(`app > controller > счетчики обновлены`);
-//         },
-
-//         createList: function(data) {
-//             this.lists.push(
-//                 new List({
-//                     data: {
-//                         id: this.model.genListId(),
-//                         name: data.name,
-//                         tasks: []
-//                     },
-//                     deleteSelf: this.deleteList.bind(this),
-//                     btnContainer: this.view.getElement('listBtnContainer'),
-//                     pageContainer: this.view.getElement('pageContainer'),
-//                 })
-//             );
-//             this.model.addList(this.lists[this.lists.length - 1]);
-
-//             this.view.hideCaptionEmptyList();
-//             // console.log(`app > controller > создан новый список "${ data.name }"`);
-//         },
-
-//         deleteList: function(id) {
-//             this.model.deleteList(id);
-//             this.lists = this.lists.filter(item => item.id != id);
-
-//             if (this.lists.length == 0) this.view.showCaptionEmptyList();
-//             // console.log(`app > controller > удален список "${ id }"`);
-//         },
-
-//         // Действия пользователя
-
-//         userActions: {
-
-//             openCreateListModal: function() {
-//                 const modal = new Modal({
-//                     id: 'create-list',
-//                     targetId: 'app',
-//                     data: null,
-//                     success: this.createList.bind(this),
-//                     failure: null
-//                 });
-
-//                 modal.open();
-//                 // console.log('app > controller > создать новый список');
-//             }
-
-//         }
-
-//     }
-
-// };
-
-// app.init();
+*/

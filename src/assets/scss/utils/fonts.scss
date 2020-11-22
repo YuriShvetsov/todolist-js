@@ -1,50 +1,31 @@
 // Open Sans, regular
 @font-face {
     font-family: 'Open Sans';
-    src: url('../fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+    src: url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-// Open Sans, italic
+// Roboto, italic
 @font-face {
     font-family: 'Open Sans';
-    src: url('../fonts/OpenSans/OpenSans-Italic.ttf') format('truetype');
+    src: url('../fonts/Open_Sans/OpenSans-Italic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
 
-// Open Sans, bold
+// Roboto, bold
 @font-face {
     font-family: 'Open Sans';
-    src: url('../fonts/OpenSans/OpenSans-SemiBold.ttf') format('truetype');
+    src: url('../fonts/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
 
-// Syne Mono, regular
+// Robotoegular
 @font-face {
-    font-family: 'Syne Mono';
-    src: url('../fonts/Syne_Mono/SyneMono-Regular.ttf') format('truetype');
+    font-family: 'Galada';
+    src: url('../fonts/Galada/Galada-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-
-// Lobster, regular
-@font-face {
-    font-family: 'Lobster';
-    src: url('../fonts/Lobster/Lobster-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-// @font-face {
-//     font-family: 'Lora';
-//     src: url('../fonts/Lora/Lora-BoldItalic.eot');
-//     src: url('../fonts/Lora/Lora-BoldItalic.eot?#iefix') format('embedded-opentype'),
-//         url('../fonts/Lora/Lora-BoldItalic.woff2') format('woff2'),
-//         url('../fonts/Lora/Lora-BoldItalic.woff') format('woff');
-//     font-weight: bold;
-//     font-style: italic;
-// }
-

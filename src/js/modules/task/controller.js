@@ -4,19 +4,17 @@ import Modal from '../modal';
 
 const TaskController = {
 
-    init(model, view, report, deleteSelf) {
+    init(model, view, subscribe) {
         this.model = model;
         this.view = view;
-
-        this.report = report;
-        this.deleteSelf = deleteSelf;
+        this.subscribe = subscribe;
 
         this.initUI();
         this.initEventHandlers();
     },
 
     initEventHandlers: function() {
-        const container = this.view.getTaskElement('container');
+        const container = this.view.getElement('container');
 
         container.addEventListener('click', this.handleClick.bind(this));
     },
@@ -63,14 +61,14 @@ const TaskController = {
         this.view.updateName(this.model.getName());
         this.view.updateNotes(this.model.getNotes());
 
-        this.report(this.model.getId());
+        this.subscribe.update(this.model.getId());
     },
 
     userActions: {
 
-        toggleDoneTask: function() {
+        toggleTaskDone: function() {
             this.model.toggleDone();
-            this.report(this.model.getId());
+            this.subscribe.update(this.model.getId());
         },
 
         openEditTaskModal: function() {
@@ -90,6 +88,9 @@ const TaskController = {
 
         deleteTask: function() {
             console.log('delete task');
+
+            this.view.remove();
+            this.subscribe.delete();
         }
 
     }

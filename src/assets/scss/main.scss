@@ -4,17 +4,13 @@
 
 // modules
 @import "./modules/button.scss";
+@import "./modules/popup.scss";
 @import "./modules/modal.scss";
 
 @import "./modules/app.scss";
-@import "./modules/btn-list.scss";
+@import "./modules/side.scss";
+@import "./modules/content.scss";
 
-@import "./modules/list.scss";
-// @import "./modules/task.scss";
-
-// @import "./modules/start-page";
-
-// reset styles
 *,
 *::before,
 *::after {
@@ -26,4 +22,25 @@
 body {
     margin: 0;
     padding: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+table tr,
+tr td,
+table tbody,
+table thead,
+table tfoot,
+table tr th,
+table tfoot tr tf
+{
+    margin:0;
+    padding:0;
+    background:none;
+    border:none;
+    border-collapse:collapse;
+    border-spacing:0;
+    background-image:none;
 }

@@ -1,71 +1,133 @@
 .app {
     width: 100%;
     height: 100vh;
-    padding: 20px;
+    padding: 16px;
     position: relative;
-    font-family: $fontDefault;
-    background-color: $colorAppBg;
+    font-family: $fontMain;
+    color: $colorText;
+    background: linear-gradient(180deg,#6f73e7,#393eca);
 }
 
 .app__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     max-width: 990px;
-    height: calc(100%);
+    height: 100%;
     margin: 0 auto;
-    padding: 16px;
-    display: flex;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-}
-
-.app__section {
-    height: inherit;
-    padding: 20px;
-    border-radius: 5px;
-}
-
-.app__section_main {
-    width: 35%;
-    background-image: linear-gradient(to bottom, $colorMainLight, $colorMain);
-}
-
-.app__section_secondary {
-    width: 65%;
 }
 
 .app__header {
     display: flex;
     justify-content: center;
-    padding-bottom: 16px;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 0 46px;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+
+.app__main {
+    display: flex;
+    width: 100%;
+    height: inherit;
+    padding: 16px 0;  
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+
+.app__section {
+    padding: 0 30px;
+    background-color: #fff;
+}
+
+.app__section_size_sm {
+    width: 335px;
+    border-right: 2px solid $colorAppBg;
+}
+
+.app__section_size_lg {
+    width: calc(100% - 335px);
+    background-image: url(../images/svg/list-stack.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70px 70px;
 }
 
 .logo {
-    display: inline-block;
-    margin: 0 auto;
-    padding-right: 20px;
+    padding: 15px 38px 5px 5px;
     position: relative;
-    font-family: 'Lobster';
-    font-size: 36px;
-    line-height: 1;
-    color: #ffffff;
-    text-transform: capitalize;
-    text-shadow: 0 3px 3px rgba(0,0,0,0.2);
-    text-align: center;
     user-select: none;
 }
 
-.logo::before {
-    content: '';
+.logo__text {
+    font-family: $fontLogo;
+    font-size: 36px;
+    line-height: 1;
+    color: $colorMain;
+    text-transform: capitalize;
+    text-shadow: 0 3px 3px rgba(0,0,0,0.1);
+}
+
+.logo__icon {
     display: block;
     width: 30px;
     height: 30px;
     position: absolute;
-    right: -10px;
-    bottom: 10px;
+    right: 5px;
+    bottom: 16px;
     background-image: url(../images/svg/quill.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 30px 30px;
-    filter: drop-shadow(0 3px 3px rgba(0,0,0,0.25));
+    filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15));
+}
+
+.current-date {
+    position: absolute;
+    right: 46px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    font-weight: bold;
+    color: $colorGrayLight;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 720px) {
+
+    .app {
+        padding: 10px;
+    }
+
+    .app__header {
+        margin-bottom: 10px;
+    }
+
+    .app__date {
+        display: none;
+    }
+
+    .app__section_size_sm {
+        width: 100%;
+        border-right: none;
+    }
+
+    .app__section_size_lg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0);
+        background-image: none;
+        pointer-events: none;
+    }
+    
 }

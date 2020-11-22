@@ -4,26 +4,22 @@ const TaskView = {
 
     init: function(taskContainer) {
         this.taskContainer = taskContainer;
+        this.task = {};
 
-        this.task = this.initTask();
+        this.initElements();
     },
 
-    initTask: function() {
+    initElements: function() {
         const taskTemplate = document.getElementById('task');
-        const task = {};
 
-        task.container = document.importNode(taskTemplate.content, true).children[0];
-        task.doneCheckbox = task.container.querySelector('.js-done');
-        task.doneLabel = task.container.querySelector('.js-done-label');
-        task.name = task.container.querySelector('.js-name');
-        task.notes = task.container.querySelector('.js-notes');
-        task.editBtn = task.container.querySelector('.js-edit');
-        task.deleteBtn = task.container.querySelector('.js-delete');
-
-        return task;
+        this.task.container = document.importNode(taskTemplate.content, true).children[0];
+        this.task.doneCheckbox = this.task.container.querySelector('.js-done');
+        this.task.doneLabel = this.task.container.querySelector('.js-done-label');
+        this.task.name = this.task.container.querySelector('.js-name');
+        this.task.notes = this.task.container.querySelector('.js-notes');
     },
 
-    getTaskElement: function(name) {
+    getElement: function(name) {
         if (!this.task[name]) throw new Error(`Element "${ name }" is not found!`);
 
         return this.task[name];
