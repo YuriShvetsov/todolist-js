@@ -22,26 +22,22 @@ const ListModel = {
 
     updateName: function(name) {
         this.name = name.trim();
-        console.log(`list > modal > имя списка обновлено`);
     },
 
     addTask: function(task) {
         this.tasks.push(task);
-        console.log(`list > modal > задача с id "${ task.id }" добавлена`);
     },
 
     deleteTask: function(id) {
         const index = this.tasks.findIndex(task => task.id === id);
 
         this.tasks.splice(index, 1);
-        console.log(`list > modal > задача с id "${ task.id }" удалена`);
     },
 
     updateTask: function(id, data) {
         const index = this.tasks.findIndex(task => task.id === id);
 
         this.tasks[index] = data;
-        console.log(`list > model > задача с id "${ data.id }" обновлена`);
     },
 
     // Получение данных

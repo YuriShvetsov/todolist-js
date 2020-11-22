@@ -58,6 +58,7 @@ const ListController = {
         const page = this.view.getPage();
 
         page.addEventListener('click', this.handleClickOnPage.bind(this));
+        window.addEventListener('resize', this.resizeHandler.bind(this));
     },
 
     handleClickOnBtn: function(event) {
@@ -76,6 +77,10 @@ const ListController = {
         this.actions[action].call(this, event);
     },
 
+    resizeHandler: function(event) {
+        this.view.setSizeTaskContainer();
+    },
+
     removeBtnEventHandlers: function() {
         const btn = this.view.getBtn();
 
@@ -91,8 +96,6 @@ const ListController = {
     // Основные методы
 
     addTask: function(data) {
-        console.log('add task');
-
         const taskContainer = this.view.getTaskContainer();
         const taskData = {
             id: this.model.generateTaskId(),
@@ -114,6 +117,7 @@ const ListController = {
         );
 
         this.model.addTask(taskData);
+        this.subscribe.update(this.model.getId());
 
         const tasksCount = this.model.getTasks().length;
 

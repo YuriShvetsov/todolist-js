@@ -18,45 +18,6 @@ const app = {
         // Чтение и запись данных в ls
 
         read: function() {
-            // const data = {
-            //     activeListId: 'list-id-1',
-            //     lists: [
-            //         {
-            //             id: 'list-id-1',
-            //             name: 'List name',
-            //             tasks: [
-            //                 {
-            //                     id: 'task-id-1',
-            //                     date: new Date(),
-            //                     done: false,
-            //                     name: 'Task name',
-            //                     notes: 'Task notes'
-            //                 }
-            //             ]
-            //         },
-            //         {
-            //             id: 'list-id-2',
-            //             name: 'List name 2',
-            //             tasks: [
-            //                 {
-            //                     id: 'task-id-1',
-            //                     date: new Date(),
-            //                     done: false,
-            //                     name: 'Task name 1',
-            //                     notes: 'Task notes'
-            //                 },
-            //                 {
-            //                     id: 'task-id-2',
-            //                     date: new Date(),
-            //                     done: true,
-            //                     name: 'Task name 2',
-            //                     notes: 'Task notes'
-            //                 }
-            //             ]
-            //         }
-            //     ]
-            // };
-
             const data = JSON.parse(localStorage.getItem('todolist')) || {
                 activeListId: null,
                 lists: []
@@ -66,8 +27,6 @@ const app = {
         },
 
         write: function() {
-            // console.log(this.data);
-
             localStorage.setItem('todolist', JSON.stringify(this.data));
         },
 
@@ -384,11 +343,3 @@ const app = {
 };
 
 app.init();
-
-/*
-
-Ошибки:
-
-1. -
-
-*/

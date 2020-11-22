@@ -50,10 +50,6 @@ const TaskController = {
         this.view.create();
     },
 
-    reportAboutChanges: function() {
-        
-    },
-
     updateTask: function(data) {
         this.model.setName(data.name);
         this.model.setNotes(data.notes);
@@ -87,8 +83,6 @@ const TaskController = {
         },
 
         deleteTask: function() {
-            console.log('delete task');
-
             this.view.remove();
             this.subscribe.delete();
         }

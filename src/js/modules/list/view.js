@@ -26,6 +26,7 @@ const ListView = {
         const page = {};
 
         page.container = document.importNode(pageTemplate.content, true).children[0];
+        page.header = page.container.querySelector('.js-header');
         page.title = page.container.querySelector('.js-title');
         page.taskContainer = page.container.querySelector('.js-task-insert');
 
@@ -67,11 +68,21 @@ const ListView = {
     createPage: function() {
         this.pageContainer.append(this.page.container);
         this.page.container.classList.add('page_visible');
+        this.setSizeTaskContainer();
     },
 
     removePage: function() {
         this.page.container.classList.remove('page_visible');
         this.page.container.remove();
+    },
+
+    setSizeTaskContainer: function() {
+        this.page.container.style.height = '0px';
+
+        const containerHeight = this.pageContainer.getBoundingClientRect().height;
+        const headerHeight = this.page.header.getBoundingClientRect().height;
+
+        this.page.taskContainer.style.height = containerHeight - headerHeight + 'px';
     },
 
     // Изменение содержимого элементов
