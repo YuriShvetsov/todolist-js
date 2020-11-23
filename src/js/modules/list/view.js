@@ -77,12 +77,18 @@ const ListView = {
     },
 
     setSizeTaskContainer: function() {
-        this.page.container.style.height = '0px';
+        console.log('resize');
+        this.page.taskContainer.style.height = 0;
 
-        const containerHeight = this.pageContainer.getBoundingClientRect().height;
-        const headerHeight = this.page.header.getBoundingClientRect().height;
+        setTimeout(resize.bind(this), 100);
 
-        this.page.taskContainer.style.height = containerHeight - headerHeight + 'px';
+        function resize() {
+            const pageHeight = this.pageContainer.getBoundingClientRect().height;
+            const headerHeight = this.page.header.getBoundingClientRect().height;
+            const taskContainerHeight = pageHeight - headerHeight;
+    
+            this.page.taskContainer.style.height = taskContainerHeight + 'px';
+        }
     },
 
     // Изменение содержимого элементов

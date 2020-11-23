@@ -173,7 +173,7 @@ const app = {
             const app = document.getElementById('app');
 
             app.addEventListener('click', this.clickHandler.bind(this));
-            window.addEventListener('resize', this.resizeHandler.bind(this));
+            window.addEventListener('resize', this.resizeHandler.bind(this), false);
         },
 
         clickHandler: function(event) {
@@ -278,7 +278,7 @@ const app = {
             if (!id) return;
 
             const list = this.lists.find(list => list.id == id);
-
+            console.log('close active list');
             list.close();
         },
 

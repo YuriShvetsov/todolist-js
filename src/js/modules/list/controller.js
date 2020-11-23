@@ -58,7 +58,10 @@ const ListController = {
         const page = this.view.getPage();
 
         page.addEventListener('click', this.handleClickOnPage.bind(this));
-        window.addEventListener('resize', this.resizeHandler.bind(this));
+    },
+
+    initWindowEventHandlers: function() {
+        window.addEventListener('resize', this.resizeHandler.bind(this), false);
     },
 
     handleClickOnBtn: function(event) {
@@ -91,6 +94,11 @@ const ListController = {
         const page = this.view.getPage();
 
         page.removeEventListener('click', this.handleClickOnPage.bind(this));
+    },
+
+    removeWindowEventHandlers: function() {
+        console.log('remove ev lis');
+        window.removeEventListener('resize', this.resizeHandler.bind(this));
     },
 
     // Основные методы
@@ -153,13 +161,18 @@ const ListController = {
         this.view.createPage();
 
         this.isOpened = true;
+
+        this.initWindowEventHandlers();
     },
 
     closeList: function() {
+        console.log('close list');
         this.view.unactivateBtn();
         this.view.removePage();
 
         this.isOpened = false;
+        
+        this.removeWindowEventHandlers();
     },
 
     renameList: function(data) {
@@ -200,15 +213,17 @@ const ListController = {
             this.view.createPage();
 
             this.isOpened = true;
+
+            this.initWindowEventHandlers();
         },
 
         closePage: function() {
             this.view.unactivateBtn();
             this.view.removePage();
 
-            this.subscribe.close();
-
             this.isOpened = false;
+
+            this.removeWindowEventHandlers();
         },
 
         openRenameListModal: function() {

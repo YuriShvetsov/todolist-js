@@ -1,3 +1,7 @@
+.side {
+    height: 100%;
+}
+
 .side__header {
     display: flex;
     flex-direction: column;
@@ -36,7 +40,7 @@
 }
 
 .list-btn:not(:last-of-type) {
-    margin-bottom: 5px;
+    // margin-bottom: 5px;
 }
 
 .list-btn__container {
