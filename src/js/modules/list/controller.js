@@ -166,7 +166,6 @@ const ListController = {
     },
 
     closeList: function() {
-        console.log('close list');
         this.view.unactivateBtn();
         this.view.removePage();
 
@@ -218,6 +217,8 @@ const ListController = {
         },
 
         closePage: function() {
+            this.subscribe.close();
+
             this.view.unactivateBtn();
             this.view.removePage();
 
