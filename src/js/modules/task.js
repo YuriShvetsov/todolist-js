@@ -22,6 +22,10 @@ class Task {
         return this.model.getId();
     }
 
+    get done() {
+        return this.model.isDone();
+    }
+
     getData() {
         return {
             id: this.model.getId(),
@@ -30,6 +34,10 @@ class Task {
             name: this.model.getName(),
             notes: this.model.getNotes()
         };
+    }
+
+    delete() {
+        this.controller.deleteTask();
     }
 
 };

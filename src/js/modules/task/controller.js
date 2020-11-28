@@ -7,8 +7,6 @@ const TaskController = {
         this.view = view;
         this.subscribe = subscribe;
 
-        // this.isClampled = false;
-
         this.initUI();
         this.initEventHandlers();
     },
@@ -22,11 +20,9 @@ const TaskController = {
     handleClick: function(event) {
         const action = event.target.dataset.action;
 
-        if (!action || !this.userActions[action]) return;
+        if (!action || !this.actions[action]) return;
 
-        // this.isClampled = true;
-
-        this.userActions[action].call(this, event);
+        this.actions[action].call(this, event);
     },
 
     removeEventHandlers: function() {
@@ -62,7 +58,11 @@ const TaskController = {
         this.subscribe.update(this.model.getId());
     },
 
-    userActions: {
+    deleteTask: function() {
+        this.actions.deleteTask.apply(this);
+    },
+
+    actions: {
 
         toggleTaskDone: function() {
             this.model.toggleDone();
@@ -86,7 +86,7 @@ const TaskController = {
 
         deleteTask: function() {
             this.view.remove();
-            this.subscribe.delete();
+            this.subscribe.delete(this.model.getId());
         }
     }
 

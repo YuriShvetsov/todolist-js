@@ -5,7 +5,7 @@
     position: relative;
     font-family: $fontMain;
     color: $colorText;
-    background: linear-gradient(180deg,#6f73e7,#393eca);
+    background: linear-gradient(135deg, $colorMain, $colorBlue);
 }
 
 .app__container {

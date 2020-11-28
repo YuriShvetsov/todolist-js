@@ -27,6 +27,7 @@ const ListView = {
 
         page.container = document.importNode(pageTemplate.content, true).children[0];
         page.header = page.container.querySelector('.js-header');
+        page.controls = page.container.querySelector('.js-controls');
         page.title = page.container.querySelector('.js-title');
         page.taskContainer = page.container.querySelector('.js-task-insert');
 
@@ -83,7 +84,8 @@ const ListView = {
         function resize() {
             const pageHeight = this.pageContainer.getBoundingClientRect().height;
             const headerHeight = this.page.header.getBoundingClientRect().height;
-            const taskContainerHeight = pageHeight - headerHeight;
+            const controlsHeight = this.page.controls.getBoundingClientRect().height;
+            const taskContainerHeight = pageHeight - headerHeight - controlsHeight;
     
             this.page.taskContainer.style.height = taskContainerHeight + 'px';
         }

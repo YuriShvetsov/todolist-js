@@ -29,9 +29,7 @@ const ListModel = {
     },
 
     deleteTask: function(id) {
-        const index = this.tasks.findIndex(task => task.id === id);
-
-        this.tasks.splice(index, 1);
+        this.tasks = this.tasks.filter(task => task.id != id);
     },
 
     updateTask: function(id, data) {

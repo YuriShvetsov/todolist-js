@@ -64,9 +64,12 @@
     <template id="list-page">
         <div class="list">
             <div class="list__header js-header">
-                <button class="list__add button button_type_text-icon button_icon_add" data-action="openCreateTaskModal">add task</button>
                 <div class="list__title js-title">List name</div>
                 <button class="list__close button button_type_icon button_icon_close" data-action="closePage" title="close">close</button>
+            </div>
+            <div class="list__controls js-controls">
+                <button class="list__add button button_type_text-icon button_icon_add" data-action="openCreateTaskModal">add task</button>
+                <button class="list__add button button_type_text-icon button_icon_minus button_style_red" data-action="clearList">clear list</button>
             </div>
             <ul class="list__body js-task-insert">
                 
@@ -85,8 +88,11 @@
                 <pre class="task__notes js-notes">Notes</pre>
             </div>
             <div class="task__col">
+                <button class="task__grabber button button_type_icon button_icon_grabber" title="replace">grab</button>
+            </div>
+            <div class="task__col">
                 <div class="task__menu">
-                    <button class="task__menu-btn button button_type_icon button_icon_menu" data-action="togglePopup">menu</button>
+                    <button class="task__menu-btn button button_type_icon button_icon_menu" data-action="togglePopup" title="menu">menu</button>
                     <div class="task__menu-popup popup">
                         <button class="button button_type_popup button_icon_edit" data-action="openEditTaskModal">edit</button>
                         <button class="button button_type_popup button_icon_delete button_style_red" data-action="deleteTask">delete</button>

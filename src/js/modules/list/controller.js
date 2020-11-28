@@ -136,16 +136,14 @@ const ListController = {
     },
 
     deleteTask: function(id) {
-        const index = this.tasks.findIndex(task => task.id == id);
-
-        this.tasks.splice(index, 1);
+        this.tasks = this.tasks.filter(task => task.id != id);
         this.model.deleteTask(id);
 
-        this.subscribe.update(this.model.getId());
-
         const tasksCount = this.model.getTasks().length;
-
         this.view.updateBtnCounter(tasksCount);
+
+        const listId = this.model.getId();
+        this.subscribe.update(listId);
     },
 
     openList: function() {
@@ -155,8 +153,6 @@ const ListController = {
         this.view.createPage();
 
         this.isOpened = true;
-
-        // this.initWindowEventHandlers();
     },
 
     closeList: function() {
@@ -164,8 +160,6 @@ const ListController = {
         this.view.removePage();
 
         this.isOpened = false;
-        
-        // this.removeWindowEventHandlers();
     },
 
     renameList: function(data) {
@@ -189,7 +183,7 @@ const ListController = {
             this.view.removeBtn();
             this.view.removePage();
 
-            this.subscribe.delete(this.model.getId());
+            this.subscribe.delete(id);
         }
     },
 
@@ -206,8 +200,6 @@ const ListController = {
             this.view.createPage();
 
             this.isOpened = true;
-
-            // this.initWindowEventHandlers();
         },
 
         closePage: function() {
@@ -217,8 +209,6 @@ const ListController = {
             this.view.removePage();
 
             this.isOpened = false;
-
-            // this.removeWindowEventHandlers();
         },
 
         openRenameListModal: function() {
@@ -259,6 +249,14 @@ const ListController = {
             modal.open();
         },
 
+        clearList: function() {
+            this.tasks.forEach(task => {
+                if (task.done) {
+                    task.delete();
+                }
+            });
+        }
+
     },
 
     // Вспомогательные функции
@@ -295,3 +293,4 @@ const ListController = {
 };
 
 export default ListController;
+

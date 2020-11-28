@@ -6,8 +6,20 @@
     box-shadow: 0 15px 20px rgba(0,0,0,0.15);
     border: 1px solid lighten($colorAppBg, 2%);
     border-radius: 5px;
-    overflow: hidden;
     visibility: hidden;
+    pointer-events: none;
+}
+
+.popup::before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 35px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    background-color: rgba(255, 255, 255, 0);
     pointer-events: none;
 }
 
