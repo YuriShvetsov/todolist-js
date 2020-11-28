@@ -16,7 +16,10 @@
     max-width: 990px;
     height: 100%;
     margin: 0 auto;
+    padding: 16px 0;
+    background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    border-radius: 8px;
 }
 
 .app__header {
@@ -24,27 +27,26 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 5px 46px;
+    padding: 0 16px 0 10px;
     position: relative;
-    background-color: #ffffff;
-    border-bottom: 2px solid $colorAppBg;
-    border-radius: 8px 8px 0 0;
+}
+
+.app__date {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .app__main {
     display: flex;
     width: 100%;
     height: inherit;
-    padding: 16px 0;  
     position: relative;
-    background-color: #ffffff;
-    border-radius: 0 0 8px 8px;
 }
 
 .app__section {
-    // height: 100%;
-    padding: 0 30px;
-    background-color: #fff;
+    padding: 0 16px;
 }
 
 .app__section_size_sm {
@@ -90,10 +92,6 @@
 }
 
 .current-date {
-    position: absolute;
-    right: 46px;
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 13px;
     font-weight: bold;
     color: $colorGrayLight;

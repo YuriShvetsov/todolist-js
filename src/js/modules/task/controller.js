@@ -1,13 +1,13 @@
 import Modal from '../modal';
 
-// Controller for class Task
-
 const TaskController = {
 
     init(model, view, subscribe) {
         this.model = model;
         this.view = view;
         this.subscribe = subscribe;
+
+        // this.isClampled = false;
 
         this.initUI();
         this.initEventHandlers();
@@ -23,6 +23,8 @@ const TaskController = {
         const action = event.target.dataset.action;
 
         if (!action || !this.userActions[action]) return;
+
+        // this.isClampled = true;
 
         this.userActions[action].call(this, event);
     },
@@ -86,7 +88,6 @@ const TaskController = {
             this.view.remove();
             this.subscribe.delete();
         }
-
     }
 
 };

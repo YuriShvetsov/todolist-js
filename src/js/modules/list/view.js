@@ -77,9 +77,7 @@ const ListView = {
     },
 
     setSizeTaskContainer: function() {
-        console.log('resize');
-        this.page.taskContainer.style.height = 0;
-
+        this.page.taskContainer.style.height = '0';
         setTimeout(resize.bind(this), 100);
 
         function resize() {

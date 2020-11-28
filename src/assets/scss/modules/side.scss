@@ -35,12 +35,8 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     padding: 0;
-    position: relative;
+    // position: relative;
     border-radius: 5px;
-}
-
-.list-btn:not(:last-of-type) {
-    // margin-bottom: 5px;
 }
 
 .list-btn__container {
@@ -87,6 +83,7 @@
 
 .list-btn__menu {
     padding-right: 5px;
+    position: relative;
 }
 
 .list-btn__menu-popup {

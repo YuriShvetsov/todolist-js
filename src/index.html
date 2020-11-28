@@ -68,14 +68,14 @@
                 <div class="list__title js-title">List name</div>
                 <button class="list__close button button_type_icon button_icon_close" data-action="closePage" title="close">close</button>
             </div>
-            <div class="list__body js-task-insert">
+            <ul class="list__body js-task-insert">
                 
-            </div>
+            </ul>
         </div>
     </template>
 
     <template id="task">
-        <div class="task">
+        <li class="task">
             <div class="task__col">
                 <input class="task__checkbox js-done" type="checkbox" id="task-id" data-action="toggleTaskDone">
                 <label class="task__label js-done-label" for="task-id"></label>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </li>
     </template>
 
     <!-- Modals -->

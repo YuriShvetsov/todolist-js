@@ -171,9 +171,10 @@ const app = {
 
         initHandlers: function() {
             const app = document.getElementById('app');
-
             app.addEventListener('click', this.clickHandler.bind(this));
-            window.addEventListener('resize', this.resizeHandler.bind(this), false);
+
+            const resize = this.throttle(this.resizeHandler, 100);
+            window.addEventListener('resize', resize.bind(this));
         },
 
         clickHandler: function(event) {
@@ -278,7 +279,6 @@ const app = {
             if (!id) return;
 
             const list = this.lists.find(list => list.id == id);
-            console.log('close active list');
             list.close();
         },
 
@@ -337,6 +337,35 @@ const app = {
                 this.popup.btn = null;
                 this.popup.isActive = false;
             }
+        },
+
+        throttle: function(func, ms) {
+            let isThrottled = false;
+            let savedThis;
+            let savedArgs;
+        
+            function wrapper() {
+                if (isThrottled) {
+                    savedThis = this;
+                    savedArgs = arguments;
+                    return;
+                }
+                
+                func.apply(this, arguments);
+
+                isThrottled = true;
+        
+                setTimeout(() => {
+                    isThrottled = false;
+        
+                    if (savedThis) {
+                        wrapper.apply(savedThis, savedArgs);
+                        savedThis = savedArgs = null;
+                    }
+                }, ms);
+            }
+        
+            return wrapper;
         }
 
     }

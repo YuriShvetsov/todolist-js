@@ -56,12 +56,10 @@ const ListController = {
 
     initPageEventHandlers: function() {
         const page = this.view.getPage();
-
         page.addEventListener('click', this.handleClickOnPage.bind(this));
-    },
 
-    initWindowEventHandlers: function() {
-        window.addEventListener('resize', this.resizeHandler.bind(this), false);
+        this.resizeHandler = this.throttle(this.resizeHandler, 100);
+        window.addEventListener('resize', this.resizeHandler.bind(this));
     },
 
     handleClickOnBtn: function(event) {
@@ -94,10 +92,6 @@ const ListController = {
         const page = this.view.getPage();
 
         page.removeEventListener('click', this.handleClickOnPage.bind(this));
-    },
-
-    removeWindowEventHandlers: function() {
-        console.log('remove ev lis');
         window.removeEventListener('resize', this.resizeHandler.bind(this));
     },
 
@@ -162,7 +156,7 @@ const ListController = {
 
         this.isOpened = true;
 
-        this.initWindowEventHandlers();
+        // this.initWindowEventHandlers();
     },
 
     closeList: function() {
@@ -171,7 +165,7 @@ const ListController = {
 
         this.isOpened = false;
         
-        this.removeWindowEventHandlers();
+        // this.removeWindowEventHandlers();
     },
 
     renameList: function(data) {
@@ -213,7 +207,7 @@ const ListController = {
 
             this.isOpened = true;
 
-            this.initWindowEventHandlers();
+            // this.initWindowEventHandlers();
         },
 
         closePage: function() {
@@ -224,7 +218,7 @@ const ListController = {
 
             this.isOpened = false;
 
-            this.removeWindowEventHandlers();
+            // this.removeWindowEventHandlers();
         },
 
         openRenameListModal: function() {
@@ -265,6 +259,37 @@ const ListController = {
             modal.open();
         },
 
+    },
+
+    // Вспомогательные функции
+
+    throttle: function(func, ms) {
+        let isThrottled = false;
+        let savedThis;
+        let savedArgs;
+    
+        function wrapper() {
+            if (isThrottled) {
+                savedThis = this;
+                savedArgs = arguments;
+                return;
+            }
+            
+            func.apply(this, arguments);
+
+            isThrottled = true;
+    
+            setTimeout(() => {
+                isThrottled = false;
+    
+                if (savedThis) {
+                    wrapper.apply(savedThis, savedArgs);
+                    savedThis = savedArgs = null;
+                }
+            }, ms);
+        }
+    
+        return wrapper;
     }
 
 };
