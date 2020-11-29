@@ -152,6 +152,12 @@
     background-color: #fff;
 }
 
+.button_state_unactive {
+    opacity: 0.5;
+    filter: grayscale(1);
+    pointer-events: none;
+}
+
 @media screen and (width: $smPhoneWidth) {
 
     .button {

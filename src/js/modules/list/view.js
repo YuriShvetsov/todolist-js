@@ -1,6 +1,4 @@
-// View for class List
-
-const ListView = {
+export default {
 
     init: function(btnContainer, pageContainer) {
         this.btnContainer = btnContainer;
@@ -30,6 +28,7 @@ const ListView = {
         page.controls = page.container.querySelector('.js-controls');
         page.title = page.container.querySelector('.js-title');
         page.taskContainer = page.container.querySelector('.js-task-insert');
+        page.clearBtn = page.container.querySelector('.js-clear-btn');
 
         return page;
     },
@@ -77,6 +76,14 @@ const ListView = {
         this.page.container.remove();
     },
 
+    activateClearBtn: function() {
+        this.page.clearBtn.classList.remove('button_state_unactive');
+    },
+
+    unactivateClearBtn: function() {
+        this.page.clearBtn.classList.add('button_state_unactive');
+    },
+
     setSizeTaskContainer: function() {
         this.page.taskContainer.style.height = '0';
         setTimeout(resize.bind(this), 100);
@@ -106,5 +113,3 @@ const ListView = {
     },
 
 };
-
-export default ListView;

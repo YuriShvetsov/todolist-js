@@ -1,6 +1,4 @@
-// View for class Modal
-
-const view = {
+export default {
 
     init: function(props) {
         // Входные параметры
@@ -148,12 +146,6 @@ const view = {
 
     focusForm: function() {
         this.elements.formInputs[0].focus();
-    },
-    
-    formInputsIsValid: function() {
-        // ...
     }
 
 };
-
-export default view;

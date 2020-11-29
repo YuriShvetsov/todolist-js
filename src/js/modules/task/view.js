@@ -1,6 +1,4 @@
-// View for class Task
-
-const TaskView = {
+export default {
 
     init: function(taskContainer) {
         this.taskContainer = taskContainer;
@@ -38,7 +36,7 @@ const TaskView = {
         this.task.doneLabel.setAttribute('for', id);
     },
 
-
+    // Обновление элементов DOM
 
     updateDoneCheckbox: function(value) {
         this.task.doneCheckbox.checked = value;
@@ -53,5 +51,3 @@ const TaskView = {
     }
 
 };
-
-export default TaskView;

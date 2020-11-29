@@ -1,6 +1,4 @@
-// Controller for class Modal
-
-const controller = {
+export default {
 
     init: function(props) {
         // Входные параметры
@@ -105,5 +103,3 @@ const controller = {
     }
 
 };
-
-export default controller;

@@ -1,7 +1,7 @@
 import Modal from '../modal';
 import Task from '../task';
 
-const ListController = {
+export default {
 
     init: function(model, view, subscribe) {
         this.model = model;
@@ -133,6 +133,8 @@ const ListController = {
         this.model.updateTask(id, taskData);
 
         this.subscribe.update(this.model.getId());
+
+        this.activateListClearing();
     },
 
     deleteTask: function(id) {
@@ -144,6 +146,8 @@ const ListController = {
 
         const listId = this.model.getId();
         this.subscribe.update(listId);
+
+        this.activateListClearing();
     },
 
     openList: function() {
@@ -151,6 +155,8 @@ const ListController = {
 
         this.view.activateBtn();
         this.view.createPage();
+
+        this.activateListClearing();
 
         this.isOpened = true;
     },
@@ -198,6 +204,8 @@ const ListController = {
 
             this.view.activateBtn();
             this.view.createPage();
+
+            this.activateListClearing();
 
             this.isOpened = true;
         },
@@ -261,6 +269,14 @@ const ListController = {
 
     // Вспомогательные функции
 
+    activateListClearing: function() {
+        if (this.tasks.find(task => task.done)) {
+            this.view.activateClearBtn();
+        } else {
+            this.view.unactivateClearBtn();
+        }
+    },
+
     throttle: function(func, ms) {
         let isThrottled = false;
         let savedThis;
@@ -291,6 +307,3 @@ const ListController = {
     }
 
 };
-
-export default ListController;
-

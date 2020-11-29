@@ -1,11 +1,23 @@
-// Model for class List
-
-const ListModel = {
+export default {
 
     init: function(data) {
         this.id = data.id;
         this.name = data.name.trim();
         this.tasks = data.tasks;
+    },
+
+    // Получение данных
+
+    getId: function() {
+        return this.id;
+    },
+
+    getName: function() {
+        return this.name;  
+    },
+
+    getTasks: function() {
+        return this.tasks;
     },
 
     generateTaskId: function() {
@@ -19,6 +31,8 @@ const ListModel = {
 
         return id;
     },
+
+    // Изменение данных
 
     updateName: function(name) {
         this.name = name.trim();
@@ -36,22 +50,6 @@ const ListModel = {
         const index = this.tasks.findIndex(task => task.id === id);
 
         this.tasks[index] = data;
-    },
-
-    // Получение данных
-
-    getId: function() {
-        return this.id;
-    },
-
-    getName: function() {
-        return this.name;  
-    },
-
-    getTasks: function() {
-        return this.tasks;
     }
 
 };
-
-export default ListModel;

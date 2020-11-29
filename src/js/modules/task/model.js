@@ -1,6 +1,4 @@
-// Model for class task
-
-const TaskModel = {
+export default {
 
     init: function(data) {
         this.id = data.id;
@@ -9,6 +7,8 @@ const TaskModel = {
         this.name = data.name;
         this.notes = data.notes;
     },
+
+    // Получение данных
 
     getId: function() {
         return this.id;
@@ -30,7 +30,7 @@ const TaskModel = {
         return this.notes;
     },
 
-    
+    // Изменение данных
 
     toggleDone: function() {
         this.done = !this.done;
@@ -45,5 +45,3 @@ const TaskModel = {
     }
 
 };
-
-export default TaskModel;

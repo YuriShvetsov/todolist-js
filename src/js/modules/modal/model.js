@@ -1,6 +1,4 @@
-// Model for class Modal
-
-const model = {
+export default {
 
     init: function(data) {
         this.data = data;
@@ -23,5 +21,3 @@ const model = {
     }
 
 };
-
-export default model;

@@ -1,6 +1,6 @@
 import Modal from '../modal';
 
-const TaskController = {
+export default {
 
     init(model, view, subscribe) {
         this.model = model;
@@ -9,6 +9,21 @@ const TaskController = {
 
         this.initUI();
         this.initEventHandlers();
+    },
+
+    initUI: function() {
+        const id = this.model.getId();
+        const done = this.model.isDone();
+        const name = this.model.getName();
+        const notes = this.model.getNotes();
+
+        this.view.setIdForDoneCheckbox(id);
+
+        this.view.updateDoneCheckbox(done);
+        this.view.updateName(name);
+        this.view.updateNotes(notes);
+
+        this.view.create();
     },
 
     initEventHandlers: function() {
@@ -32,21 +47,6 @@ const TaskController = {
     },
 
     // Основные методы
-
-    initUI: function() {
-        const id = this.model.getId();
-        const done = this.model.isDone();
-        const name = this.model.getName();
-        const notes = this.model.getNotes();
-
-        this.view.setIdForDoneCheckbox(id);
-
-        this.view.updateDoneCheckbox(done);
-        this.view.updateName(name);
-        this.view.updateNotes(notes);
-
-        this.view.create();
-    },
 
     updateTask: function(data) {
         this.model.setName(data.name);
@@ -91,5 +91,3 @@ const TaskController = {
     }
 
 };
-
-export default TaskController;
