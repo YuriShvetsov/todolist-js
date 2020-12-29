@@ -40,6 +40,26 @@ class Task {
         this.controller.deleteTask();
     }
 
+    showUpperPointer() {
+        this.view.showUpperPointer();
+    }
+
+    showLowerPointer() {
+        this.view.showLowerPointer();
+    }
+
+    hidePointer() {
+        this.view.hidePointer();
+    }
+
+    select() {
+        this.view.select();
+    }
+
+    unselect() {
+        this.view.unselect();
+    }
+
 };
 
 export default Task;

@@ -78,7 +78,8 @@
     </template>
 
     <template id="task">
-        <li class="task">
+        <li class="task js-task">
+            <div class="task__upper-pointer js-upper-pointer"></div>
             <div class="task__col">
                 <input class="task__checkbox js-done" type="checkbox" id="task-id" data-action="toggleTaskDone">
                 <label class="task__label js-done-label" for="task-id"></label>
@@ -88,7 +89,7 @@
                 <pre class="task__notes js-notes">Notes</pre>
             </div>
             <div class="task__col">
-                <button class="task__grabber button button_type_icon button_icon_grabber" title="replace">grab</button>
+                <button class="task__grabber button button_type_icon button_icon_grabber" title="replace" data-action=grabTask>grab</button>
             </div>
             <div class="task__col">
                 <div class="task__menu">
@@ -99,6 +100,7 @@
                     </div>
                 </div>
             </div>
+            <div class="task__lower-pointer js-lower-pointer"></div>
         </li>
     </template>
 

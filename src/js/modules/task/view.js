@@ -15,6 +15,8 @@ export default {
         this.task.doneLabel = this.task.container.querySelector('.js-done-label');
         this.task.name = this.task.container.querySelector('.js-name');
         this.task.notes = this.task.container.querySelector('.js-notes');
+        this.task.upperPointer = this.task.container.querySelector('.js-upper-pointer');
+        this.task.lowerPointer = this.task.container.querySelector('.js-lower-pointer');
     },
 
     getElement: function(name) {
@@ -29,6 +31,10 @@ export default {
 
     remove: function() {
         this.task.container.remove();
+    },
+
+    setIdForContainer: function(id) {
+        this.task.container.dataset.taskid = id;
     },
 
     setIdForDoneCheckbox: function(id) {
@@ -48,6 +54,27 @@ export default {
 
     updateNotes: function(value) {
         this.task.notes.innerHTML = value;
+    },
+
+    showUpperPointer: function() {
+        this.task.upperPointer.classList.add('task__upper-pointer_visible');
+    },
+
+    showLowerPointer: function() {
+        this.task.lowerPointer.classList.add('task__lower-pointer_visible');
+    },
+
+    hidePointer: function() {
+        this.task.upperPointer.classList.remove('task__upper-pointer_visible');
+        this.task.lowerPointer.classList.remove('task__lower-pointer_visible');
+    },
+
+    select: function() {
+        this.task.container.classList.add('task_selected');
+    },
+
+    unselect: function() {
+        this.task.container.classList.remove('task_selected');
     }
 
 };

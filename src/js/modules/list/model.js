@@ -32,6 +32,13 @@ export default {
         return id;
     },
 
+    taskPlacedBeforeTask: function(firstTaskId, secondTaskId) {
+        const firstTaskIndex = this.tasks.findIndex(task => task.id == firstTaskId);
+        const secondTaskIndex = this.tasks.findIndex(task => task.id == secondTaskId);
+
+        return (firstTaskIndex < secondTaskIndex);
+    },
+
     // Изменение данных
 
     updateName: function(name) {
@@ -50,6 +57,36 @@ export default {
         const index = this.tasks.findIndex(task => task.id === id);
 
         this.tasks[index] = data;
+    },
+
+    replaceTask: function(firstTaskId, secondTaskId) {
+        const firstTask = this.tasks.find(task => task.id == firstTaskId);
+        const newTaskList = [];
+        const firstPlacedBefore = this.taskPlacedBeforeTask(firstTaskId, secondTaskId);
+
+        if (firstPlacedBefore) {
+            this.tasks.forEach(task => {
+                if (task.id != firstTaskId) {
+                    newTaskList.push(task);
+                }
+    
+                if (task.id == secondTaskId) {
+                    newTaskList.push(firstTask);
+                }
+            });
+        } else {
+            this.tasks.forEach(task => {
+                if (task.id == secondTaskId) {
+                    newTaskList.push(firstTask);
+                }
+
+                if (task.id != firstTaskId) {
+                    newTaskList.push(task);
+                }
+            });
+        }
+
+        this.tasks = newTaskList;
     }
 
 };

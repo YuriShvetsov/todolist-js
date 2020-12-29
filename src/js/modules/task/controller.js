@@ -17,6 +17,7 @@ export default {
         const name = this.model.getName();
         const notes = this.model.getNotes();
 
+        this.view.setIdForContainer(id);
         this.view.setIdForDoneCheckbox(id);
 
         this.view.updateDoneCheckbox(done);

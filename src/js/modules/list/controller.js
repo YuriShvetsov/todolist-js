@@ -10,6 +10,12 @@ export default {
 
         this.tasks = [];
         this.isOpened = false;
+        this.sorting = {
+            isLaunched: false,
+            firstTaskId: null,
+            secondTaskId: null,
+            firstTaskPlacedBeforeSecondTask: true
+        };
 
         this.initBtn();
         this.initTasks();
@@ -56,7 +62,12 @@ export default {
 
     initPageEventHandlers: function() {
         const page = this.view.getPage();
+
         page.addEventListener('click', this.handleClickOnPage.bind(this));
+        page.addEventListener('mousedown', this.handleMousedown.bind(this));
+
+        document.addEventListener('mouseup', this.handleMouseup.bind(this));
+        document.addEventListener('mouseover', this.handleMouseover.bind(this));
 
         this.resizeHandler = this.throttle(this.resizeHandler, 100);
         window.addEventListener('resize', this.resizeHandler.bind(this));
@@ -76,6 +87,34 @@ export default {
         if (!action || !this.actions[action]) return;
 
         this.actions[action].call(this, event);
+    },
+
+    handleMousedown: function(event) {
+        const action = event.target.dataset.action;
+
+        if (!action || !this.mousedownActions[action]) return;
+
+        this.mousedownActions[action].call(this, event.target);
+    },
+
+    handleMouseover: function(event) {
+        if (this.sorting.isLaunched) this.mouseoverActions['setSecondTaskIdForSorting'].call(this, event.target);
+
+        const action = event.target.dataset.action;
+
+        if (!action || !this.mouseoverActions[action]) return;
+
+        this.mouseoverActions[action].call(this, event.target);
+    },
+
+    handleMouseup: function(event) {
+        if (this.sorting.isLaunched) this.mouseupActions['replaceTo'].call(this, event.target);
+
+        const action = event.target.dataset.action;
+
+        if (!action || !this.mouseupActions[action]) return;
+
+        this.mouseupActions[action].call(this, event.target);
     },
 
     resizeHandler: function(event) {
@@ -267,7 +306,108 @@ export default {
 
     },
 
+    mousedownActions: {
+
+        grabTask: function(button) {
+            const taskElement = button.closest('.js-task');
+            const taskId = taskElement.dataset.taskid;
+
+            this.sorting.isLaunched = true;
+            this.sorting.firstTaskId = taskId;
+
+            this.tasks.find(task => task.id == this.sorting.firstTaskId).select();
+        }
+
+    },
+
+    mouseoverActions: {
+
+        setSecondTaskIdForSorting: function(button) {
+            const taskElement = button.closest('.js-task');
+
+            if (!taskElement && !this.sorting.secondTaskId) {
+                return;
+            } else if (!taskElement && this.sorting.secondTaskId) {
+                this.tasks.find(task => task.id == this.sorting.secondTaskId).hidePointer();
+                this.sorting.secondTaskId = null;
+                return;
+            }
+
+            const taskId = taskElement.dataset.taskid;
+
+            if (taskId == this.sorting.firstTaskId && !this.sorting.secondTaskId) {
+                return;
+            } else if (taskId == this.sorting.firstTaskId && this.sorting.secondTaskId) {
+                this.tasks.find(task => task.id == this.sorting.secondTaskId).hidePointer();
+                this.sorting.secondTaskId = null;
+                return;
+            }
+            
+            if (taskId == this.sorting.secondTaskId) {
+                return;
+            }
+
+            if (this.sorting.secondTaskId) {
+                this.tasks.find(task => task.id == this.sorting.secondTaskId).hidePointer();
+            }
+            
+            this.sorting.secondTaskId = taskId;
+            this.sorting.firstTaskPlacedBeforeSecondTask = this.model.taskPlacedBeforeTask(this.sorting.firstTaskId, this.sorting.secondTaskId);
+
+            const secondTask = this.tasks.find(task => task.id == this.sorting.secondTaskId);
+
+            if (this.sorting.firstTaskPlacedBeforeSecondTask) {
+                secondTask.showLowerPointer();
+            } else {
+                secondTask.showUpperPointer();
+            }
+        }
+
+    },
+
+    mouseupActions: {
+
+        replaceTo: function(button) {
+
+            // Отмена сортировка
+
+            if (!this.sorting.secondTaskId) {
+                this.tasks.find(task => task.id == this.sorting.firstTaskId).unselect();
+                this.resetSorting();
+                return;
+            }
+
+            // Выполнить сортировку (данные)
+
+            this.model.replaceTask(this.sorting.firstTaskId, this.sorting.secondTaskId);
+
+            // Скрыть маркер и убрать выделение перещаемой задачи
+
+            this.tasks.find(task => task.id == this.sorting.firstTaskId).unselect();
+            this.tasks.find(task => task.id == this.sorting.secondTaskId).hidePointer();
+            this.resetSorting();
+
+            // Инициалзация (отрисовка)
+
+            this.view.clearTaskList();
+            this.tasks = [];
+            this.initTasks();
+
+            // Сообщить об изменениях "наверх"
+
+            this.subscribe.update(this.model.getId());
+        }
+
+    },
+
     // Вспомогательные функции
+
+    resetSorting: function() {
+        this.sorting.isLaunched = false;
+        this.sorting.firstTaskId = null;
+        this.sorting.secondTaskId = null;
+        this.sorting.firstTaskPlacedBeforeSecondTask = true;
+    },
 
     activateListClearing: function() {
         if (this.tasks.find(task => task.done)) {

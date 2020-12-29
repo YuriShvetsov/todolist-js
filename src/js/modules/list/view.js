@@ -98,6 +98,10 @@ export default {
         }
     },
 
+    clearTaskList: function() {
+        this.page.taskContainer.innerHTML = '';
+    },
+
     // Изменение содержимого элементов
 
     updatePageTitle: function(value) {

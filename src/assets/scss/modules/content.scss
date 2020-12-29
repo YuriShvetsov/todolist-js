@@ -32,43 +32,8 @@
 }
 
 .list__body {
-    padding: 4px 0;
+    padding: 6px 0;
     overflow-y: scroll;
-}
-
-.list__marker {
-    width: calc(100% - 16px);
-    height: 2px;
-    margin: 0 auto;
-    position: relative;
-    background-color: $colorMain;
-    z-index: 100;
-}
-
-.list__marker::after {
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
-    position: absolute;
-    left: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 2px solid $colorMain;
-    border-radius: 50%;
-}
-
-.list__marker::before {
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
-    position: absolute;
-    right: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 2px solid $colorMain;
-    border-radius: 50%;
 }
 
 /* Task */
@@ -86,6 +51,10 @@
     transition: border 150ms ease-in-out;
 }
 
+.task_selected {
+    border: 2px solid lighten($colorMain, 12%);
+}
+
 .task:not(:last-of-type) {
     margin-bottom: 2px;    
 }
@@ -100,6 +69,10 @@
 
 .task:hover {
     border: 2px solid #f2f2f2;
+}
+
+.task_selected:hover {
+    border: 2px solid lighten($colorMain, 12%);
 }
 
 .task__checkbox {
@@ -195,6 +168,61 @@
     right: 40px;
     transform: translateY(-50%);
     z-index: 100;
+}
+
+.task__upper-pointer,
+.task__lower-pointer {
+    width: calc(100% - 14px);
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $colorRed;
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+    transition: opacity 150ms ease-in-out;
+}
+
+.task__upper-pointer::before,
+.task__lower-pointer::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid lighten($colorRed, 12%);
+    border-radius: 50%;
+}
+
+.task__upper-pointer::after,
+.task__lower-pointer::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid lighten($colorRed, 12%);
+    border-radius: 50%;
+}
+
+.task__upper-pointer_visible,
+.task__lower-pointer_visible {
+    opacity: 1;
+}
+
+.task__upper-pointer {
+    top: -4px;
+}
+
+.task__lower-pointer {
+    bottom: -4px;
 }
 
 @media screen and (max-width: 720px) {
