@@ -1,0 +1,127 @@
+.app {
+    width: 100%;
+    height: 100vh;
+    padding: 16px;
+    position: relative;
+    font-family: $fontMain;
+    color: $colorText;
+    background: linear-gradient(135deg, $colorMain, $colorBlue);
+}
+
+.app__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 990px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 16px 0;
+    background-color: #ffffff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+    border-radius: 8px;
+}
+
+.app__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px 0 10px;
+    position: relative;
+}
+
+.app__date {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.app__main {
+    display: flex;
+    width: 100%;
+    height: inherit;
+    position: relative;
+}
+
+.app__section {
+    padding: 0 16px;
+}
+
+.app__section_size_sm {
+    width: 335px;
+    border-right: 2px solid $colorAppBg;
+}
+
+.app__section_size_lg {
+    width: calc(100% - 335px);
+    background-image: url(../images/svg/list-stack.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70px 70px;
+}
+
+.logo {
+    padding: 15px 38px 5px 5px;
+    position: relative;
+    user-select: none;
+}
+
+.logo__text {
+    font-family: $fontLogo;
+    font-size: 36px;
+    line-height: 1;
+    color: $colorMain;
+    text-transform: capitalize;
+    text-shadow: 0 3px 3px rgba(0,0,0,0.1);
+}
+
+.logo__icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 5px;
+    bottom: 16px;
+    background-image: url(../images/svg/quill.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15));
+}
+
+.current-date {
+    font-size: 13px;
+    font-weight: bold;
+    color: $colorGrayLight;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 720px) {
+
+    .app {
+        padding: 10px;
+    }
+
+    .app__date {
+        display: none;
+    }
+
+    .app__section_size_sm {
+        width: 100%;
+        border-right: none;
+    }
+
+    .app__section_size_lg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0);
+        background-image: none;
+        pointer-events: none;
+    }
+    
+}

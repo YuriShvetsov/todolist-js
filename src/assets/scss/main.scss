@@ -1,9 +1,15 @@
-// Utils
+// utils
+@import "./utils/fonts.scss";
+@import "./utils/vars.scss";
 
-// @import './utils/fonts.scss';
-@import './utils/vars.scss';
+// modules
+@import "./modules/button.scss";
+@import "./modules/popup.scss";
+@import "./modules/modal.scss";
 
-// Common styles
+@import "./modules/app.scss";
+@import "./modules/side.scss";
+@import "./modules/content.scss";
 
 *,
 *::before,
@@ -11,8 +17,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    // font-family: $main-font;
-    color: $defaultTextColor;
 }
 
 body {
@@ -20,16 +24,23 @@ body {
     padding: 0;
 }
 
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+::-webkit-scrollbar {
+    display: none;
 }
 
-// Modules
-
-@import './modules/todolist.scss';
-
-// Other styles
-
+table tr,
+tr td,
+table tbody,
+table thead,
+table tfoot,
+table tr th,
+table tfoot tr tf
+{
+    margin:0;
+    padding:0;
+    background:none;
+    border:none;
+    border-collapse:collapse;
+    border-spacing:0;
+    background-image:none;
+}

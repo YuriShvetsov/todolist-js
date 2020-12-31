@@ -1,7 +1,10 @@
 // Fonts
-$main-font: Arial, sans-serif;
+
+$fontMain: 'Open Sans';
+$fontLogo: 'Galada';
 
 // Sizes
+
 $mainFontSize: 16px;
 $mainFontWeight: 400;
 $mainFontHeight: 1.4;
@@ -12,6 +15,15 @@ $tableWidth: 640px;
 $phoneWidth: 480px;
 $smPhoneWidth: 320px;
 
-// Main colors
-$defaultTextColor: #333;
-$errorColor: #ec3e3e;
+// Colors
+
+$colorAppBg: #f4f4f8;
+$colorMain: #4d42fe;
+$colorText: #333333;
+$colorInputBg: #f0f2f5;
+$colorBtnHover: #f0f2f5;
+$colorBlue: #07ccff;
+$colorGray: #5a5a5a;
+$colorGrayLight: #7a7a7a;
+$colorRed: #ed344e;
+

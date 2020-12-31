@@ -1,0 +1,107 @@
+.side {
+    height: 100%;
+}
+
+.side__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side__body {
+    padding: 8px 0;
+}
+
+.my-lists__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    font-weight: bold;
+}
+
+.my-lists__title {
+    color: $colorText;
+}
+
+.my-lists__body {
+    overflow-y: scroll;
+}
+
+/* List button */
+
+.list-btn {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.list-btn__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.list-btn__open-link {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.list-btn__info {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 22px;
+    padding: 7px 15px;
+    pointer-events: none;
+}
+
+.list-btn__name {
+    margin-right: 12px;
+    line-height: 1.5;
+    color: $colorText;
+    text-transform: lowercase;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-btn__name::first-letter {
+    text-transform: uppercase;
+}
+
+.list-btn__counter {
+    margin-left: auto;
+    font-size: 13px;
+    color: $colorGrayLight;
+    pointer-events: none;
+}
+
+.list-btn__menu {
+    padding-right: 5px;
+    position: relative;
+}
+
+.list-btn__menu-popup {
+    right: 33px;
+    top: 0;
+    z-index: 100;
+}
+
+.list-btn_active {
+    background-color: lighten($colorMain, 34%);
+}
+
+.list-btn_active:hover {
+    background-color: lighten($colorMain, 34%);
+}
+

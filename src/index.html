@@ -4,59 +4,218 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-    <title>To-Do List</title>
-    <link rel="shortcut icon" href="./assets/img/icons/todo-list-favicon.png" type="image/x-icon">
+    <title>Todolist</title>
+    <link rel="shortcut icon" href="./assets/images/png/todolist.png" type="image/x-icon">
 </head>
 <body>
 
-    <div class="todo" id="todo">
-        <div class="todo__inner">
+    <div class="app" id="app">
+        <div class="app__container">
 
-            <div class="todo__header">
-                <div class="todo__h-row">
-                    <div class="todo__current-date">
-                        <span class="todo__current-weekday js-todo-weekday"></span>
-                        <span class="todo__current-date-number js-todo-day"></span>
-                    </div>
-                    <div class="todo__count js-todo-count"></div>
+            <div class="app__header">
+                <div class="logo">
+                    <span class="logo__text">todolist</span>
+                    <img class="logo__icon" src="./assets/images/svg/quill.svg" alt="">
                 </div>
-                <div class="todo__h-row">
-                    <div class="todo__current-month js-todo-month"></div>
-                    <button class="todo__clear-all js-todo-clear">Clear list</button>
-                </div>
+                <div class="app__date js-date-insert"></div>
             </div>
 
-            <div class="todo__body">
-                <div class="todo__add-task">
-                    <button class="todo__add-btn js-todo-add">Add</button>
-                    <input type="text" class="todo__add-input js-todo-input" placeholder="Type your task">
-                </div>
-                <div class="todo__content">
-                    <div class="todo__filter todo__filter_notouch js-todo-filter">
-                        <input type="checkbox" class="todo__filter-checkbox js-todo-filter-checkbox" id="todo-select-all" disabled>
-                        <label for="todo-select-all" class="todo__filter-label js-todo-filter-label">
-                            <span class="todo__filter-text">Select all</span>
-                        </label>
+            <div class="app__main">
+                <div class="app__section app__section_size_sm side js-side">
+                    <div class="my-lists">
+                        <div class="my-lists__header js-side-header">
+                            <div class="my-lists__title">My lists</div>
+                            <button class="my-lists__add-btn button button_type_text-icon button_icon_add" data-action="openCreateListModal">add list</button>
+                        </div>
+                        <ul class="my-lists__body js-list-btn-insert">
+                            
+                        </ul>
                     </div>
-                    <ul class="todo__list js-todo-list"></ul>
                 </div>
-                <div class="todo__caption-empty js-todo-caption-empty">List is empty</div>
+    
+                <div class="app__section app__section_size_lg content js-list-insert">
+
+                </div>
             </div>
 
         </div>
-
-        <template id="task-template">
-            <li class="todo__item js-todo-task">
-                <input type="checkbox" class="todo__item-checkbox js-todo-task-checkbox" id="">
-                <div class="todo__item-label js-todo-task-label">
-                    <div class="todo__item-content js-todo-task-text"></div>
-                    <div class="todo__item-date js-todo-task-date"></div><!-- 24 Feb. 20:30 -->
-                </div>
-            </li>
-        </template>
-        
     </div>
+
+    <template id="list-btn">
+        <li class="list-btn button">
+            <div class="list-btn__container">
+                <a class="list-btn__open-link" data-action="openPage">
+                    <div class="list-btn__info">
+                        <div class="list-btn__name js-name">List name</div>
+                        <div class="list-btn__counter js-counter">0</div>
+                    </div>
+                </a>
+                <div class="list-btn__menu">
+                    <button class="list-btn__menu-btn button button_type_icon button_icon_menu" data-action="togglePopup">menu</button>
+                    <div class="list-btn__menu-popup popup">
+                        <button class="button button_type_popup button_icon_edit" data-action="openRenameListModal">rename</button>
+                        <button class="button button_type_popup button_icon_delete button_style_red" data-action="openDeleteListModal">delete</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </template>
+
+    <template id="list-page">
+        <div class="list">
+            <div class="list__header js-header">
+                <div class="list__title js-title">List name</div>
+                <button class="list__close button button_type_icon button_icon_close" data-action="closePage" title="close">close</button>
+            </div>
+            <div class="list__controls js-controls">
+                <button class="list__add button button_type_text-icon button_icon_add" data-action="openCreateTaskModal">add task</button>
+                <button class="list__add button button_type_text-icon button_icon_minus button_style_red js-clear-btn" data-action="clearList">clear list</button>
+            </div>
+            <ul class="list__body js-task-insert">
+                <!-- <div class="list__marker"></div> -->
+            </ul>
+        </div>
+    </template>
+
+    <template id="task">
+        <li class="task js-task">
+            <div class="task__pointer task__pointer_upper js-upper-pointer"></div>
+            <div class="task__col">
+                <input class="task__checkbox js-done" type="checkbox" id="task-id" data-action="toggleTaskDone">
+                <label class="task__label js-done-label" for="task-id"></label>
+            </div>
+            <div class="task__col task__col_widdest">
+                <div class="task__name js-name">Task</div>
+                <pre class="task__notes js-notes">Notes</pre>
+            </div>
+            <div class="task__col">
+                <button class="task__grabber button button_type_icon button_icon_grabber" title="replace" data-action=grabTask>grab</button>
+            </div>
+            <div class="task__col">
+                <div class="task__menu">
+                    <button class="task__menu-btn button button_type_icon button_icon_menu" data-action="togglePopup" title="menu">menu</button>
+                    <div class="task__menu-popup popup">
+                        <button class="button button_type_popup button_icon_edit" data-action="openEditTaskModal">edit</button>
+                        <button class="button button_type_popup button_icon_delete button_style_red" data-action="deleteTask">delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="task__pointer task__pointer_lower js-lower-pointer"></div>
+        </li>
+    </template>
+
+    <!-- Modals -->
+
+    <template id="create-list">
+        <div class="create-list modal">
+            <div class="modal__container js-container">
+                <div class="modal__title">List creating</div>
+                <form action="" class="modal__form js-form" name="create-list">
+                    <div class="modal__row">
+                        <label for="" class="modal__label">
+                            <span class="modal__label-name">Name</span>
+                            <input type="text" name="name" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false" important>
+                        </label>
+                    </div>
+                    <div class="modal__row modal__row_accept">
+                        <input type="submit" value="ok" class="create-list__save-button modal__accept-button button button_type_ok" data-action="send">
+                        <input type="button" value="cancel" class="modal__accept-button button button_type_simple" data-action="cancel">
+                    </div>
+                </form>
+            </div>
+            <div class="modal__overlay js-overlay" data-action="cancel"></div>
+        </div>
+    </template>
+
+    <template id="rename-list">
+        <div class="rename-list modal">
+            <div class="modal__container js-container">
+                <div class="modal__title">List renaming</div>
+                <form action="" class="modal__form js-form">
+                    <div class="modal__row">
+                        <label for="" class="modal__label"><span class="modal__label-name">Name</span>
+                            <input type="text" name="name" id="" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false" important>
+                        </label>
+                    </div>
+                    <div class="modal__row modal__row_accept">
+                        <input type="submit" value="ok" class="modal__accept-button button button_type_ok" data-action="send">
+                        <input type="button" value="cancel" class="modal__accept-button button button_type_simple" data-action="cancel">
+                    </div>
+                </form>
+            </div>
+            <div class="modal__overlay js-overlay" data-action="cancel"></div>
+        </div>
+    </template>
+
+    <template id="delete-list">
+        <div class="delete-list modal">
+            <div class="modal__container js-container">
+                <div class="modal__title modal__title_style_red">List deleting</div>
+                <div class="modal__text">Do you really want to delete the list along with all tasks?</div>
+                <form action="" class="modal__form js-form">
+                    <div class="modal__row modal__row_accept">
+                        <input type="submit" value="ok" class="modal__accept-button button button_type_warning" data-action="accept">
+                        <input type="button" value="cancel" class="modal__accept-button button button_type_simple button_style_red" data-action="cancel">
+                    </div>
+                </form>
+            </div>
+            <div class="modal__overlay js-overlay" data-action="cancel"></div>
+        </div>
+    </template>
+
+    <template id="create-task">
+        <div class="create-task modal">
+            <div class="modal__container js-container">
+                <div class="modal__title">Task creating</div>
+                <form action="" class="modal__form js-form">
+                    <div class="modal__row">
+                        <label for="" class="modal__label">
+                            <span class="modal__label-name">Name</span>
+                            <input type="text" name="name" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false" important>
+                        </label>
+                    </div>
+                    <div class="modal__row">
+                        <label for="" class="modal__label">
+                            <span class="modal__label-name">Notes</span>
+                            <textarea name="notes" class="modal__input modal__input_type_area" autocomplete="off" spellcheck="false" rows="5"></textarea>
+                        </label>
+                    </div>
+                    <div class="modal__row modal__row_accept">
+                        <input type="submit" value="ok" class="create-list__save-button modal__accept-button button button_type_ok" data-action="send">
+                        <input type="button" value="cancel" class="modal__accept-button button button_type_simple" data-action="cancel">
+                    </div>
+                </form>
+            </div>
+            <div class="modal__overlay js-overlay" data-action="cancel"></div>
+        </div>
+    </template>
+
+    <template id="edit-task">
+        <div class="edit-task modal">
+            <div class="modal__container js-container">
+                <div class="modal__title">Editing task</div>
+                <form action="" class="modal__form js-form">
+                    <div class="modal__row">
+                        <label for="" class="modal__label">
+                            <span class="modal__label-name">Name</span>
+                            <input type="text" name="name" class="modal__input modal__input_type_text" autocomplete="off" spellcheck="false" important>
+                        </label>
+                    </div>
+                    <div class="modal__row">
+                        <label for="" class="modal__label">
+                            <span class="modal__label-name">Notes</span>
+                            <textarea name="notes" class="modal__input modal__input_type_area" autocomplete="off" spellcheck="false" rows="5"></textarea>
+                        </label>
+                    </div>
+                    <div class="modal__row modal__row_accept">
+                        <input type="submit" value="ok" class="create-list__save-button modal__accept-button button button_type_ok" data-action="send">
+                        <input type="button" value="cancel" class="modal__accept-button button button_type_simple" data-action="cancel">
+                    </div>
+                </form>
+            </div>
+            <div class="modal__overlay js-overlay" data-action="cancel"></div>
+        </div>
+    </template>
 
 </body>
 </html>
