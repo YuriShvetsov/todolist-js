@@ -35,7 +35,6 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     padding: 0;
-    // position: relative;
     border-radius: 5px;
 }
 
@@ -50,6 +49,8 @@
 .list-btn__open-link {
     display: block;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .list-btn__info {
@@ -59,15 +60,19 @@
     align-items: center;
     width: 100%;
     padding-left: 22px;
-    padding: 10px 15px;
+    padding: 7px 15px;
     pointer-events: none;
 }
 
 .list-btn__name {
     margin-right: 12px;
+    line-height: 1.5;
     color: $colorText;
     text-transform: lowercase;
     pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .list-btn__name::first-letter {
