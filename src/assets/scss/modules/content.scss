@@ -55,7 +55,7 @@
 }
 
 .task_selected {
-    border: 2px solid lighten($colorMain, 12%);
+    border: 2px solid lighten($colorMain, 10%);
 }
 
 .task:not(:last-of-type) {
@@ -75,7 +75,7 @@
 }
 
 .task_selected:hover {
-    border: 2px solid lighten($colorMain, 12%);
+    border: 2px solid lighten($colorMain, 8%);
 }
 
 .task__checkbox {
@@ -148,7 +148,6 @@
 }
 
 .task__grabber {
-    // display: none;
     opacity: 0;
     transition: opacity 150ms ease-in-out ;
 }
@@ -180,7 +179,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background-color: $colorRed;
+    background-color: lighten($colorRed, 8%);
     opacity: 0;
     user-select: none;
     pointer-events: none;
@@ -197,7 +196,7 @@
     left: -8px;
     top: 50%;
     transform: translateY(-50%);
-    border: 2px solid lighten($colorRed, 12%);
+    border: 2px solid lighten($colorRed, 8%);
     border-radius: 50%;
 }
 
@@ -211,7 +210,7 @@
     right: -8px;
     top: 50%;
     transform: translateY(-50%);
-    border: 2px solid lighten($colorRed, 12%);
+    border: 2px solid lighten($colorRed, 8%);
     border-radius: 50%;
 }
 
