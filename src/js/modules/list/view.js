@@ -85,6 +85,8 @@ export default {
     },
 
     setSizeTaskContainer: function() {
+        this.hideTaskContainer();
+
         this.page.taskContainer.style.height = '0';
         setTimeout(resize.bind(this), 100);
 
@@ -95,7 +97,19 @@ export default {
             const taskContainerHeight = pageHeight - headerHeight - controlsHeight;
     
             this.page.taskContainer.style.height = taskContainerHeight + 'px';
+
+            this.showTaskContainer();
         }
+    },
+
+    showTaskContainer: function() {
+        this.page.taskContainer.classList.remove('list__body_hidden');
+        this.page.taskContainer.classList.add('list__body_visible');
+    },
+
+    hideTaskContainer: function() {
+        this.page.taskContainer.classList.remove('list__body_visible');
+        this.page.taskContainer.classList.add('list__body_hidden');
     },
 
     clearTaskList: function() {

@@ -37,6 +37,16 @@
 .list__body {
     padding: 6px 0;
     overflow-y: scroll;
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+}
+
+.list__body_hidden {
+    opacity: 0;
+}
+
+.list__body_visible {
+    opacity: 1;
 }
 
 /* Task */
@@ -172,8 +182,7 @@
     z-index: 100;
 }
 
-.task__upper-pointer,
-.task__lower-pointer {
+.task__pointer {
     width: calc(100% - 14px);
     height: 2px;
     position: absolute;
@@ -186,8 +195,7 @@
     transition: opacity 150ms ease-in-out;
 }
 
-.task__upper-pointer::before,
-.task__lower-pointer::before {
+.task__pointer::before {
     content: '';
     display: block;
     width: 8px;
@@ -200,8 +208,8 @@
     border-radius: 50%;
 }
 
-.task__upper-pointer::after,
-.task__lower-pointer::after {
+.task__pointer_upper::after,
+.task__pointer_lower::after {
     content: '';
     display: block;
     width: 8px;
@@ -214,16 +222,16 @@
     border-radius: 50%;
 }
 
-.task__upper-pointer_visible,
-.task__lower-pointer_visible {
+.task__pointer_visible,
+.task__pointer_visible {
     opacity: 1;
 }
 
-.task__upper-pointer {
+.task__pointer_upper {
     top: -4px;
 }
 
-.task__lower-pointer {
+.task__pointer_lower {
     bottom: -4px;
 }
 

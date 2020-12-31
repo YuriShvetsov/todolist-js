@@ -57,16 +57,16 @@ export default {
     },
 
     showUpperPointer: function() {
-        this.task.upperPointer.classList.add('task__upper-pointer_visible');
+        this.task.upperPointer.classList.add('task__pointer_visible');
     },
 
     showLowerPointer: function() {
-        this.task.lowerPointer.classList.add('task__lower-pointer_visible');
+        this.task.lowerPointer.classList.add('task__pointer_visible');
     },
 
     hidePointer: function() {
-        this.task.upperPointer.classList.remove('task__upper-pointer_visible');
-        this.task.lowerPointer.classList.remove('task__lower-pointer_visible');
+        this.task.upperPointer.classList.remove('task__pointer_visible');
+        this.task.lowerPointer.classList.remove('task__pointer_visible');
     },
 
     select: function() {

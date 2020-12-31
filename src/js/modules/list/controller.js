@@ -204,6 +204,8 @@ export default {
         this.view.unactivateBtn();
         this.view.removePage();
 
+        this.view.hideTaskContainer();
+
         this.isOpened = false;
     },
 
