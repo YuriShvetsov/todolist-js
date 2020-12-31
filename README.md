@@ -1,11 +1,11 @@
-## To-Do List
+## Todolist
 Learning project on JavaScript
 
 Author: Yuri Shvetsov
 
 Date: 28/01/20
 
-Version: 1.0
+Version: 2.0
 
 Link: none
 
