@@ -98,11 +98,21 @@
     white-space: nowrap;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
 
     .app {
-        padding: 10px;
+        padding: 0;
     }
+
+    .app__container {
+        padding: 0;
+        border-radius: 0;
+        box-shadow: unset;
+    }
+
+}
+
+@media screen and (max-width: 720px) {
 
     .app__date {
         display: none;
